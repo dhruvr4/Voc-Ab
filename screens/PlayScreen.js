@@ -3,62 +3,97 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { StyleSheet, Text, View, Button,TouchableOpacity } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import { selectAssetSource } from 'expo-asset/build/AssetSources';
 
-state ={
-  text : "",
-  options : [],
-  correct : ""
-}
-export default function PlayScreen({navigation}) {
-  load();
-  return (
+
+
+export default function PlayScreen({navigation}) {  
+  function answer ( answer) {
+    let va= (options).indexOf(correct) === answer
+    if (answer == -1) {
+      va = "Time Up"
+    } 
+     navigat(va) 
+  }
+    function load() {
+    txt='Something you are not sure about'
+    cor ='ambigous'
+    arr=["ambigous","ambivalent","flowery","delicious"]
+    shuffle(arr)
+    }
+    function navigat(ans) {
+      clearInterval(time)
+        navigation.navigate("Result",{answer :ans,correct:correct})
+    }
+    function tick() {
+      if (timer == 0)  {
+        answer(-1)
+          }
+      else {
+          setTimer(timer-1)
+        }
+    }
+    React.useEffect(()=> {
+        time = setInterval(tick,1000)
+        return () => {
+          clearInterval(time)
+        }
+    })
+    function shuffle(array) {
+      array.sort(() => Math.random() - 0.5);
+    }
+    let txt=''
+    let cor =''
+    let arr=[]
+    load()
+    const [ text, setText ] = React.useState(txt)
+    const [ options, setOptions ] = React.useState (arr)
+    const [ correct, setCorrect ] = React.useState(cor)
+    let [ timer, setTimer ] = React.useState(10)
+    let time = null
+    //let time = setInterval(this.tick, 1000);
+    return (
     <View>
-      <Text style = {styles.text}> {state.text}</Text>
+      <Text style = {styles.timer}> {timer}</Text>
+      <Text style = {styles.text}> {text}</Text>
       <Button
-        onPress={() => {
-          navigation.navigate("Result",{answer :answer(0)})}}
-        title={state.options[0]}
+        onPress={() => {answer(0)}}
+        title={options[0]}
         color="#841584"
       />    
       <Button
-         onPress={() => {
-             navigation.navigate("Result",{answer :answer(1)})}}
-         title={state.options[1]}
+        onPress={() => {answer(1)}}
+        title={options[1]}
          color="#841584"
       />    
       <Button
-        onPress={() => {
-          navigation.navigate("Result",{answer :answer(2)})}}
-        title={state.options[2]}
+        onPress={() => {answer(2)}}
+        title={options[2]}
         color="#841584"
       />    
       <Button
-       onPress={() => {
-          navigation.navigate("Result",{answer :answer(3)})}}
-        title={state.options[3]}
+        onPress={() => {answer(3)}}
+        title={options[3]}
         color="#841584"
-      />    
-
+      />   
     </View>
     );
 }
-answer = answer => {
-return (state.options).indexOf(state.correct) == answer
-  };
-
-function load(){
-  state.text = 'Something you are not sure about'
-  state.options = ["ambigous","ambivalent","flowery","delicious"]
-  state.correct = 'ambigous'
-}
-
 const styles = StyleSheet.create({
+  timer:{
+    paddingTop: 10,
+    fontWeight: 'bold',
+    fontSize :30,
+    textAlign: "center"    
+  },
   text:{
-    paddingTop: 100,
+    textAlign: "center",
+    paddingTop: 30,
     fontWeight: 'bold',
     fontSize :30
   },
   button0:{
+    paddingTop:20,
     backgroundColor:'white',
     width:400,
     height :90,
