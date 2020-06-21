@@ -16,7 +16,7 @@ export default function ResultScreen({route,navigation}) {
   if (result === 'false') {
     answer = "You are wrong"
   }
-  const pushAction = StackActions.push('Play');
+  const pushAction = StackActions.push('Play',{answer:"default"});
 
   return (
       <View>

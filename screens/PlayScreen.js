@@ -76,7 +76,7 @@ export default function PlayScreen({navigation,route}) {
     }
     const result = JSON.stringify(route.params.answer)
     resul = result.substring(1,result.length-1)
-    console.log(resul)
+    //console.log(resul)
     let txt=''
     let cor =''
     let arr=[]
