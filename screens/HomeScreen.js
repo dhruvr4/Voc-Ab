@@ -1,7 +1,8 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button, Settings } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { MonoText } from '../components/StyledText';
 
@@ -9,7 +10,9 @@ import { MonoText } from '../components/StyledText';
   return (
     <View>
     <Button title="Play" onPress={() => navigation.navigate('Play')} />
-    <Button title="Setting" onPress={() => navigation.navigate('Setting')}/>
+    <Button 
+    title = "Setting" 
+    onPress={() => navigation.navigate('Setting')}/>
     </View>
     )
 }
