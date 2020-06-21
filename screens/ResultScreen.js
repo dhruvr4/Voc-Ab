@@ -10,7 +10,6 @@ export default function ResultScreen({route,navigation}) {
   let answer = "Time Up"
   const result = JSON.stringify(route.params.answer)
   const correct = JSON.stringify(route.params.correct)
-  console.log(result)
   if( result === 'true') {
     answer = "You are correct"
   }

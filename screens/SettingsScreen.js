@@ -6,10 +6,18 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { MonoText } from '../components/StyledText';
 
  function SettingsScreen({navigation}) {
+  function navigat(ans) {
+      navigation.navigate("Play",{answer :ans})
+  }
   return (
-<Text style = {styles.result}> "MCG"</Text>
-      )
-}
+    <View>
+<Button title="Easy" onPress={() => navigat('easy')} />
+<Button title="Medium" onPress={() => navigat('medium')} />
+<Button title="Hard" onPress={() => navigat('hard')} />
+</View>
+          )
+  }
+
 
 SettingsScreen.navigationOptions = {
   header: null,

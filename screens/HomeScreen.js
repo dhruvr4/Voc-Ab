@@ -7,9 +7,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { MonoText } from '../components/StyledText';
 
  function HomeScreen({navigation}) {
+  function navigat(ans) {
+    navigation.navigate("Play",{answer :ans})
+}
   return (
     <View>
-    <Button title="Play" onPress={() => navigation.navigate('Play')} />
+    <Button title="Play" onPress={() => navigat("default")} />
     <Button 
     title = "Setting" 
     onPress={() => navigation.navigate('Setting')}/>

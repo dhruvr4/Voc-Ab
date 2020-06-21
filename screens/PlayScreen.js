@@ -4,25 +4,55 @@ import * as React from 'react';
 import { StyleSheet, Text, View, Button,TouchableOpacity } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { selectAssetSource } from 'expo-asset/build/AssetSources';
-import {Database} from '../screens/Database.js';
-import {Question} from '../screens/Question.js';
+import {Datab} from '../screens/Database.js';
 
 
-export default function PlayScreen({navigation}) {  
-  function answer ( answer) {
-    let va= (options).indexOf(correct) === answer
-    if (answer == -1) {
-      va = "Time Up"
-    } 
-     navigat(va) 
+export default function PlayScreen({navigation,route}) {  
+  class Question {
+    question="";
+    answers=[];
+    correctanswer="";
+    constructor( a, b, c) {
+        this.question=a;
+        for( i=0;i<4;i++) {
+            this.answers[i] = b[i];
+        }
+        this.correctanswer=c;
+    }
+}
+  const datab = {
+    easy :[],
+    medium:[],
+    hard :[],
+    default :[]
+}
+  function create_database() {
+    add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","easy");
+    add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","medium");
+    add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","hard");
+    add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","default");
   }
-    function load() {
-    //database = new Database("Hello");
-    txt='Something you are not sure about'
-    cor ='ambigous'
-    arr=["ambigous","ambivalent","flowery","delicious"]
+  add=( a,  b, c, type) => {
+    toAdd = new Question(a,b,c);
+    datab[type].push(toAdd)
+}  
+    function load(val) {
+    create_database()
+    const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
+    txt=ques.question
+    cor =ques.correctanswer
+    arr=ques.answers
     shuffle(arr)
     }
+
+    function answer ( answer) {
+      let va= (options).indexOf(correct) === answer
+      if (answer == -1) {
+        va = "Time Up"
+      } 
+       navigat(va) 
+    }
+  
     function navigat(ans) {
       clearInterval(time)
         navigation.navigate("Result",{answer :ans,correct:correct})
@@ -44,10 +74,13 @@ export default function PlayScreen({navigation}) {
     function shuffle(array) {
       array.sort(() => Math.random() - 0.5);
     }
+    const result = JSON.stringify(route.params.answer)
+    resul = result.substring(1,result.length-1)
+    console.log(resul)
     let txt=''
     let cor =''
     let arr=[]
-    load()
+    load(resul)
     const [ text, setText ] = React.useState(txt)
     const [ options, setOptions ] = React.useState (arr)
     const [ correct, setCorrect ] = React.useState(cor)
