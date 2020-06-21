@@ -4,7 +4,8 @@ import * as React from 'react';
 import { StyleSheet, Text, View, Button,TouchableOpacity } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { selectAssetSource } from 'expo-asset/build/AssetSources';
-
+import {Database} from '../screens/Database.js';
+import {Question} from '../screens/Question.js';
 
 
 export default function PlayScreen({navigation}) {  
@@ -16,6 +17,7 @@ export default function PlayScreen({navigation}) {
      navigat(va) 
   }
     function load() {
+    //database = new Database("Hello");
     txt='Something you are not sure about'
     cor ='ambigous'
     arr=["ambigous","ambivalent","flowery","delicious"]
