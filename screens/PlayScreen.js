@@ -4,7 +4,8 @@ import * as React from 'react';
 import { StyleSheet, Text, View, Button,TouchableOpacity } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { selectAssetSource } from 'expo-asset/build/AssetSources';
-//import { readString } from 'react-papaparse';
+import {Datab} from '../screens/Database.js';
+
 
 export default function PlayScreen({navigation,route}) {  
   class Question {
@@ -13,7 +14,7 @@ export default function PlayScreen({navigation,route}) {
     correctanswer="";
     constructor( a, b, c) {
         this.question=a;
-        for(var i=0;i<4;i++) {
+        for( i=0;i<4;i++) {
             this.answers[i] = b[i];
         }
         this.correctanswer=c;
@@ -24,26 +25,15 @@ export default function PlayScreen({navigation,route}) {
     medium:[],
     hard :[],
     default :[]
-  }
+}
   function create_database() {
-    data();
-    add("mithilesh",["ambigous","monotonous", "unique","lucid"], "ambigous","easy");
-    add("mcg",["ambigous","monotonous", "unique","lucid"], "ambigous","medium");
-    add("curse of m",["ambigous","monotonous", "unique","lucid"], "ambigous","hard");
+    add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","easy");
+    add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","medium");
+    add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","hard");
     add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","default");
   }
-  function data(){
-    //console.log("Hi")
-    //data = readString("GRE_list_1.csv")
-    //console.log(data)
-    //data = CSVReader("GRE_list_1.csv")
-    //console.log(data);
-  }
   add=( a,  b, c, type) => {
-    var toAdd = new Question(a,b,c);
-    if (type!= 'default') {
-      datab['default'].push(toAdd)
-    } 
+    toAdd = new Question(a,b,c);
     datab[type].push(toAdd)
 }  
     function load(val) {
@@ -86,8 +76,7 @@ export default function PlayScreen({navigation,route}) {
     }
     const result = JSON.stringify(route.params.answer)
     resul = result.substring(1,result.length-1)
-    console.log(resul)
-    console.log("A")
+    //console.log(resul)
     let txt=''
     let cor =''
     let arr=[]
@@ -136,7 +125,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingTop: 30,
     fontWeight: 'bold',
-    fontSize :30
+    fontSize :30,
+    width : 300,
+    height : 100,
+    backgroundColor:'#696969',
   },
   button0:{
     paddingTop:20,
