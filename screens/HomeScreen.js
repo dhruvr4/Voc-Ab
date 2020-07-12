@@ -19,16 +19,15 @@ import { MonoText } from '../components/StyledText';
     
       <View style = {styles.buttonContainer}>
         <Button
-        title="Play" 
-        onPress={() => navigat("default")} 
-        style = {styles.play} 
-        color = "#841584"
+          title="Play" 
+          onPress={() => navigat("default")} 
+          style = {styles.play} 
+          color = "#841584"
         /> 
       </View> 
     </View>
     )
 }
-g
 HomeScreen.navigationOptions = {
   header: null,
 };
