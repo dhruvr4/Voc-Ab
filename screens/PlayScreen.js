@@ -125,7 +125,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingTop: 30,
     fontWeight: 'bold',
-    fontSize :30
+    fontSize :30,
+    width : 300,
+    height : 100,
+    backgroundColor:'#696969',
   },
   button0:{
     paddingTop:20,

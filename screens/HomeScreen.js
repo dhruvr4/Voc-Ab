@@ -1,9 +1,10 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button, Settings } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { ScrollView } from 'react-native-gesture-handler';
+import IconFon from 'react-native-vector-icons/FontAwesome';
+import IconSim from 'react-native-vector-icons/SimpleLineIcons';
 import { MonoText } from '../components/StyledText';
 
  function HomeScreen({navigation}) {
@@ -11,11 +12,19 @@ import { MonoText } from '../components/StyledText';
     navigation.navigate("Play",{answer :ans})
 }
   return (
-    <View>
-    <Button title="Play" onPress={() => navigat("default")} />
-    <Button 
-    title = "Setting" 
-    onPress={() => navigation.navigate('Setting')}/>
+    <View style = {styles.container}>
+
+      <IconFon name = "wrench"  size={50} onPress={() => navigation.navigate('Setting')} style = {styles.wrenchIcon} />
+      <IconSim name = "globe" size={50} onPress={() => navigation.navigate('Setting')} style = {styles.globeIcon}/>
+    
+      <View style = {styles.buttonContainer}>
+        <Button
+        title="Play" 
+        onPress={() => navigat("default")} 
+        style = {styles.play} 
+        color = "#841584"
+        /> 
+      </View> 
     </View>
     )
 }
@@ -26,92 +35,29 @@ HomeScreen.navigationOptions = {
 
 export default HomeScreen
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'black',
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
+  buttonContainer:{
+    flex : 1,
+    alignItems : 'center',
+    justifyContent : 'center',
   },
-  contentContainer: {
-    paddingTop: 30,
+  wrenchIcon : {
+    color : 'white',
+    left : 10,
   },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+  globeIcon : {
+    position : "absolute",
+    right : 10,
+    color : 'white',
   },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
+  play : {
+    width: 500,
+    height: 500,
+    borderRadius: 150/2,
+    backgroundColor : 'red',
+  }
 });

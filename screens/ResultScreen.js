@@ -17,7 +17,6 @@ export default function ResultScreen({route,navigation}) {
     answer = "You are wrong"
   }
   const pushAction = StackActions.push('Play',{answer:"default"});
-
   return (
       <View>
     <Text style = {styles.result}> {answer}</Text>
