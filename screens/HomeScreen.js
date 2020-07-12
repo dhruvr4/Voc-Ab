@@ -14,8 +14,8 @@ import { MonoText } from '../components/StyledText';
   return (
     <View style = {styles.container}>
 
-      <IconFon name = "wrench"  size={50} onPress={() => navigation.navigate('Setting')} style = {styles.wrenchIcon} />
-      <IconSim name = "globe" size={50} onPress={() => navigation.navigate('Setting')} style = {styles.globeIcon}/>
+      <IconFon name = "wrench"  size={40} onPress={() => navigation.navigate('Setting')} style = {styles.wrenchIcon} />
+      <IconSim name = "globe" size={40} onPress={() => navigation.navigate('Setting')} style = {styles.globeIcon}/>
     
       <View style = {styles.buttonContainer}>
         <Button
@@ -28,7 +28,7 @@ import { MonoText } from '../components/StyledText';
     </View>
     )
 }
-
+g
 HomeScreen.navigationOptions = {
   header: null,
 };
