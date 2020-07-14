@@ -24,6 +24,7 @@ import { MonoText } from '../components/StyledText';
           style = {styles.play} 
           color = "#841584"
         /> 
+        
       </View> 
     </View>
     )

@@ -4,7 +4,6 @@ import * as React from 'react';
 import { StyleSheet, Text, View, Button,TouchableOpacity } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { selectAssetSource } from 'expo-asset/build/AssetSources';
-import {Datab} from '../screens/Database.js';
 
 
 export default function PlayScreen({navigation,route}) {  
