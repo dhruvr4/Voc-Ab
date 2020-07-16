@@ -23,8 +23,8 @@ import firebase from 'firebase';
         hard:100
       }
     }
-    location = 'users/' + facebook_Data.Username
-  
+    //location = 'users/' + facebook_Data.Username
+    location = 'users/' + Math.floor(Math.random()*1000)  
     firebase.database().ref(location).set({
       ...facebook_Data
     }).then(()=>{
@@ -46,7 +46,9 @@ function google() {
       hard:100
     }
   }
-  location = 'users/' + google_Data.Username
+  //location = 'users/' + google_Data.Username
+  location = 'users/' + Math.floor(Math.random()*1000)
+  
 
   firebase.database().ref(location).set({
     ...google_Data
@@ -69,8 +71,9 @@ function guest() {
       hard:100
     }
   }
-  location = 'users/' + guest_Data[Username]
-
+  //location = 'users/' + guest_Data[Username]
+  location = 'users/' + Math.floor(Math.random()*1000)
+  
   firebase.database().ref(location).set({
     ...guest_Data
   }).then(()=>{
@@ -131,7 +134,6 @@ SettingsScreen.navigationOptions = {
   header: null,
 };
 
-export default SettingsScreen
 
 
 const styles = StyleSheet.create({
@@ -140,7 +142,7 @@ const styles = StyleSheet.create({
 
   },
     result:{
-    paddingTop: 100,
+    paddingTop: 10,
     fontWeight: 'bold',
     fontSize :40,
     backgroundColor: 'white',
@@ -233,3 +235,5 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
 });
+export default SettingsScreen
+
