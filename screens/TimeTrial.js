@@ -4,6 +4,10 @@ import * as React from 'react';
 import { StyleSheet, Text, View, Button,TouchableOpacity } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { selectAssetSource } from 'expo-asset/build/AssetSources';
+<<<<<<< HEAD:screens/TimeTrial.js
+=======
+
+>>>>>>> 8dd7a818f3792ada3dd4f4825a72d9fbdcd8c791:screens/PlayScreen.js
 
 
 export default function TimeTrial({navigation,route}) {  

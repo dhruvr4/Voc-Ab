@@ -33,7 +33,11 @@ const screenHeight = Math.round(Dimensions.get('window').height);
       </View>
 
       <View style = {styles.buttonContainer}>
+<<<<<<< HEAD
       <TouchableOpacity style = {styles.play} onPress={() => navigation.navigate("LearnIt",{answer :"default"})}> 
+=======
+      <TouchableOpacity style = {styles.play} onPress={() => navigat("default")}> 
+>>>>>>> 8dd7a818f3792ada3dd4f4825a72d9fbdcd8c791
           <Text style = {styles.ButtonText}>Learn It</Text>
       </TouchableOpacity>
       </View> 
@@ -44,10 +48,17 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 
       <View style = {{height : 135, alignItems : 'center', justifyContent : 'center', paddingBottom : 20,}}>
         <ScrollView horizontal = {true} showsHorizontalScrollIndicator={false}>
+<<<<<<< HEAD
           <TouchableOpacity style = {styles.timeTrial} onPress={() => navigation.navigate("TimeTrial",{answer :"default"})} >
             <Text style = {{fontSize : 48, fontWeight : '700', fontFamily : 'serif'}}>Time Trial</Text>
           </TouchableOpacity>
           <TouchableOpacity style = {styles.wordUp} onPress={() => navigation.navigate("Challenge",{answer :"default"})}>
+=======
+          <TouchableOpacity style = {styles.timeTrial}>
+            <Text style = {{fontSize : 48, fontWeight : '700', fontFamily : 'serif'}}>Time Trial</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style = {styles.wordUp}>
+>>>>>>> 8dd7a818f3792ada3dd4f4825a72d9fbdcd8c791
             <Text style = {{fontSize : 48, fontWeight : '700', fontFamily : 'serif'}}>Word Up</Text>
           </TouchableOpacity>
         </ScrollView>
