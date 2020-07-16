@@ -4,13 +4,103 @@ import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } fro
 import { ScrollView } from 'react-native-gesture-handler';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { MonoText } from '../components/StyledText';
+import firebase from 'firebase';
 
  function SettingsScreen({navigation}) {
   function navigat(ans) {
       navigation.navigate("Play",{answer :ans})
   }
-  function facebook() {
+  /*
+     function facebook() {
+    //Pushing faceb0ok data in database
+    facebook_Data={
+      Username:'Dhruvr4',
+      email_id:'dhruvz123z@gmail.com',
+      level:{
+        easy:100,
+        medium:100,
+        hard:100
+      }
+    }
+    //location = 'users/' + facebook_Data.Username
+    location = 'users/' + Math.floor(Math.random()*1000)  
+    firebase.database().ref(location).set({
+      ...facebook_Data
+    }).then(()=>{
+      console.log("Firebase success");
+    }).catch((error)=>{
+      console.log(error)
+    });
 }
+function google() {
+
+
+  //Pushing google data in database
+  google_Data={
+    Username:'Dhruvr2',
+    email_id:'dhruvz123z@gmail.com',
+    level:{
+      easy:100,
+      medium:100,
+      hard:100
+    }
+  }
+  //location = 'users/' + google_Data.Username
+  location = 'users/' + Math.floor(Math.random()*1000)
+  
+
+  firebase.database().ref(location).set({
+    ...google_Data
+  }).then(()=>{
+    console.log("Firebase success");
+  }).catch((error)=>{
+    console.log(error)
+  });
+}
+function guest() {
+
+
+  //Pushing guest data in database
+  guest_Data={
+    Username:'Dhruvr3',
+    email_id:'dhruvz123z@gmail.com',
+    level:{
+      easy:100,
+      medium:100,
+      hard:100
+    }
+  }
+  //location = 'users/' + guest_Data[Username]
+  location = 'users/' + Math.floor(Math.random()*1000)
+  
+  firebase.database().ref(location).set({
+    ...guest_Data
+  }).then(()=>{
+    console.log("Firebase success");
+  }).catch((error)=>{
+    console.log(error)
+  });
+}
+React.useEffect(()=> {
+  var firebaseConfig = {
+    apiKey: "AIzaSyD6Xi2XISAlkaY_24kSXxhNikzNirylw_4",
+    authDomain: "voc-ab.firebaseapp.com",
+    databaseURL: "https://voc-ab.firebaseio.com",
+    projectId: "voc-ab",
+    storageBucket: "voc-ab.appspot.com",
+    messagingSenderId: "48251159172",
+    appId: "1:48251159172:web:201f544d60bcd8c3c878d1",
+    measurementId: "G-CWE55Q64X9"
+  }
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  //firebase.analytics();
+  
+})
+*/
+
+
+
   var mode = 'default'
   return (
     <View>
@@ -29,7 +119,7 @@ import { MonoText } from '../components/StyledText';
         }
         />
     <Button title="Play" onPress={() => navigat(mode)} />
-    <Button title="Facebook Login" onPress={() => facebook()} />
+    
     </View>
     )
 }
@@ -40,7 +130,6 @@ SettingsScreen.navigationOptions = {
   header: null,
 };
 
-export default SettingsScreen
 
 
 const styles = StyleSheet.create({
@@ -49,7 +138,7 @@ const styles = StyleSheet.create({
 
   },
     result:{
-    paddingTop: 100,
+    paddingTop: 10,
     fontWeight: 'bold',
     fontSize :40,
     backgroundColor: 'white',
@@ -142,3 +231,5 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
 });
+export default SettingsScreen
+

@@ -4,16 +4,20 @@ import * as React from 'react';
 import { StyleSheet, Text, View, Button,TouchableOpacity } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { selectAssetSource } from 'expo-asset/build/AssetSources';
-//import { readString } from 'react-papaparse';
+<<<<<<< HEAD:screens/TimeTrial.js
+=======
 
-export default function PlayScreen({navigation,route}) {  
+>>>>>>> 8dd7a818f3792ada3dd4f4825a72d9fbdcd8c791:screens/PlayScreen.js
+
+
+export default function TimeTrial({navigation,route}) {  
   class Question {
     question="";
     answers=[];
     correctanswer="";
     constructor( a, b, c) {
         this.question=a;
-        for(var i=0;i<4;i++) {
+        for( i=0;i<4;i++) {
             this.answers[i] = b[i];
         }
         this.correctanswer=c;
@@ -24,26 +28,15 @@ export default function PlayScreen({navigation,route}) {
     medium:[],
     hard :[],
     default :[]
-  }
+}
   function create_database() {
-    data();
-    add("mithilesh",["ambigous","monotonous", "unique","lucid"], "ambigous","easy");
-    add("mcg",["ambigous","monotonous", "unique","lucid"], "ambigous","medium");
-    add("curse of m",["ambigous","monotonous", "unique","lucid"], "ambigous","hard");
+    add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","easy");
+    add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","medium");
+    add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","hard");
     add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","default");
   }
-  function data(){
-    //console.log("Hi")
-    //data = readString("GRE_list_1.csv")
-    //console.log(data)
-    //data = CSVReader("GRE_list_1.csv")
-    //console.log(data);
-  }
   add=( a,  b, c, type) => {
-    var toAdd = new Question(a,b,c);
-    if (type!= 'default') {
-      datab['default'].push(toAdd)
-    } 
+    toAdd = new Question(a,b,c);
     datab[type].push(toAdd)
 }  
     function load(val) {
@@ -59,14 +52,25 @@ export default function PlayScreen({navigation,route}) {
       let va= (options).indexOf(correct) === answer
       if (answer == -1) {
         va = "Time Up"
+        navigat(va) 
       } 
-       navigat(va) 
-    }
+      //console.log(va)
+      
+      if (va === true){
+        settotscore(totscore+1)
+      }
+      if (va === false){
+        settotwrong([...totwrong,[text,options[answer],correct]])
+      }
+      }
   
     function navigat(ans) {
       clearInterval(time)
-        navigation.navigate("Result",{answer :ans,correct:correct})
+      //console.log(totscore)
+      //console.log(totwrong)
+      navigation.navigate("TimeTrialResult",{answer :totscore,correct:totwrong})
     }
+
     function tick() {
       if (timer == 0)  {
         answer(-1)
@@ -81,13 +85,14 @@ export default function PlayScreen({navigation,route}) {
           clearInterval(time)
         }
     })
+    
     function shuffle(array) {
+
       array.sort(() => Math.random() - 0.5);
     }
     const result = JSON.stringify(route.params.answer)
     resul = result.substring(1,result.length-1)
-    console.log(resul)
-    console.log("A")
+    //console.log(resul)
     let txt=''
     let cor =''
     let arr=[]
@@ -95,6 +100,8 @@ export default function PlayScreen({navigation,route}) {
     const [ text, setText ] = React.useState(txt)
     const [ options, setOptions ] = React.useState (arr)
     const [ correct, setCorrect ] = React.useState(cor)
+    const [ totscore, settotscore ] = React.useState(0)
+    const [ totwrong, settotwrong ] = React.useState([])
     let [ timer, setTimer ] = React.useState(10)
     let time = null
     //let time = setInterval(this.tick, 1000);
@@ -136,7 +143,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingTop: 30,
     fontWeight: 'bold',
-    fontSize :30
+    fontSize :30,
+    width : 300,
+    height : 100,
+    backgroundColor:'#696969',
   },
   button0:{
     paddingTop:20,
