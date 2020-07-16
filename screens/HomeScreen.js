@@ -14,7 +14,7 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 
  function HomeScreen({navigation}) {
   function navigat(ans) {
-    navigation.navigate("Play",{answer :ans})
+    navigation.navigate("LearnIt",{answer :ans})
 }
   return (
     <View style = {styles.container}>
@@ -33,7 +33,7 @@ const screenHeight = Math.round(Dimensions.get('window').height);
       </View>
 
       <View style = {styles.buttonContainer}>
-      <TouchableOpacity style = {styles.play} onPress={() => navigat("default")}> 
+      <TouchableOpacity style = {styles.play} onPress={() => navigation.navigate("LearnIt",{answer :"default"})}> 
           <Text style = {styles.ButtonText}>Learn It</Text>
       </TouchableOpacity>
       </View> 
@@ -44,10 +44,10 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 
       <View style = {{height : 135, alignItems : 'center', justifyContent : 'center', paddingBottom : 20,}}>
         <ScrollView horizontal = {true} showsHorizontalScrollIndicator={false}>
-          <TouchableOpacity style = {styles.timeTrial}>
+          <TouchableOpacity style = {styles.timeTrial} onPress={() => navigation.navigate("TimeTrial",{answer :"default"})} >
             <Text style = {{fontSize : 48, fontWeight : '700', fontFamily : 'serif'}}>Time Trial</Text>
           </TouchableOpacity>
-          <TouchableOpacity style = {styles.wordUp}>
+          <TouchableOpacity style = {styles.wordUp} onPress={() => navigation.navigate("Challenge",{answer :"default"})}>
             <Text style = {{fontSize : 48, fontWeight : '700', fontFamily : 'serif'}}>Word Up</Text>
           </TouchableOpacity>
         </ScrollView>

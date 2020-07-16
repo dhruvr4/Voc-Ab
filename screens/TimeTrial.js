@@ -6,7 +6,7 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { selectAssetSource } from 'expo-asset/build/AssetSources';
 
 
-export default function PlayScreen({navigation,route}) {  
+export default function TimeTrial({navigation,route}) {  
   class Question {
     question="";
     answers=[];
@@ -48,14 +48,25 @@ export default function PlayScreen({navigation,route}) {
       let va= (options).indexOf(correct) === answer
       if (answer == -1) {
         va = "Time Up"
+        navigat(va) 
       } 
-       navigat(va) 
-    }
+      //console.log(va)
+      
+      if (va === true){
+        settotscore(totscore+1)
+      }
+      if (va === false){
+        settotwrong([...totwrong,[text,options[answer],correct]])
+      }
+      }
   
     function navigat(ans) {
       clearInterval(time)
-        navigation.navigate("Result",{answer :ans,correct:correct})
+      //console.log(totscore)
+      //console.log(totwrong)
+      navigation.navigate("TimeTrialResult",{answer :totscore,correct:totwrong})
     }
+
     function tick() {
       if (timer == 0)  {
         answer(-1)
@@ -70,7 +81,9 @@ export default function PlayScreen({navigation,route}) {
           clearInterval(time)
         }
     })
+    
     function shuffle(array) {
+
       array.sort(() => Math.random() - 0.5);
     }
     const result = JSON.stringify(route.params.answer)
@@ -83,6 +96,8 @@ export default function PlayScreen({navigation,route}) {
     const [ text, setText ] = React.useState(txt)
     const [ options, setOptions ] = React.useState (arr)
     const [ correct, setCorrect ] = React.useState(cor)
+    const [ totscore, settotscore ] = React.useState(0)
+    const [ totwrong, settotwrong ] = React.useState([])
     let [ timer, setTimer ] = React.useState(10)
     let time = null
     //let time = setInterval(this.tick, 1000);

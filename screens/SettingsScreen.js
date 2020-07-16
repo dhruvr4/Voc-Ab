@@ -10,10 +10,9 @@ import firebase from 'firebase';
   function navigat(ans) {
       navigation.navigate("Play",{answer :ans})
   }
-  function facebook() {
-
-
-    //Pushing facebook data in database
+  /*
+     function facebook() {
+    //Pushing faceb0ok data in database
     facebook_Data={
       Username:'Dhruvr4',
       email_id:'dhruvz123z@gmail.com',
@@ -98,7 +97,7 @@ React.useEffect(()=> {
   //firebase.analytics();
   
 })
-
+*/
 
 
 
@@ -120,9 +119,6 @@ React.useEffect(()=> {
         }
         />
     <Button title="Play" onPress={() => navigat(mode)} />
-    <Button title="Facebook Login" onPress={() => facebook()} />
-    <Button title="Google Login" onPress={() => google()} />
-    <Button title="Guest Login" onPress={() => guest()} />
     
     </View>
     )
