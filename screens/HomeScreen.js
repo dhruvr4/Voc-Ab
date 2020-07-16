@@ -44,7 +44,7 @@ const screenHeight = Math.round(Dimensions.get('window').height);
           <TouchableOpacity style = {styles.wordUp}>
             <Text style = {{fontSize : 48, fontWeight : '700', fontFamily : 'serif'}}>Word Up</Text>
           </TouchableOpacity>
-          </ScrollView>
+          </ScrollView>gi
         </View> 
 
       <View style = {styles.textContainer}>
