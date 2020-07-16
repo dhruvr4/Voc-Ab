@@ -1,117 +1,140 @@
+  
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button, Settings } from 'react-native';
+import {Dimensions } from "react-native";
 import { ScrollView } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
+import IconSetting from 'react-native-vector-icons/Feather';
+import IconLeader from 'react-native-vector-icons/MaterialCommunityIcons';
 import { MonoText } from '../components/StyledText';
+import * as Progress from 'react-native-progress';
+import Coverflow from 'react-native-coverflow';
+
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height);
 
  function HomeScreen({navigation}) {
   function navigat(ans) {
     navigation.navigate("Play",{answer :ans})
 }
   return (
-    <View>
-    <Button title="Play" onPress={() => navigat("default")} />
-    <Button 
-    title = "Setting" 
-    onPress={() => navigation.navigate('Setting')}/>
+    <View style = {styles.container}>
+    
+      <View style = {{flexDirection : 'row'}}>
+        <IconSetting name = "settings"  size={40} onPress={() => navigation.navigate('Setting')} style = {styles.wrenchIcon} />
+          <View style = {styles.progressBar}>
+            <Progress.Bar progress = {0.5} color = {'blue'} width ={screenWidth/2} size = {50} borderColor = {'white'} 
+            unfilledColor = {'white'} height = {10} borderRadius = {5} borderWidth = {1.5}/>
+          </View>
+        <IconLeader name = "podium" size={43} onPress={() => navigation.navigate('Setting')} style = {styles.globeIcon}/> 
+      </View>
+
+      <View style = {styles.titleContainer}>
+        <Text style = {styles.ButtonText}>VOC-AB</Text>
+      </View>
+
+        <View style = {styles.buttonContainer}>
+         <ScrollView horizontal = {true} showsHorizontalScrollIndicator={false}>
+          <TouchableOpacity style = {styles.play} onPress={() => navigat("default")}> 
+           <Text style = {{fontFamily : 'serif', fontSize : 48, fontWeight : '700'}}>Learn It</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style = {styles.timeTrial}>
+            <Text style = {{fontSize : 48, fontWeight : '700', fontFamily : 'serif'}}>Time Trial</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style = {styles.wordUp}>
+            <Text style = {{fontSize : 48, fontWeight : '700', fontFamily : 'serif'}}>Word Up</Text>
+          </TouchableOpacity>
+          </ScrollView>
+        </View> 
+
+      <View style = {styles.textContainer}>
+        <Text style = {styles.swipeText}>Word Of the day</Text>
+      </View>
+
+      <View style = {{alignItems : 'center', justifyContent : 'center',marginTop : 30, 
+      backgroundColor : 'white' ,width : screenWidth,}}>
+        <Text>Ambigious Open to more than one interpretations</Text>
+      </View>
     </View>
     )
 }
-
 HomeScreen.navigationOptions = {
   header: null,
 };
 
 export default HomeScreen
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#D1F6FF',
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
+  buttonContainer:{
+    alignItems : 'center',
+    justifyContent: 'center',
+    height : 270,
+    marginTop : 70
   },
-  contentContainer: {
-    paddingTop: 30,
+  ButtonText : {
+    fontSize : 70,
+    fontWeight : '700',
+    fontFamily : 'serif',
   },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+  wrenchIcon : {
+    paddingTop : screenHeight/15 + 4,
+    paddingLeft : 10,
+    color : 'black',
+    left : 10,
   },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
+  globeIcon : {
+    paddingTop : screenHeight/15,
+    paddingRight : 10,
+    right : 10,
+    color : 'black',
   },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
+  play : {
+    width : screenWidth,
+    alignItems : 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
+    width : screenWidth-50,
+    backgroundColor : 'white',
+    marginLeft : 15,
   },
-  homeScreenFilename: {
-    marginVertical: 7,
+  timeTrial : {
+    alignItems : 'center',
+    justifyContent: 'center',
+    width : screenWidth-50,
+    backgroundColor : '#76E0D3',
+    borderRadius : 15,
+    paddingRight : 10,
+    marginLeft : 15,
   },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
+  wordUp : { 
+    alignItems : 'center',
+    justifyContent: 'center',
+    width : screenWidth-50, 
+    backgroundColor : '#EA8585',
+    borderRadius : 15,
+    marginLeft : 15,
   },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
+  swipeText : {
+    fontSize : 38,
   },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
+  textContainer : {
+    alignItems : 'center',
+    justifyContent : 'center',
+    marginTop : 30,
   },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+  progressBar : {
+    flex : 1.5,
+    alignItems : 'center',
+    justifyContent : 'center',
+    marginTop : screenHeight/15 + 4,
   },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
+  titleContainer : {
+    alignItems : 'center',
+    justifyContent : 'center',
+    marginTop : 50,
+  }
 });

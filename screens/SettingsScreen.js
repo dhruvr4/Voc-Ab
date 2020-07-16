@@ -2,21 +2,38 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import DropDownPicker from 'react-native-dropdown-picker';
 import { MonoText } from '../components/StyledText';
 
  function SettingsScreen({navigation}) {
   function navigat(ans) {
       navigation.navigate("Play",{answer :ans})
   }
+  function facebook() {
+}
+  var mode = 'default'
   return (
     <View>
-<Button title="Easy" onPress={() => navigat('easy')} />
-<Button title="Medium" onPress={() => navigat('medium')} />
-<Button title="Hard" onPress={() => navigat('hard')} />
-</View>
-          )
-  }
+      <Text styles = {styles.result}>Mode</Text>
+      <DropDownPicker
+        items={[
+            {label: 'Easy',value : 'easy'},
+            {label: 'Medium',value : 'medium'},
+            {label: 'Hard',value : 'hard'},
+            {label: 'Random',value : 'default'},
+        ]}
+        defaultValue={'default'}
+        style={styles.pick}
+        onChangeItem={a=>
+          mode = a.value
+        }
+        />
+    <Button title="Play" onPress={() => navigat(mode)} />
+    <Button title="Facebook Login" onPress={() => facebook()} />
+    </View>
+    )
+}
+  
 
 
 SettingsScreen.navigationOptions = {
@@ -27,6 +44,10 @@ export default SettingsScreen
 
 
 const styles = StyleSheet.create({
+  pick:{
+    width:50
+
+  },
     result:{
     paddingTop: 100,
     fontWeight: 'bold',
