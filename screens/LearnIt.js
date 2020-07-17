@@ -10,6 +10,10 @@ import GRE2 from './Data/GRE_list_2.json';
 import GRE3 from './Data/GRE_list_3.json';
 import GRE4 from './Data/GRE_list_4.json';
 import GRE5 from './Data/GRE_list_5.json';
+<<<<<<< HEAD
+=======
+import Coverflow from 'react-native-coverflow';
+>>>>>>> bfd61f6680e4f6d3fcaa53b00030d9e70b73e665
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
