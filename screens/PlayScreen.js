@@ -4,7 +4,11 @@ import * as React from 'react';
 import { StyleSheet, Text, View, Button,TouchableOpacity } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { selectAssetSource } from 'expo-asset/build/AssetSources';
-//import { readString } from 'react-papaparse';
+import {Dimensions } from "react-native";
+
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height);
+let check = true;
 
 export default function PlayScreen({navigation,route}) {  
   class Question {
@@ -13,7 +17,7 @@ export default function PlayScreen({navigation,route}) {
     correctanswer="";
     constructor( a, b, c) {
         this.question=a;
-        for(var i=0;i<4;i++) {
+        for( i=0;i<4;i++) {
             this.answers[i] = b[i];
         }
         this.correctanswer=c;
@@ -24,26 +28,15 @@ export default function PlayScreen({navigation,route}) {
     medium:[],
     hard :[],
     default :[]
-  }
+}
   function create_database() {
-    data();
-    add("mithilesh",["ambigous","monotonous", "unique","lucid"], "ambigous","easy");
-    add("mcg",["ambigous","monotonous", "unique","lucid"], "ambigous","medium");
-    add("curse of m",["ambigous","monotonous", "unique","lucid"], "ambigous","hard");
+    add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","easy");
+    add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","medium");
+    add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","hard");
     add("something not clear",["ambigous","monotonous", "unique","lucid"], "ambigous","default");
   }
-  function data(){
-    //console.log("Hi")
-    //data = readString("GRE_list_1.csv")
-    //console.log(data)
-    //data = CSVReader("GRE_list_1.csv")
-    //console.log(data);
-  }
   add=( a,  b, c, type) => {
-    var toAdd = new Question(a,b,c);
-    if (type!= 'default') {
-      datab['default'].push(toAdd)
-    } 
+    toAdd = new Question(a,b,c);
     datab[type].push(toAdd)
 }  
     function load(val) {
@@ -86,8 +79,7 @@ export default function PlayScreen({navigation,route}) {
     }
     const result = JSON.stringify(route.params.answer)
     resul = result.substring(1,result.length-1)
-    console.log(resul)
-    console.log("A")
+    //console.log(resul)
     let txt=''
     let cor =''
     let arr=[]
@@ -99,92 +91,72 @@ export default function PlayScreen({navigation,route}) {
     let time = null
     //let time = setInterval(this.tick, 1000);
     return (
-    <View>
+    <View style = {{ flex : 1, backgroundColor : '#F0FFF0'}}>
       <Text style = {styles.timer}> {timer}</Text>
-      <Text style = {styles.text}> {text}</Text>
-      <Button
-        onPress={() => {answer(0)}}
-        title={options[0]}
-        color="#841584"
-      />    
-      <Button
-        onPress={() => {answer(1)}}
-        title={options[1]}
-         color="#841584"
-      />    
-      <Button
-        onPress={() => {answer(2)}}
-        title={options[2]}
-        color="#841584"
-      />    
-      <Button
-        onPress={() => {answer(3)}}
-        title={options[3]}
-        color="#841584"
-      />   
+      <View style = {styles.QuestionContainer}> 
+        <Text style = {styles.text}> {text}</Text>
+      </View> 
+
+      <View style = {{alignItems : 'center', justifyContent: 'center', backgroundColor : '#F0FFF0'}}> 
+        <TouchableOpacity style = {styles.AnswerButtonBlack} onPress={() => {answer(0)}}>
+          <Text style = {styles.AnswerText}>{options[0]}</Text>
+        </TouchableOpacity>    
+        <TouchableOpacity style = {styles.AnswerButtonBlue}  onPress={() => {answer(1)}}>
+          <Text style = {styles.AnswerText}>{options[1]}</Text>
+        </TouchableOpacity>   
+        <TouchableOpacity style = {styles.AnswerButtonBlack} onPress={() => {answer(2)}}>
+          <Text style = {styles.AnswerText}>{options[2]}</Text>
+        </TouchableOpacity>   
+        <TouchableOpacity style = {styles.AnswerButtonBlue} onPress={() => {answer(3)}}>
+          <Text style = {styles.AnswerText}>{options[3]}</Text>
+        </TouchableOpacity>
+      </View>   
     </View>
     );
 }
 const styles = StyleSheet.create({
   timer:{
-    paddingTop: 10,
+    paddingTop: screenHeight/10,
     fontWeight: 'bold',
-    fontSize :30,
+    fontSize : 48,
     textAlign: "center"    
   },
   text:{
-    textAlign: "center",
-    paddingTop: 30,
     fontWeight: 'bold',
-    fontSize :30
+    fontSize : 36,
+    color : 'white'
   },
-  button0:{
-    paddingTop:20,
-    backgroundColor:'white',
-    width:400,
-    height :90,
+  QuestionContainer : {
+    width : screenWidth - 40,
+    height : 180,
+    backgroundColor:'#696969',
+    alignSelf : 'center',
+    alignItems : 'center',
+    justifyContent: 'center',
+    borderRadius: 40,
+    marginTop : 60,
   },
-  button1:{
-    width:400,
-    height :90,
-    backgroundColor:'white'
+  AnswerText : {
+    fontWeight : 'bold',
+    fontSize : 24,
+    color : 'white'
   },
-  button2:{
-    width:400,
-    height :90,
-    backgroundColor:'white'
+  AnswerButtonBlack : {
+    width : screenWidth - 40,
+    height : 55,
+    backgroundColor : 'black',
+    alignItems : 'center',
+    justifyContent: 'center',
+    marginTop : 45,
+    borderRadius : 30,
   },
-  button3:{
-    width:400,
-    height :90,
-    backgroundColor:'white'
-  },
-
-
-  container: {
-    flex: 1,
-    backgroundColor: '#fafafa',
-  },
-  contentContainer: {
-    paddingTop: 15,
-  },
-  optionIconContainer: {
-    marginRight: 12,
-  },
-  option: {
-    backgroundColor: '#fdfdfd',
-    paddingHorizontal: 15,
-    paddingVertical: 15,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderBottomWidth: 0,
-    borderColor: '#ededed',
-  },
-  lastOption: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  optionText: {
-    fontSize: 15,
-    alignSelf: 'flex-start',
-    marginTop: 1,
-  },
+  AnswerButtonBlue : {
+    width : screenWidth - 40,
+    height : 55,
+    backgroundColor : '#4455BB',
+    alignItems : 'center',
+    justifyContent: 'center',
+    marginTop : 45,
+    borderRadius : 30,
+  }
 });
