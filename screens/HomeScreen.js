@@ -8,100 +8,44 @@ import IconSetting from 'react-native-vector-icons/Feather';
 import IconLeader from 'react-native-vector-icons/MaterialCommunityIcons';
 import { MonoText } from '../components/StyledText';
 import * as Progress from 'react-native-progress';
-import GRE1 from './Data/GRE_list_1.json';
-import GRE2 from './Data/GRE_list_2.json';
-import GRE3 from './Data/GRE_list_3.json';
-import GRE4 from './Data/GRE_list_4.json';
-import GRE5 from './Data/GRE_list_5.json';
-
+import Coverflow from 'react-native-coverflow';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
-function HomeScreen({ navigation }) {
-  class Question {
-    question = "";
-    correctanswer = "";
-    constructor(a, c) {
-      this.question = a;
-      this.correctanswer = c;
-    }
+function HomeScreen({ navigation, route }) {
+  let ans = "hard"
+  try {
+    ans = route.params.mode
+  } catch {
+    ans = "hard"
   }
-  const datab = {
-    easy: [],
-    medium: [],
-    hard: [],
-    default: []
+  let ans2 = "fifty"
+  try {
+    ans2 = route.params.perweek
+  } catch {
+    ans2 = "fifty"
   }
-  function create_database() {
-    for (var i = 0; i < 262; i++) {
-      add(GRE1.Adjective[i], GRE1.Word[i], "default");
-    }
-    for (var i = 0; i < 262; i++) {
-      add(GRE2.Adjective[i], GRE2.Word[i], "default");
-    }
-    for (var i = 0; i < 262; i++) {
-      add(GRE3.Adjective[i], GRE3.Word[i], "default");
-    }
-    for (var i = 0; i < 262; i++) {
-      add(GRE4.Adjective[i], GRE4.Word[i], "default");
-    }
-    for (var i = 0; i < 262; i++) {
-      add(GRE5.Adjective[i], GRE5.Word[i], "default");
-    }
-  }
-  function add(a, def, type) {
-    const toAdd = new Question(a, def);
-    datab[type].push(toAdd)
-  }
-  function load(val) {
-    console.log("Load function started")
-    create_database()
-
-    const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
-    txt = ques.question
-    cor = ques.correctanswer
-
-    var ar = [ques.correctanswer]
-    while (ar.length < 4) {
-      const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
-      if (!(arr.includes(ques.correctanswer))) {
-        ar.push(ques.correctanswer)
-      }
-    }
-
-    arr = ar
-  }
-
-  let txt=''
-  let cor =''
-  let arr=[]
-  load('default')
-  let ans = "default"
   return (
     <View style={styles.container}>
-
       <View style={{ flexDirection: 'row' }}>
-        <IconSetting name="settings" size={40} onPress={() => navigation.navigate('Setting')} style={styles.wrenchIcon} />
+        <IconSetting name="settings" size={40} onPress={() => navigation.navigate('Setting', { mode: ans, perweek: ans2 })} style={styles.wrenchIcon} />
         <View style={styles.progressBar}>
-          <Progress.Bar progress={0.75} color={'blue'} width={screenWidth / 2} size={50} borderColor={'white'}
+          <Progress.Bar progress={0.5} color={'blue'} width={screenWidth / 2} size={50} borderColor={'white'}
             unfilledColor={'white'} height={10} borderRadius={5} borderWidth={1.5} />
         </View>
-        <IconLeader name="podium" size={43} onPress={() => navigation.navigate('Setting')} style={styles.globeIcon} />
       </View>
-
       <View style={styles.titleContainer}>
         <Text style={styles.ButtonText}>VOC-AB</Text>
       </View>
-
       <View style={styles.buttonContainer}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans })}>
+          <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, perweek: ans2 })}>
             <Text style={{ fontFamily: 'serif', fontSize: 48, fontWeight: '700' }}>Learn It</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", { answer: ans })}>
+          <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", { answer: ans, perweek: ans2 })}>
             <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif' }}>Time Trial</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", { answer: ans })}>
+          <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", { answer: ans, perweek: ans2 })}>
             <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif' }}>Challenge</Text>
           </TouchableOpacity>
         </ScrollView>
@@ -115,7 +59,7 @@ function HomeScreen({ navigation }) {
         alignItems: 'center', justifyContent: 'center', marginTop: 30,
         backgroundColor: 'white', width: screenWidth,
       }}>
-        <Text>{cor}:{txt}</Text>
+        <Text>Ambigious Open to more than one interpretations</Text>
       </View>
     </View>
   )
@@ -123,9 +67,6 @@ function HomeScreen({ navigation }) {
 HomeScreen.navigationOptions = {
   header: null,
 };
-
-export default HomeScreen
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -200,3 +141,4 @@ const styles = StyleSheet.create({
     marginTop: 50,
   }
 });
+export default HomeScreen
