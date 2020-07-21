@@ -5,6 +5,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { MonoText } from '../components/StyledText';
 import IconBack from 'react-native-vector-icons/AntDesign';
+import Icon from 'react-native-vector-icons/EvilIcons'; 
+import { Dimensions } from "react-native";
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height);
+
 
 function SettingsScreen({ navigation, route }) {
   function navigat(ans) {
@@ -111,8 +116,13 @@ function SettingsScreen({ navigation, route }) {
   }
   return (
     <View>
-      <IconBack name="back" size={40} onPress={() => navigation.navigate('Home', { mode: retu, perweek: retu2 })} style={styles.back} />
-      <Text styles={styles.result}>Select Mode</Text>
+      <View style={styles.head}>
+        <Text style={styles.settings}>Settings</Text>
+        <Icon name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu, perweek: retu2 })} style={styles.back}/>
+      </View>
+
+      <Text style={styles.subHeads}>In App Difficulty</Text>
+
       <TouchableOpacity style={easy} onPress={() => { answer(1) }}>
         <Text style={styles.AnswerText}>Easy</Text>
       </TouchableOpacity>
@@ -144,12 +154,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: 'white'
   },
-  back: {
-    paddingTop: 25,
-    paddingLeft: 10,
-    color: 'black',
-    left: 10,
-  },
+  // back: {
+  //   alignSelf:'flex-end',
+  //   paddingTop: 50,
+  //   paddingRight: 20,
+  //   color: 'black',
+  //   left: 10,
+  // },
   pick: {
     paddingTop: 100,
     paddingBottom: 50,
@@ -180,5 +191,26 @@ const styles = StyleSheet.create({
     marginTop: 45,
     borderRadius: 30,
   },
+  settings: { 
+    fontFamily: 'ReemKufi-Regular', 
+    fontSize: 48, 
+    fontWeight: '700',
+    paddingLeft: 15,
+  },
+  head: {
+    width: '95%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 50,
+    flexDirection: 'row'
+  },
+  subHeads: {
+    justifyContent: 'flex-start',
+    fontFamily: 'ReemKufi-Regular',
+    fontSize: 28, 
+    fontWeight: '700',
+    paddingLeft: 18,
+    marginTop: 15,
+  }
 });
 export default SettingsScreen
