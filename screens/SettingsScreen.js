@@ -7,6 +7,7 @@ import { MonoText } from '../components/StyledText';
 import IconBack from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/EvilIcons'; 
 import { Dimensions } from "react-native";
+import MultiSwitch from '../components/MultiSwitch';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -115,14 +116,14 @@ function SettingsScreen({ navigation, route }) {
     settwohundred2()
   }
   return (
-    <View>
+    <View >
       <View style={styles.head}>
         <Text style={styles.settings}>Settings</Text>
         <Icon name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu, perweek: retu2 })} style={styles.back}/>
       </View>
 
       <Text style={styles.subHeads}>In App Difficulty</Text>
-
+      
       <TouchableOpacity style={easy} onPress={() => { answer(1) }}>
         <Text style={styles.AnswerText}>Easy</Text>
       </TouchableOpacity>
@@ -132,7 +133,17 @@ function SettingsScreen({ navigation, route }) {
       <TouchableOpacity style={hard} onPress={() => { answer(3) }}>
         <Text style={styles.AnswerText}>Hard</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={fifty} onPress={() => { answer2(1) }}>
+
+      <Text style={styles.subHeads}>Connect</Text>
+
+
+      <Text style={styles.subHeads}>Weekly Goal</Text>
+
+      <View style={styles.goalMenu}>
+        <MultiSwitch g1={() => answer2(1) } g2={() => answer2(2) } g3={() => answer2(3) }/>
+      </View>
+
+      {/* <TouchableOpacity style={fifty} onPress={() => { answer2(1) }}>
         <Text style={styles.AnswerText}>50</Text>
       </TouchableOpacity>
       <TouchableOpacity style={hundred} onPress={() => { answer2(2) }}>
@@ -140,8 +151,7 @@ function SettingsScreen({ navigation, route }) {
       </TouchableOpacity>
       <TouchableOpacity style={twohundred} onPress={() => { answer2(3) }}>
         <Text style={styles.AnswerText}>200</Text>
-      </TouchableOpacity>
-
+      </TouchableOpacity> */}
     </View>
   )
 }
@@ -149,6 +159,9 @@ SettingsScreen.navigationOptions = {
   header: null,
 };
 const styles = StyleSheet.create({
+  page: {
+    flexDirection:'column'
+  },
   AnswerText: {
     fontWeight: 'bold',
     fontSize: 24,
@@ -211,6 +224,13 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     paddingLeft: 18,
     marginTop: 15,
-  }
+  },
+  goalMenu: {
+    //flex: 1,
+    marginVertical: 20,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 export default SettingsScreen
