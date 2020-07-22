@@ -149,16 +149,6 @@ function SettingsScreen({ navigation, route }) {
       <View style={styles.goalMenu}>
         <MultiSwitch g1={() => answer2(1) } g2={() => answer2(2) } g3={() => answer2(3) }/>
       </View>
-
-      {/* <TouchableOpacity style={fifty} onPress={() => { answer2(1) }}>
-        <Text style={styles.AnswerText}>50</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={hundred} onPress={() => { answer2(2) }}>
-        <Text style={styles.AnswerText}>100</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={twohundred} onPress={() => { answer2(3) }}>
-        <Text style={styles.AnswerText}>200</Text>
-      </TouchableOpacity> */}
     </View>
   )
 }
