@@ -4,8 +4,9 @@ import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } fro
 import { ScrollView } from 'react-native-gesture-handler';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { MonoText } from '../components/StyledText';
-import IconBack from 'react-native-vector-icons/AntDesign';
-import Icon from 'react-native-vector-icons/EvilIcons'; 
+//import IconBack from 'react-native-vector-icons/AntDesign';
+import IconBack from 'react-native-vector-icons/EvilIcons';
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { Dimensions } from "react-native";
 import MultiSwitch from '../components/MultiSwitch';
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -119,7 +120,7 @@ function SettingsScreen({ navigation, route }) {
     <View >
       <View style={styles.head}>
         <Text style={styles.settings}>Settings</Text>
-        <Icon name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu, perweek: retu2 })} style={styles.back}/>
+        <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu, perweek: retu2 })} style={styles.back}/>
       </View>
 
       <Text style={styles.subHeads}>In App Difficulty</Text>
@@ -136,6 +137,12 @@ function SettingsScreen({ navigation, route }) {
 
       <Text style={styles.subHeads}>Connect</Text>
 
+      <TouchableOpacity activeOpacity={0.8}>
+        <Image  source={require('../assets/images/fb-login.png')} style={{marginLeft:2, marginTop:10, height:50, width:280, borderRadius:1}}/>
+      </TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.8}>
+        <Image  source={require('../assets/images/g-login.png')} style={{height:50, width:283, marginVertical:10}}/>
+      </TouchableOpacity>
 
       <Text style={styles.subHeads}>Weekly Goal</Text>
 
@@ -187,21 +194,21 @@ const styles = StyleSheet.create({
 
   },
   AnswerButtonBlue: {
-    width: 400,
+    width: 250,
     height: 55,
     backgroundColor: '#4455BB',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 45,
+    marginVertical: 20,
     borderRadius: 30,
   },
   AnswerButtonBlack: {
-    width: 400,
+    width: 250,
     height: 55,
     backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 45,
+    marginTop: 20,
     borderRadius: 30,
   },
   settings: { 
