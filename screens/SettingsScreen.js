@@ -4,7 +4,14 @@ import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } fro
 import { ScrollView } from 'react-native-gesture-handler';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { MonoText } from '../components/StyledText';
-import IconBack from 'react-native-vector-icons/AntDesign';
+//import IconBack from 'react-native-vector-icons/AntDesign';
+import IconBack from 'react-native-vector-icons/EvilIcons';
+import Icon from 'react-native-vector-icons/FontAwesome'
+import { Dimensions } from "react-native";
+import MultiSwitch from '../components/MultiSwitch';
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height);
+
 
 function SettingsScreen({ navigation, route }) {
   function navigat(ans) {
@@ -110,9 +117,14 @@ function SettingsScreen({ navigation, route }) {
     settwohundred2()
   }
   return (
-    <View>
-      <IconBack name="back" size={40} onPress={() => navigation.navigate('Home', { mode: retu, perweek: retu2 })} style={styles.back} />
-      <Text styles={styles.result}>Select Mode</Text>
+    <View >
+      <View style={styles.head}>
+        <Text style={styles.settings}>Settings</Text>
+        <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu, perweek: retu2 })} style={styles.back}/>
+      </View>
+
+      <Text style={styles.subHeads}>In App Difficulty</Text>
+      
       <TouchableOpacity style={easy} onPress={() => { answer(1) }}>
         <Text style={styles.AnswerText}>Easy</Text>
       </TouchableOpacity>
@@ -122,16 +134,21 @@ function SettingsScreen({ navigation, route }) {
       <TouchableOpacity style={hard} onPress={() => { answer(3) }}>
         <Text style={styles.AnswerText}>Hard</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={fifty} onPress={() => { answer2(1) }}>
-        <Text style={styles.AnswerText}>50</Text>
+
+      <Text style={styles.subHeads}>Connect</Text>
+
+      <TouchableOpacity activeOpacity={0.8}>
+        <Image  source={require('../assets/images/fb-login.png')} style={{marginLeft:2, marginTop:10, height:50, width:280, borderRadius:1}}/>
       </TouchableOpacity>
-      <TouchableOpacity style={hundred} onPress={() => { answer2(2) }}>
-        <Text style={styles.AnswerText}>100</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={twohundred} onPress={() => { answer2(3) }}>
-        <Text style={styles.AnswerText}>200</Text>
+      <TouchableOpacity activeOpacity={0.8}>
+        <Image  source={require('../assets/images/g-login.png')} style={{height:50, width:283, marginVertical:10}}/>
       </TouchableOpacity>
 
+      <Text style={styles.subHeads}>Weekly Goal</Text>
+
+      <View style={styles.goalMenu}>
+        <MultiSwitch g1={() => answer2(1) } g2={() => answer2(2) } g3={() => answer2(3) }/>
+      </View>
     </View>
   )
 }
@@ -139,17 +156,21 @@ SettingsScreen.navigationOptions = {
   header: null,
 };
 const styles = StyleSheet.create({
+  page: {
+    flexDirection:'column'
+  },
   AnswerText: {
     fontWeight: 'bold',
     fontSize: 24,
     color: 'white'
   },
-  back: {
-    paddingTop: 25,
-    paddingLeft: 10,
-    color: 'black',
-    left: 10,
-  },
+  // back: {
+  //   alignSelf:'flex-end',
+  //   paddingTop: 50,
+  //   paddingRight: 20,
+  //   color: 'black',
+  //   left: 10,
+  // },
   pick: {
     paddingTop: 100,
     paddingBottom: 50,
@@ -163,22 +184,50 @@ const styles = StyleSheet.create({
 
   },
   AnswerButtonBlue: {
-    width: 400,
+    width: 250,
     height: 55,
     backgroundColor: '#4455BB',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 45,
+    marginTop: 20,
     borderRadius: 30,
   },
   AnswerButtonBlack: {
-    width: 400,
+    width: 250,
     height: 55,
     backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 45,
+    marginTop: 20,
     borderRadius: 30,
+  },
+  settings: { 
+    //fontFamily: 'ReemKufi-Regular', 
+    fontSize: 48, 
+    fontWeight: '700',
+    paddingLeft: 15,
+  },
+  head: {
+    width: '95%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 50,
+    flexDirection: 'row'
+  },
+  subHeads: {
+    justifyContent: 'flex-start',
+    //fontFamily: 'ReemKufi-Regular',
+    fontSize: 28, 
+    fontWeight: '700',
+    paddingLeft: 18,
+    marginTop: 15,
+  },
+  goalMenu: {
+    //flex: 1,
+    marginVertical: 20,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 export default SettingsScreen
