@@ -1,7 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
-import DropDownPicker from 'react-native-dropdown-picker';
 import { MonoText } from '../components/StyledText';
 import IconBack from 'react-native-vector-icons/EvilIcons';
 import { Dimensions } from "react-native";
