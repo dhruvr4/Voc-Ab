@@ -14,6 +14,8 @@ import SAT2 from './Data/SAT_list_2.json';
 import SAT3 from './Data/SAT_list_3.json';
 import SAT4 from './Data/SAT_list_4.json';
 import SAT5 from './Data/SAT_list_5.json';
+import IconBack from 'react-native-vector-icons/AntDesign';
+
 
 export default function Challenge({ navigation, route }) {
   class Question {
@@ -109,6 +111,7 @@ export default function Challenge({ navigation, route }) {
   const hint = "Hint : The word starts with " + correct[0].toLocaleUpperCase() + " The length of the word is = " + correct.length;
   return (
     <View>
+            <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, perweek: perweek })} style={styles.home} />
       <Text style={styles.text}> {text}</Text>
       <Text style={styles.text2}> {hint}</Text>
       <TextInput
@@ -126,6 +129,12 @@ export default function Challenge({ navigation, route }) {
   );
 }
 const styles = StyleSheet.create({
+  home : {
+    paddingTop: 30,
+    paddingLeft: 10,
+    color: 'black',
+    left: 10,
+  },
   timer: {
     paddingTop: 10,
     fontWeight: 'bold',

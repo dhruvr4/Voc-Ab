@@ -210,6 +210,7 @@ const styles = StyleSheet.create({
     paddingTop : screenHeight / 55
   },
   WordOfDay : {
+    borderRadius:25,
     alignItems: 'flex-start', 
     justifyContent: 'flex-start', 
     marginTop: 30,
