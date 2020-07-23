@@ -1,60 +1,126 @@
-  
+
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button, Settings } from 'react-native';
-import {Dimensions } from "react-native";
+import { Dimensions } from "react-native";
 import { ScrollView } from 'react-native-gesture-handler';
 import IconSetting from 'react-native-vector-icons/Feather';
 import IconLeader from 'react-native-vector-icons/MaterialCommunityIcons';
 import { MonoText } from '../components/StyledText';
 import * as Progress from 'react-native-progress';
-import Coverflow from 'react-native-coverflow';
+import GRE1 from './Data/GRE_list_1.json';
+import GRE2 from './Data/GRE_list_2.json';
+import GRE3 from './Data/GRE_list_3.json';
+import GRE4 from './Data/GRE_list_4.json';
+import GRE5 from './Data/GRE_list_5.json';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
- function HomeScreen({navigation}) {
-   let ans = "default"
+function HomeScreen({ navigation, route}) {
+  let ans = "hard"
+  try {
+    ans = route.params.mode
+  } catch {
+    ans = "hard"
+  }
+  let ans2 = "fifty"
+  try {
+    ans2 = route.params.perweek
+  } catch {
+    ans2 = "fifty"
+  }
+  class Question {
+    question = "";
+    correctanswer = "";
+    constructor(a, c) {
+      this.question = a;
+      this.correctanswer = c;
+    }
+  }
+  const datab = {
+    easy: [],
+    medium: [],
+    hard: [],
+    default: []
+  }
+  function create_database() {
+    for (var i = 0; i < 262; i++) {
+      add(GRE1.Adjective[i], GRE1.Word[i], "default");
+    }
+    for (var i = 0; i < 262; i++) {
+      add(GRE2.Adjective[i], GRE2.Word[i], "default");
+    }
+    for (var i = 0; i < 262; i++) {
+      add(GRE3.Adjective[i], GRE3.Word[i], "default");
+    }
+    for (var i = 0; i < 262; i++) {
+      add(GRE4.Adjective[i], GRE4.Word[i], "default");
+    }
+    for (var i = 0; i < 262; i++) {
+      add(GRE5.Adjective[i], GRE5.Word[i], "default");
+    }
+  }
+  function add(a, def, type) {
+    const toAdd = new Question(a, def);
+    datab[type].push(toAdd)
+  }
+  function load(val) {
+    console.log("Load function started")
+    create_database()
+
+    const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
+    txt = ques.question
+    cor = ques.correctanswer
+
+    var ar = [ques.correctanswer]
+    while (ar.length < 4) {
+      const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
+      if (!(arr.includes(ques.correctanswer))) {
+        ar.push(ques.correctanswer)
+      }
+    }
+
+    arr = ar
+  }
+
+  let txt = ''
+  let cor = ''
+  let arr = []
+  load('default')
   return (
-    <View style = {styles.container}>
-    
-      <View style = {{flexDirection : 'row'}}>
-        <IconSetting name = "settings"  size={40} onPress={() => navigation.navigate('Setting')} style = {styles.wrenchIcon} />
-          <View style = {styles.progressBar}>
-            <Progress.Bar progress = {0.5} color = {'blue'} width ={screenWidth/2} size = {50} borderColor = {'white'} 
-            unfilledColor = {'white'} height = {10} borderRadius = {5} borderWidth = {1.5}/>
-          </View>
-        <IconLeader name = "podium" size={43} onPress={() => navigation.navigate('Setting')} style = {styles.globeIcon}/> 
+    <View style={styles.container}>
+
+      <View style={{ flexDirection: 'row' }}>
+        <IconSetting name="settings" size={40} onPress={() => navigation.navigate('Setting', { mode: ans, perweek: ans2 })} style={styles.wrenchIcon} />
+        <View style={styles.titleContainer}>
+          <Text style={styles.ButtonText}>VOC-AB</Text>
+        </View>    
+       </View>
+      <View style={styles.buttonContainer}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", {answer: ans, perweek: ans2,})}>
+            <Text style={{ fontFamily: 'serif', fontSize: 48, fontWeight: '700', color : 'white'}}>Learn It</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", {answer: ans, perweek: ans2,})}>
+            <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color : 'white'}}>Time Trial</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", {answer: ans, perweek: ans2})}>
+            <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color : 'white'}}>Challenge</Text>
+          </TouchableOpacity>
+        </ScrollView>
       </View>
 
-      <View style = {styles.titleContainer}>
-        <Text style = {styles.ButtonText}>VOC-AB</Text>
+      <View style={styles.textContainer}>
+        <Text style={{fontSize: 38,fontWeight : '600'}}>Word Of the day</Text>
       </View>
 
-        <View style = {styles.buttonContainer}>
-         <ScrollView horizontal = {true} showsHorizontalScrollIndicator={false}>
-          <TouchableOpacity style = {styles.play} onPress={() => navigation.navigate("LearnIt",{answer :ans})}> 
-           <Text style = {{fontFamily : 'serif', fontSize : 48, fontWeight : '700'}}>Learn It</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.timeTrial} onPress={() => navigation.navigate("TimeTrial",{answer :ans})}>
-            <Text style = {{fontSize : 48, fontWeight : '700', fontFamily : 'serif'}}>Time Trial</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.wordUp} onPress={() => navigation.navigate("Challenge",{answer :ans})}>
-            <Text style = {{fontSize : 48, fontWeight : '700', fontFamily : 'serif'}}>Challenge</Text>
-          </TouchableOpacity>
-          </ScrollView>
-        </View> 
-
-      <View style = {styles.textContainer}>
-        <Text style = {styles.swipeText}>Word Of the day</Text>
-      </View>
-
-      <View style = {{alignItems : 'center', justifyContent : 'center',marginTop : 30, 
-      backgroundColor : 'white' ,width : screenWidth,}}>
-        <Text>Ambigious Open to more than one interpretations</Text>
+      <View style={styles.WordOfDay}>
+          <Text style={styles.WordText}>{cor.charAt(0).toUpperCase()+cor.substring(1,cor.length)}</Text>
+          <Text style={styles.DefinitionText}>{txt}</Text>
       </View>
     </View>
-    )
+  )
 }
 HomeScreen.navigationOptions = {
   header: null,
@@ -65,74 +131,99 @@ export default HomeScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#D1F6FF',
+    backgroundColor: '#cfebf2',
   },
-  buttonContainer:{
-    alignItems : 'center',
+  buttonContainer: {
+    alignItems: 'center',
     justifyContent: 'center',
-    height : 270,
-    marginTop : 70
+    height: screenHeight/3.5,
+    marginTop: 70,
+    shadowColor: "#000",
+    shadowOffset: {
+	      width: 0,
+	      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.00,
+    elevation: 24,
   },
-  ButtonText : {
-    fontSize : 70,
-    fontWeight : '700',
-    fontFamily : 'serif',
+  ButtonText: {
+    fontSize: 60,
+    fontWeight: '700',
+    fontFamily: 'serif',
+    paddingLeft : screenWidth / 15
   },
-  wrenchIcon : {
-    paddingTop : screenHeight/15 + 4,
-    paddingLeft : 10,
-    color : 'black',
-    left : 10,
+  wrenchIcon: {
+    paddingTop: screenHeight / 15 + 4,
+    paddingLeft: 10,
+    color: 'black',
+    left: 10,
   },
-  globeIcon : {
-    paddingTop : screenHeight/15,
-    paddingRight : 10,
-    right : 10,
-    color : 'black',
-  },
-  play : {
-    width : screenWidth,
-    alignItems : 'center',
+  play: {
+    alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 15,
-    width : screenWidth-50,
-    backgroundColor : 'white',
-    marginLeft : 15,
+    borderRadius: 35,
+    width: screenWidth - 50,
+    backgroundColor: '#0b5cd5',
+    marginLeft: 15,
   },
-  timeTrial : {
-    alignItems : 'center',
+  timeTrial: {
+    alignItems: 'center',
     justifyContent: 'center',
-    width : screenWidth-50,
-    backgroundColor : '#76E0D3',
-    borderRadius : 15,
-    paddingRight : 10,
-    marginLeft : 15,
+    width: screenWidth - 50,
+    backgroundColor: '#ffc300',
+    borderRadius: 35,
+    paddingRight: 10,
+    marginLeft: 15,
   },
-  wordUp : { 
-    alignItems : 'center',
+  wordUp: {
+    alignItems: 'center',
     justifyContent: 'center',
-    width : screenWidth-50, 
-    backgroundColor : '#EA8585',
-    borderRadius : 15,
-    marginLeft : 15,
+    width: screenWidth - 50,
+    backgroundColor: '#bd0a0a',
+    borderRadius: 35,
+    marginLeft: 15,
   },
-  swipeText : {
-    fontSize : 38,
+  textContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: screenHeight / 13,
   },
-  textContainer : {
-    alignItems : 'center',
-    justifyContent : 'center',
-    marginTop : 30,
+  titleContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf : 'center',
+    marginTop: screenHeight / 20,
   },
-  progressBar : {
-    flex : 1.5,
-    alignItems : 'center',
-    justifyContent : 'center',
-    marginTop : screenHeight/15 + 4,
+  WordText: {
+    fontWeight: '700',
+    fontSize : 32,
+    alignSelf : 'flex-start',
+    paddingLeft : screenWidth / 30,
+    paddingTop : screenHeight / 60
   },
-  titleContainer : {
-    alignItems : 'center',
-    justifyContent : 'center',
-    marginTop : 50,
+  DefinitionText : {
+    fontWeight : '300',
+    fontSize : 24,
+    paddingLeft : screenWidth / 10,
+    paddingRight : screenWidth / 35,
+    paddingTop : screenHeight / 55
+  },
+  WordOfDay : {
+    alignItems: 'flex-start', 
+    justifyContent: 'flex-start', 
+    marginTop: 30,
+    backgroundColor: 'white', 
+    width: screenWidth - 40, 
+    height : screenHeight/4, 
+    alignSelf : 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+	      width: 0,
+	      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.00,
+    elevation: 24,
   }
 });
