@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, useState} from 'react'
 import {View, StyleSheet, Text, Dimensions, TouchableOpacity, Animated, PanResponder} from 'react-native'
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
@@ -7,6 +7,18 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default class MultiSwitch extends Component {
+    constructor(props) {
+        super(props);
+        const selected = 0;
+        if (props.selected === "fifty") {
+            this.selected = 1;
+        } else if (props.selected === "hundred") {
+            this.selected = 2;
+        } else {
+            this.selected = 3;
+        }
+            
+    }
     // Slider() {
     //     const panResponder = React.useRef(PanResponder.create({
     //         onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -57,9 +69,9 @@ export default class MultiSwitch extends Component {
     render() {
         return(
             <View style={styles.container}>
-                <GoalBtn number={50} handler={() => { console.log('50');/*answer2(1)*/ }}/>
-                <GoalBtn number={100} handler={() => { console.log('100');/*answer2(2)*/}}/> 
-                <GoalBtn number={200} handler={() => { console.log('200')/*answer2(3)*/; }}/>
+                <GoalBtn number={50} handler={this.props.g1}/>
+                <GoalBtn number={100} handler={this.props.g2}/> 
+                <GoalBtn number={200} handler={this.props.g3}/>
                 {/* <Animated.View 
                     {...this._panResponder.panHandelers}
                     style={[
@@ -108,13 +120,19 @@ const styles = {
         borderRadius: 27.5,
         justifyContent: 'space-between',
         alignItems: 'center',
-        borderWidth:1,
-        borderColor:'black',
     },
     btnText: {
         color: 'grey',
         fontWeight: "bold",
         textAlign: 'center',
+    },
+    selectedBtnTexn: {
+        flex:1,
+        color: 'blue',
+        fontSize:15,
+        fontWeight: "bold",
+        textAlign: 'center',
+        padding: 15,
     },
     GoalSliderBtn: {
         width: Metrics.containerWidth/3,
