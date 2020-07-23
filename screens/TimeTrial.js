@@ -77,10 +77,12 @@ export default function TimeTrial({ navigation, route }) {
     const toAdd = new Question(a, def);
     datab[type].push(toAdd)
   }
+
   function load(val) {
     console.log("Load function started")
     create_database(val)
     const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
+    //console.log(ques)
     txt = ques.question
     cor = ques.correctanswer
     var ar = [ques.correctanswer]
@@ -102,13 +104,18 @@ export default function TimeTrial({ navigation, route }) {
       settotwrong([...totwrong, [text, options[answer], correct]])
     }
     nextQuestion()
+    setTimer(tim - (new Date().getMinutes() * 60 + new Date().getSeconds()) + 10)
+    if (timer < 0.5) {
+      navigat()
+    }
   }
   function nextQuestion() {
-    let val = "hard"
+    const val = mode
     const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
     txt = ques.question
     cor = ques.correctanswer
     var ar = [ques.correctanswer]
+
     while (ar.length < 4) {
       const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
       if (!(arr.includes(ques.correctanswer))) {
@@ -124,11 +131,11 @@ export default function TimeTrial({ navigation, route }) {
   function navigat() {
     console.log("Navigat called")
     clearInterval(time)
-    const pushAction2 = StackActions.push("TimeTrialResult", { answer: totscore, correct: totwrong, mode: result, perwee: perweek });
+    const pushAction2 = StackActions.push("TimeTrialResult", { answer: totscore, correct: totwrong, mode: mode, perwee: perweek });
     navigation.dispatch(pushAction2)
   }
   function tick() {
-    if (timer < 0.1) {
+    if (timer < 0.5) {
       navigat()
     }
     else {
@@ -144,19 +151,21 @@ export default function TimeTrial({ navigation, route }) {
   function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
   }
-  const result = route.params.answer
+  const mode = route.params.answer
   const perweek = route.params.perweek
   let txt = ''
   let cor = ''
   let arr = []
-  load(result)
+  let [tim, settim] = React.useState(new Date().getMinutes() * 60 + new Date().getSeconds())
+  let [timer, setTimer] = React.useState(10)
+  
+  load(mode)
+  
   const [text, setText] = React.useState(txt)
   const [options, setOptions] = React.useState(arr)
   const [correct, setCorrect] = React.useState(cor)
   const [totscore, settotscore] = React.useState(0)
   const [totwrong, settotwrong] = React.useState([])
-  let [tim, settim] = React.useState(new Date().getMinutes() * 60 + new Date().getSeconds())
-  let [timer, setTimer] = React.useState(10)
   let time = null
   return (
     <View style={{ flex: 1, backgroundColor: '#F0FFF0' }}>

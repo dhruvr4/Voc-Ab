@@ -78,8 +78,11 @@ export default function LearnIt({ navigation, route }) {
     datab[type].push(toAdd)
   }
   function load(val) {
+    //console.log(datab)
     console.log("Load function started")
     create_database(val)
+    //console.log(datab)
+
     const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
     txt = ques.question
     cor = ques.correctanswer
