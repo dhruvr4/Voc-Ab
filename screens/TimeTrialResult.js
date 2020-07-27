@@ -19,7 +19,7 @@ export default function TimeTrialResult({ route, navigation }) {
   const pushAction2 = StackActions.push('TimeTrial', { answer: "hard" });
   return (
     <View>
-      <IconBack name="back" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per })} style={styles.back} />
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per })} style={styles.home} />
       <Text style={styles.result}> {result}</Text>
       <Text style={styles.correct}> {corr}</Text>
       <Button title="Again" onPress={() => navigation.dispatch(pushAction2)} />
@@ -27,6 +27,12 @@ export default function TimeTrialResult({ route, navigation }) {
   );
 }
 const styles = StyleSheet.create({
+  home: {
+    paddingTop: 30,
+    paddingLeft: 10,
+    color: 'black',
+    left: 10,
+  },
   result: {
     paddingTop: 100,
     fontWeight: 'bold',

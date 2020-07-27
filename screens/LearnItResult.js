@@ -95,15 +95,15 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize : 32,
     alignSelf : 'center',
-    paddingLeft : screenWidth / 30,
     paddingTop : screenHeight / 60
   },
   DefinitionText : {
     fontWeight : '300',
     fontSize : 24,
     paddingLeft : screenWidth / 10,
-    paddingRight : screenWidth / 35,
-    paddingTop : screenHeight / 20
+    paddingRight : screenWidth / 10,
+    paddingTop : screenHeight / 20,
+    alignSelf : 'center'
   },
   WordOfDay : {
     alignItems: 'flex-start', 
