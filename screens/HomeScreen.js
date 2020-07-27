@@ -92,10 +92,11 @@ function HomeScreen({ navigation, route}) {
     <View style={styles.container}>
 
       <View style={{ flexDirection: 'row' }}>
-        <IconSetting name="settings" size={40} onPress={() => navigation.navigate('Setting', { mode: ans, perweek: ans2 })} style={styles.wrenchIcon} />
+        <IconSetting name="settings" size={35} onPress={() => navigation.navigate('Setting', { mode: ans, perweek: ans2 })} style={styles.wrenchIcon} />
         <View style={styles.titleContainer}>
           <Text style={styles.ButtonText}>VOC-AB</Text>
-        </View>  
+        </View> 
+        <IconSetting name="book-open" size={35} onPress={()=> navigation.navigate('Dictionary', { mode: ans, perweek: ans2 })} style={styles.wrenchIcon} /> 
       </View>
       <View style={styles.buttonContainer}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -116,7 +117,6 @@ function HomeScreen({ navigation, route}) {
       </View>
 
       <View>
-      <Button title="Dict" style={{paddingTop: screenHeight / 15 + 4, paddingLeft: 10,}} onPress={()=> navigation.navigate('Dictionary', { mode: ans, perweek: ans2 })} />
       </View>
       <View style={styles.WordOfDay}>
           <Text style={styles.WordText}>{cor.charAt(0).toUpperCase()+cor.substring(1,cor.length)}</Text>
