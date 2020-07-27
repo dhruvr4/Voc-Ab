@@ -1,6 +1,7 @@
-import React from 'react'
-import { Dimensions, View, TextInput, StyleSheet, Text } from "react-native";
+import React, { useState } from 'react'
+import { Dimensions, View, TextInput, StyleSheet, Text, Button } from "react-native";
 import IconBack from 'react-native-vector-icons/EvilIcons';
+import { SearchBar } from 'react-native-elements'
 
 import GRE1 from './Data/GRE_list_1.json';
 import GRE2 from './Data/GRE_list_2.json';
@@ -72,16 +73,31 @@ export default function Dictionary({navigation, route}) {
     create_database(val)
     }
 
+    const [search, setSearch] = useState('');
+
+    const updateSearch = (event) => {
+        setSearch(event);
+    }
+
     return (
         <View style={{
             flex: 1,
             flexDirection: 'column',
             backgroundColor: '#fff',
           }}>
+
             <View style={styles.head}>
                 <Text style={styles.heading}>Dictionary</Text>
                 <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu, perweek: retu2 })} style={styles.back} />
             </View>
+            <SearchBar 
+            placeholder="Look up a word..." 
+            onChangeText={updateSearch} 
+            value={search} 
+            lightTheme={true} 
+            round={true} 
+            containerStyle={{backgroundColor:'white', borderTopWidth:0}}
+            inputContainerStyle={{backgroundColor:'#EBEBEB', height: 40, width: '97%', marginLeft:'1%',}}/>
         </View>
     )
 }
@@ -99,6 +115,19 @@ const styles = StyleSheet.create({
         paddingTop: 50,
         flexDirection: 'row'
     },
+    // searchBar: {
+    //     width: '95%',
+    //     alignItems: 'center',
+    //     justifyContent: 'space-between',
+    //     marginHorizontal: 25,
+    //     marginVertical: 15,
+    //     flexDirection: 'row'
+    // },
+    inputBox: {
+        borderRadius: 10,
+        borderWidth:1,
+    },
+
     heading: {
         fontSize: 48,
         fontWeight: '700',
