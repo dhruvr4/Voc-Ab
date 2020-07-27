@@ -14,6 +14,8 @@ import SAT2 from './Data/SAT_list_2.json';
 import SAT3 from './Data/SAT_list_3.json';
 import SAT4 from './Data/SAT_list_4.json';
 import SAT5 from './Data/SAT_list_5.json';
+import IconBack from 'react-native-vector-icons/AntDesign';
+
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height)
@@ -140,6 +142,12 @@ export default function Challenge({ navigation, route }) {
   );
 }
 const styles = StyleSheet.create({
+  home : {
+    paddingTop: 30,
+    paddingLeft: 10,
+    color: 'black',
+    left: 10,
+  },
   timer: {
     paddingTop: 10,
     fontWeight: 'bold',
