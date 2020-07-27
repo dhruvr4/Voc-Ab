@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Dimensions, View, TextInput, StyleSheet, Text, FlatList } from "react-native";
+import { Dimensions, View, TextInput, StyleSheet, Text, FlatList, ActivityIndicator } from "react-native";
 import IconBack from 'react-native-vector-icons/EvilIcons';
 import { SearchBar } from 'react-native-elements'
 
@@ -58,9 +58,7 @@ export default function Dictionary({navigation, route}) {
             adj:a
         })
     }
-    
-    const addKeys = (val, key) => ({key: key, ...val}); // fn to add keys to the database
-    
+        
     load = () => {
         console.log("Load function started")
         create_database();
@@ -72,6 +70,7 @@ export default function Dictionary({navigation, route}) {
     const [search, setSearch] = useState('');
     const [displayedList, setDisplayedList] = useState([]);
     const [memory, setMemory] = useState([])
+    const [isLoading, setLoading] = useState(true);
     
 
     const updateSearch = (event) => {
@@ -92,6 +91,7 @@ export default function Dictionary({navigation, route}) {
         console.log("New Render Cycle");
         setDisplayedList(datab);
         setMemory(datab)
+        setLoading(false);
         
     }, [])
 
@@ -122,13 +122,24 @@ export default function Dictionary({navigation, route}) {
             containerStyle={{backgroundColor:'white', borderTopWidth:0}}
             inputContainerStyle={{backgroundColor:'#EBEBEB', height: 40, width: '97%', marginLeft:'1%',}}/>
             <View style={{flex:1}}>
+                {
+                    isLoading?(
+                        <View style={{...StyleSheet.absoluteFill, alignItems:'center', justifyContent:'center'}}>
+                            <ActivityIndicator size="large" />
+                        </View>
+                    ):null
+                }
                 <FlatList
                     data={displayedList}
                     renderItem={renderItem}
                     keyExtractor={(item, index) => index.toString()}
                     ListEmptyComponent={()=> (
-                        <View style={{flex:1, alignItems:'center', justifyContent:'center', marginVertical:30}}>
-                            <Text style={{fontSize:15}} >Word Unavailable</Text>
+                        <View style={{flex:1, alignItems:'center', justifyContent:'center', marginVertical:20}}>
+                            {
+                                isLoading?null:(
+                                    <Text style={{fontSize:15}} >No such word found... try something else</Text>
+                                )
+                            }
                         </View>
                     )}
                 />
