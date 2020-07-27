@@ -131,7 +131,7 @@ export default HomeScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#cfebf2',
+    backgroundColor: 'white',
   },
   buttonContainer: {
     alignItems: 'center',
@@ -210,6 +210,7 @@ const styles = StyleSheet.create({
     paddingTop : screenHeight / 55
   },
   WordOfDay : {
+    borderRadius:25,
     alignItems: 'flex-start', 
     justifyContent: 'flex-start', 
     marginTop: 30,
