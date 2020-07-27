@@ -12,6 +12,7 @@ import TimeTrialResult from './screens/TimeTrialResult.js';
 
 
 import SettingsScreen from './screens/SettingsScreen.js';
+import Dictionary from './screens/Dictionary'
 
 import useCachedResources from './hooks/useCachedResources';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
@@ -32,6 +33,7 @@ function App (){
         <Stack.Screen name="ChallengeResult" component={ChallengeResult} />
         <Stack.Screen name="TimeTrialResult" component={TimeTrialResult} />
         <Stack.Screen name="Setting" component={SettingsScreen} /> 
+        <Stack.Screen name="Dictionary" component={Dictionary} /> 
         </Stack.Navigator>
     </NavigationContainer>
   );

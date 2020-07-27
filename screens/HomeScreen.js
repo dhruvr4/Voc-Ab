@@ -95,8 +95,8 @@ function HomeScreen({ navigation, route}) {
         <IconSetting name="settings" size={40} onPress={() => navigation.navigate('Setting', { mode: ans, perweek: ans2 })} style={styles.wrenchIcon} />
         <View style={styles.titleContainer}>
           <Text style={styles.ButtonText}>VOC-AB</Text>
-        </View>    
-       </View>
+        </View>  
+      </View>
       <View style={styles.buttonContainer}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", {answer: ans, perweek: ans2,})}>
@@ -115,6 +115,9 @@ function HomeScreen({ navigation, route}) {
         <Text style={{fontSize: 38,fontWeight : '600'}}>Word Of the day</Text>
       </View>
 
+      <View>
+      <Button title="Dict" style={{paddingTop: screenHeight / 15 + 4, paddingLeft: 10,}} onPress={()=> navigation.navigate('Dictionary', { mode: ans, perweek: ans2 })} />
+      </View>
       <View style={styles.WordOfDay}>
           <Text style={styles.WordText}>{cor.charAt(0).toUpperCase()+cor.substring(1,cor.length)}</Text>
           <Text style={styles.DefinitionText}>{txt}</Text>
