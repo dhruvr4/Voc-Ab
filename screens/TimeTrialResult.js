@@ -12,14 +12,31 @@ export default function TimeTrialResult({ route, navigation }) {
   const correct = route.params.correct
   const mod = route.params.mode
   const per = route.params.perwee
+  const lvl = route.params.lvl
+  var xp=route.params.xp
+  const pu = route.params.pu
+  
   var corr = ""
   for (var i = 0; i < correct.length; i++) {
-    corr = corr + "For the definition " + correct[i][0] + "You chose " + correct[i][1] + "Correct Answer was " + correct[i][2]
+    const ab = correct[i][3]? "Correct":"Wrong"
+    if(ab == "Correct") {
+      if (mod == "easy") {
+        xp = xp+20
+      }
+      if (mod == "medium") {
+        xp = xp+30
+      }
+      if (mod == "hard") {
+        xp = xp+50
+      }
+  
+    }
+    corr = corr + "For the definition " + correct[i][0] + "You chose " + correct[i][1] + "Correct Answer was " + correct[i][2] + "You were " + ab
   }
-  const pushAction2 = StackActions.push('TimeTrial', { answer: "hard" });
+  const pushAction2 = StackActions.push('TimeTrial', { answer: mod,perweek:per,lvl:lvl,xp:xp,pu:pu });
   return (
     <View>
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per })} style={styles.home} />
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per,lvl:lvl,xp:xp,pu:pu })} style={styles.home} />
       <Text style={styles.result}> {result}</Text>
       <Text style={styles.correct}> {corr}</Text>
       <Button title="Again" onPress={() => navigation.dispatch(pushAction2)} />

@@ -81,28 +81,41 @@ export default function TimeTrial({ navigation, route }) {
 
   function load(val) {
     console.log("Load function started")
+    var incorrects = []
+
     create_database(val)
     const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
     //console.log(ques)
     txt = ques.question
     cor = ques.correctanswer
     var ar = [ques.correctanswer]
+    var pups = [true, true, true, true]
+   
     while (ar.length < 4) {
       const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
       if (!(arr.includes(ques.correctanswer))) {
         ar.push(ques.correctanswer)
+        incorrects.push(ques.correctanswer)
+    
       }
     }
     arr = ar
     shuffle(arr)
+    pups[arr.indexOf(incorrects[0])] = false
+    pups[arr.indexOf(incorrects[1])] = false
+    //console.log(pups)
+    powup = pups
+
   }
   function answer(answer) {
     let va = (options).indexOf(correct) === answer
+    setto_show([true,true,true,true])
     if (va === true) {
       settotscore(totscore + 1)
+      settotwrong([...totwrong, [text, options[answer], correct, va]])
     }
     if (va === false) {
-      settotwrong([...totwrong, [text, options[answer], correct]])
+      settotwrong([...totwrong, [text, options[answer], correct, va]])
     }
     nextQuestion()
     setTimer(tim - (new Date().getMinutes() * 60 + new Date().getSeconds()) + tx)
@@ -111,20 +124,26 @@ export default function TimeTrial({ navigation, route }) {
     }
   }
   function nextQuestion() {
+    var incorrects = []
     const val = mode
     const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
     txt = ques.question
     cor = ques.correctanswer
     var ar = [ques.correctanswer]
-
+    var pups = [true, true, true, true]
     while (ar.length < 4) {
       const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
       if (!(arr.includes(ques.correctanswer))) {
         ar.push(ques.correctanswer)
+        incorrects.push(ques.correctanswer)
       }
     }
     arr = ar
     shuffle(arr)
+    pups[arr.indexOf(incorrects[0])] = false
+    pups[arr.indexOf(incorrects[1])] = false
+    //console.log(pups)
+    setshow(pups)
     setText(txt)
     setCorrect(cor)
     setOptions(arr)
@@ -132,9 +151,11 @@ export default function TimeTrial({ navigation, route }) {
   function navigat() {
     console.log("Navigat called")
     clearInterval(time)
-    const pushAction2 = StackActions.push("TimeTrialResult", { answer: totscore, correct: totwrong, mode: mode, perwee: perweek });
+    console.log(pu)
+    const pushAction2 = StackActions.push("TimeTrialResult", { answer: totscore, correct: totwrong, mode: mode, perwee: perweek, lvl: lvl, xp: xp, pu: powerupp });
     navigation.dispatch(pushAction2)
   }
+
   function tick() {
     if (timer < 0.5) {
       navigat()
@@ -152,46 +173,91 @@ export default function TimeTrial({ navigation, route }) {
   function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
   }
+  function powerup() {
+    console.log(powerupp)
+    console.log(to_show)
+    if(powerupp > 0 && JSON.stringify(to_show) == JSON.stringify([true,true,true,true])) {
+    console.log("Hi")
+    //console.log(show)
+    setto_show(show)
+    setpowerupp(powerupp-1)
+    }
+    //console.log(to_show)
+
+  }
   const mode = route.params.answer
   const perweek = route.params.perweek
+  const lvl = route.params.lvl
+  const xp = route.params.xp
+  var pu = route.params.pu
+
   let txt = ''
   let cor = ''
   let arr = []
-  const [tx] = React.useState(60)
+  let powup = []
+  const [tx] = React.useState(10)
   let [tim, settim] = React.useState(new Date().getMinutes() * 60 + new Date().getSeconds())
   let [timer, setTimer] = React.useState(tx)
   load(mode)
+  const [powerupp, setpowerupp] = React.useState(pu)
   const [text, setText] = React.useState(txt)
   const [options, setOptions] = React.useState(arr)
   const [correct, setCorrect] = React.useState(cor)
   const [totscore, settotscore] = React.useState(0)
   const [totwrong, settotwrong] = React.useState([])
+  const [show, setshow] = React.useState(powup)
+  const [to_show, setto_show] = React.useState([true,true,true,true])
+
   let time = null
   return (
     <View style={{ flex: 1, backgroundColor: '#F0FFF0' }}>
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, perweek: perweek })} style={styles.home} />
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mode, perweek: perweek, lvl: lvl, xp: xp, pu: powerupp })} style={styles.home} />
       <Text style={styles.timer}> {timer}</Text>
+
       <View style={styles.QuestionContainer}>
         <Text style={styles.text}> {text}</Text>
       </View>
+      <TouchableOpacity style={styles.PowerButton} onPress={() => { powerup() }}>
+        <Text style={styles.AnswerText}>Power Up</Text>
+      </TouchableOpacity>
       <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#F0FFF0' }}>
-        <TouchableOpacity style={styles.AnswerButton} onPress={() => { answer(0) }}>
-          <Text style={styles.AnswerText}>{options[0]}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.AnswerButton} onPress={() => { answer(1) }}>
-          <Text style={styles.AnswerText}>{options[1]}</Text>
-        </TouchableOpacity>
+        {
+        to_show[0] &&
+          <TouchableOpacity style={styles.AnswerButton} onPress={() => { answer(0) }}>
+            <Text style={styles.AnswerText}>{options[0]}</Text>
+          </TouchableOpacity>
+        }
+        {
+        to_show[1] &&
+          <TouchableOpacity style={styles.AnswerButton} onPress={() => { answer(1) }}>
+            <Text style={styles.AnswerText}>{options[1]}</Text>
+          </TouchableOpacity>
+        } 
+      {to_show[2] &&
         <TouchableOpacity style={styles.AnswerButton} onPress={() => { answer(2) }}>
           <Text style={styles.AnswerText}>{options[2]}</Text>
         </TouchableOpacity>
+      }
+      {to_show[3] &&
         <TouchableOpacity style={styles.AnswerButton} onPress={() => { answer(3) }}>
           <Text style={styles.AnswerText}>{options[3]}</Text>
         </TouchableOpacity>
-      </View>
+      }
+               </View>
+    
     </View>
   );
 }
 const styles = StyleSheet.create({
+  PowerButton: {
+    width: screenWidth - 300,
+    height: 30,
+    backgroundColor: '#bd0a0a',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 45,
+    borderRadius: 30,
+  },
   home: {
     paddingTop: 30,
     paddingLeft: 10,
@@ -230,7 +296,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#bd0a0a',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 45,
+    marginTop: 25,
     borderRadius: 30,
   },
 });

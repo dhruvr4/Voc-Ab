@@ -11,9 +11,6 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 
 
 function SettingsScreen({ navigation, route }) {
-  function navigat(ans) {
-    navigation.navigate("LearnIt", { answer: ans })
-  }
   function answer(num) {
     if (num == 1) {
       seteasy2()
@@ -117,7 +114,7 @@ function SettingsScreen({ navigation, route }) {
     <View style={styles.page}>
       <View style={styles.head}>
         <Text style={styles.settings}>Settings</Text>
-        <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu, perweek: retu2 })} style={styles.back} />
+        <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})} style={styles.back} />
       </View>
       <Text style={styles.subHeads}>In App Difficulty</Text>
       <View style={styles.goalMenu}>

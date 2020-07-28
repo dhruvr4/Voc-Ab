@@ -17,9 +17,22 @@ export default function ChallengeResult({ route, navigation }) {
   const question = route.params.question
   const mod = route.params.mode
   const per = route.params.perwee
+  const lvl = route.params.lvl
+  const xp=route.params.xp
+  const pu = route.params.pu
+      
   console.log(result)
   let Color = " "
   if (result === true) {
+    if (mod == "easy") {
+      xp = xp+20
+    }
+    if (mod == "medium") {
+      xp = xp+30
+    }
+    if (mod == "hard") {
+      xp = xp+50
+    }
     answer = "Correct"
     Color = "green"
   }
@@ -27,10 +40,10 @@ export default function ChallengeResult({ route, navigation }) {
     answer = "Incorrect"
     Color = "red"
   }
-  const pushAction = StackActions.push('Challenge', { answer: mod });
+  const pushAction = StackActions.push('Challenge', { answer: mod,perweek:per,lvl:lvl,xp:xp,pu:pu });
   return (
     <View style = {{flex : 1, backgroundColor : 'white'}}>
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per })} style={styles.home} />
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per,lvl:lvl,xp:xp,pu:pu })} style={styles.home} />
 
       <Text style={{
         paddingTop: screenHeight/20,

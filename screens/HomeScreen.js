@@ -14,22 +14,13 @@ import GRE3 from './Data/GRE_list_3.json';
 import GRE4 from './Data/GRE_list_4.json';
 import GRE5 from './Data/GRE_list_5.json';
 
+
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
 function HomeScreen({ navigation, route}) {
-  let ans = "hard"
-  try {
-    ans = route.params.mode
-  } catch {
-    ans = "hard"
-  }
-  let ans2 = "fifty"
-  try {
-    ans2 = route.params.perweek
-  } catch {
-    ans2 = "fifty"
-  }
+  
+
   class Question {
     question = "";
     correctanswer = "";
@@ -80,10 +71,53 @@ function HomeScreen({ navigation, route}) {
         ar.push(ques.correctanswer)
       }
     }
-
     arr = ar
   }
+  function lvlupdate() {
+    while(xp > levels[lvl]) {
+      xp = xp- levels[lvl]
+      lvl = lvl +1
+      pu = pu+1    
+    }
+  }
+  const levels=[]
+  for (var i = 100;i <400;i=i+10) {
+    levels[i/10-10]=i
+  }
+  //console.log(levels)
+  let ans = "hard"
+  try {
+    ans = route.params.mode
+  } catch {
+    ans = "hard"
+  }
+  let ans2 = "fifty"
+  try {
+    ans2 = route.params.perweek
+  } catch {
+    ans2 = "fifty"
+  }
+  let lvl = 1
+  try {
+    lvl = route.params.lvl
+  } catch {
+    lvl = 1
+  }
+  let xp = 0
+  try {
+    xp = route.params.xp
+  } catch {
+    xp = 0
+  }
+  let pu = 0
+  try {
+    pu = route.params.pu
+  } catch {
+    pu = 0
+  }
+  
 
+  lvlupdate()
   let txt = ''
   let cor = ''
   let arr = []
@@ -92,21 +126,26 @@ function HomeScreen({ navigation, route}) {
     <View style={styles.container}>
 
       <View style={{ flexDirection: 'row' }}>
-        <IconSetting name="settings" size={35} onPress={() => navigation.navigate('Setting', { mode: ans, perweek: ans2 })} style={styles.wrenchIcon} />
+        <IconSetting name="settings" size={40} onPress={() => navigation.navigate('Setting', { mode: ans, perweek: ans2,lvl:lvl,xp:xp,pu:pu })} style={styles.wrenchIcon} />
         <View style={styles.titleContainer}>
           <Text style={styles.ButtonText}>VOC-AB</Text>
-        </View> 
-        <IconSetting name="book-open" size={35} onPress={()=> navigation.navigate('Dictionary', { mode: ans, perweek: ans2 })} style={styles.wrenchIcon} /> 
-      </View>
+        </View>
+        <IconSetting name="book-open" size={35} onPress={()=> navigation.navigate('Dictionary', { mode: ans, perweek: ans2,lvl:lvl,xp:xp,pu:pu })} style={styles.wrenchIcon} /> 
+      
+       </View>
+       <Text style={styles.LvlText}>Level = {lvl}</Text>
+  <Text style={styles.xpText}>XP = {xp} / {levels[lvl]}</Text>
+      <Text style={styles.puText}>PowerUp = {pu}</Text>
+  
       <View style={styles.buttonContainer}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", {answer: ans, perweek: ans2,})}>
+          <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", {answer: ans, perweek: ans2,lvl:lvl,xp:xp,pu:pu })}>
             <Text style={{ fontFamily: 'serif', fontSize: 48, fontWeight: '700', color : 'white'}}>Learn It</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", {answer: ans, perweek: ans2,})}>
+          <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", {answer: ans, perweek: ans2,lvl:lvl,xp:xp,pu:pu })}>
             <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color : 'white'}}>Time Trial</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", {answer: ans, perweek: ans2})}>
+          <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", {answer: ans, perweek: ans2,lvl:lvl,xp:xp,pu:pu })}>
             <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color : 'white'}}>Challenge</Text>
           </TouchableOpacity>
         </ScrollView>
@@ -116,8 +155,6 @@ function HomeScreen({ navigation, route}) {
         <Text style={{fontSize: 38,fontWeight : '600'}}>Word Of the day</Text>
       </View>
 
-      <View>
-      </View>
       <View style={styles.WordOfDay}>
           <Text style={styles.WordText}>{cor.charAt(0).toUpperCase()+cor.substring(1,cor.length)}</Text>
           <Text style={styles.DefinitionText}>{txt}</Text>
@@ -155,6 +192,24 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontFamily: 'serif',
     paddingLeft : screenWidth / 15
+  },
+  LvlText: {
+    fontSize: 16,
+    fontWeight: '700',
+    fontFamily: 'serif',
+    paddingTop: 10,
+  },
+  xpText: {
+    fontSize: 16,
+    fontWeight: '700',
+    fontFamily: 'serif',
+    paddingTop: 10,
+  },
+  puText: {
+    fontSize: 16,
+    fontWeight: '700',
+    fontFamily: 'serif',
+    paddingTop: 10,
   },
   wrenchIcon: {
     paddingTop: screenHeight / 15 + 4,

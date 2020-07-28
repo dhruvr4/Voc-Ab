@@ -99,13 +99,16 @@ export default function LearnIt({ navigation, route }) {
   }
   function answer(answer) {
     let ans = ((options).indexOf(correct) === answer)
-    navigation.navigate("LearnItResult", { answer: ans, correct: correct, mode: result, perwee: perweek, question : text })
+    navigation.navigate("LearnItResult", { answer: ans, correct: correct, mode: result, perwee: perweek, question : text,lvl:lvl,xp:xp,pu:pu })
   }
   function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
   }
   var result = route.params.answer
   const perweek = route.params.perweek
+  const lvl = route.params.lvl
+  const xp=route.params.xp
+  const pu = route.params.pu
   console.log(result)
   let txt = ''
   let cor = ''
@@ -116,7 +119,7 @@ export default function LearnIt({ navigation, route }) {
   const [correct, setCorrect] = React.useState(cor)
   return (
     <View style={{ flex: 1, backgroundColor: '#F0FFF0' }}>
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, perweek: perweek })} style={styles.home} />
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, perweek: perweek,lvl:lvl,xp:xp,pu:pu })} style={styles.home} />
       <View style={styles.QuestionContainer}>
         <Text style={styles.text}>{text}</Text>
       </View>
