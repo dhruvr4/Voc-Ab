@@ -1,47 +1,51 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { StyleSheet, Text, View,Button } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { StackActions } from '@react-navigation/native';
+import IconBack from 'react-native-vector-icons/AntDesign';
 
-
-export default function TimeTrialResult({route,navigation}) {
+export default function TimeTrialResult({ route, navigation }) {
   let answer = "Time Up"
   const result = "You got " + JSON.stringify(route.params.answer) + "correct"
   const correct = route.params.correct
- var corr=""
-  for (var i = 0; i <correct.length;i++) {
-//    console.log(i)
-    corr = corr+"For the definition " +correct[i][0]+ "You chose " + correct[i][1]+"Correct Answer was " + correct[i][2]
+  const mod = route.params.mode
+  const per = route.params.perwee
+  var corr = ""
+  for (var i = 0; i < correct.length; i++) {
+    corr = corr + "For the definition " + correct[i][0] + "You chose " + correct[i][1] + "Correct Answer was " + correct[i][2]
   }
-  //console.log(corr)
-  
-  const pushAction = StackActions.push('TimeTrial',{answer:"default"});
+  const pushAction2 = StackActions.push('TimeTrial', { answer: "hard" });
   return (
-      <View>
-    <Text style = {styles.result}> {result}</Text>
-    <Text style = {styles.correct}> {corr}</Text>
-    <Button title="Again" onPress={() => navigation.dispatch(pushAction)} />
+    <View>
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per })} style={styles.home} />
+      <Text style={styles.result}> {result}</Text>
+      <Text style={styles.correct}> {corr}</Text>
+      <Button title="Again" onPress={() => navigation.dispatch(pushAction2)} />
     </View>
-    );
+  );
 }
-
-
 const styles = StyleSheet.create({
-result:{
+  home: {
+    paddingTop: 30,
+    paddingLeft: 10,
+    color: 'black',
+    left: 10,
+  },
+  result: {
     paddingTop: 100,
     fontWeight: 'bold',
-    fontSize :40,
+    fontSize: 40,
     backgroundColor: 'white',
-  
-},
-correct:{
-  paddingTop: 40,
-  fontWeight: 'bold',
-  fontSize :30,
-  backgroundColor: 'white',
-},
+
+  },
+  correct: {
+    paddingTop: 40,
+    fontWeight: 'bold',
+    fontSize: 30,
+    backgroundColor: 'white',
+  },
   container: {
     flex: 1,
     backgroundColor: '#fafafa',
