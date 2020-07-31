@@ -121,11 +121,8 @@ function SettingsScreen({ navigation, route }) {
         <VerticalMenu diff1={() => answer(1)} diff2={() => answer(2)} diff3={() => answer(3)} />
       </View>
       <Text style={styles.subHeads}>Connect</Text>
-      <TouchableOpacity activeOpacity={0.8}>
-        <Image source={require('../assets/images/fb-login.png')} style={{ marginLeft: 15, marginTop: 10, height: 50, width: 280, borderRadius: 1 }} />
-      </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.8}>
-        <Image source={require('../assets/images/g-login.png')} style={{ height: 49, width: 286, marginVertical: 10, marginLeft: 12 }} />
+      <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Login', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})}>
+      <Text style={styles.settings}>Login</Text>
       </TouchableOpacity>
       <Text style={styles.subHeads}>Weekly Goal</Text>
       <View style={styles.goalMenu}>
