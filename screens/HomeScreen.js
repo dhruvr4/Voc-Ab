@@ -13,7 +13,6 @@ import GRE2 from './Data/GRE_list_2.json';
 import GRE3 from './Data/GRE_list_3.json';
 import GRE4 from './Data/GRE_list_4.json';
 import GRE5 from './Data/GRE_list_5.json';
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -114,15 +113,11 @@ function HomeScreen({ navigation, route }) {
     pu = 0
   }
 
-
   lvlupdate()
   let txt = ''
   let cor = ''
   let arr = []
   load('default')
-  
-  console.log((xp/(levels[lvl]))*100) 
-   
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
