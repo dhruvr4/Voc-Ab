@@ -152,7 +152,7 @@ export default function TimeTrial({ navigation, route }) {
     console.log("Navigat called")
     clearInterval(time)
     console.log(pu)
-    const pushAction2 = StackActions.push("TimeTrialResult", { answer: totscore, correct: totwrong, mode: mode, perwee: perweek, lvl: lvl, xp: xp, pu: powerupp });
+    const pushAction2 = StackActions.push("TimeTrialResult", { answer: totscore, correct: totwrong, mode: mode, perwee: perweek, lvl: lvl, xp: xp, pu: powerupp, question: text});
     navigation.dispatch(pushAction2)
   }
 

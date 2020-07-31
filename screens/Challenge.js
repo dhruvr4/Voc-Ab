@@ -16,7 +16,6 @@ import SAT4 from './Data/SAT_list_4.json';
 import SAT5 from './Data/SAT_list_5.json';
 import IconBack from 'react-native-vector-icons/AntDesign';
 
-
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height)
 
@@ -131,21 +130,20 @@ export default function Challenge({ navigation, route }) {
   const [hint2, sethint2] = React.useState(hint)
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
-      <View style={{ flex: 1, backgroundColor: 'white' }}>
+    <KeyboardAvoidingView
+    behavior= "position" 
+    style={{ flex: 1, backgroundColor : 'white'}} keyboardVerticalOffset = {-100}>
         <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, perweek: perweek, lvl: lvl, xp: xp, pu: powerupp })} style={styles.home} />
+        <TouchableOpacity style={styles.PowerButton} onPress={() => { powerup() }}>
+        <Text style={styles.AnswerText}>Power Up</Text>
+      </TouchableOpacity>
         <View style={styles.questionBox}>
           <Text style={styles.text}> {text}</Text>
         </View>
-        <TouchableOpacity style={styles.PowerButton} onPress={() => { powerup() }}>
-          <Text style={styles.AnswerText}>Power Up</Text>
-        </TouchableOpacity>
-
+       
         <View style={{ alignItems: 'center', alignSelf: 'center', justifyContent: 'center', paddingTop: screenHeight / 15 }}>
           <Text style={styles.text2}> {hint2}</Text>
         </View>
-
-
         <View style={styles.inputBox}>
           <TextInput
             style={{ height: 40 }}
@@ -154,14 +152,12 @@ export default function Challenge({ navigation, route }) {
             defaultValue={text2}
           />
         </View>
-
         <Button
           onPress={() => { answer(text2) }}
           title="Enter"
           color="#841584"
         />
-      </View>
-    </KeyboardAvoidingView>
+     </KeyboardAvoidingView>
   );
 }
 const styles = StyleSheet.create({
