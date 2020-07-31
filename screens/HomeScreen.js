@@ -139,7 +139,6 @@ function HomeScreen({ navigation, route }) {
         </ProgressCircle>
         </View>
       </View>
-      <IconSetting name="book-open" size={40} onPress={()=> navigation.navigate('Dictionary', { mode: ans, perweek: ans2,lvl:lvl,xp:xp,pu:pu })} style={styles.Dictionary} />
       <View style={styles.buttonContainer}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu })}>
@@ -155,7 +154,8 @@ function HomeScreen({ navigation, route }) {
       </View>
 
       <View style={styles.textContainer}>
-        <Text style={{ fontSize: 38, fontWeight: '600' }}>Word Of the day</Text>
+        <IconSetting name="book-open" size={40} onPress={()=> navigation.navigate('Dictionary', { mode: ans, perweek: ans2,lvl:lvl,xp:xp,pu:pu })} style={styles.Dictionary} />
+        <Text style={{ fontSize: 38, fontWeight: '600', }}>Word Of the day</Text>
       </View>
 
       <View style={styles.WordOfDay}>
@@ -235,6 +235,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffc300',
     borderRadius: 35,
     marginLeft: 15,
+
     shadowColor: "#000",
     shadowOffset: {
       width: 5,
@@ -247,7 +248,6 @@ const styles = StyleSheet.create({
   textContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: screenHeight / 13,
   },
   titleContainer: {
     flex : 1,
