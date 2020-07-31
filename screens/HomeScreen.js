@@ -13,6 +13,7 @@ import GRE2 from './Data/GRE_list_2.json';
 import GRE3 from './Data/GRE_list_3.json';
 import GRE4 from './Data/GRE_list_4.json';
 import GRE5 from './Data/GRE_list_5.json';
+import ProgressCircle from 'react-native-progress-circle'
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -118,16 +119,25 @@ function HomeScreen({ navigation, route }) {
   let cor = ''
   let arr = []
   load('default')
+ 
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
-        <IconSetting name="settings" size={40} onPress={() => navigation.navigate('Setting', { mode: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu })} style={styles.wrenchIcon} />
+        <IconSetting name="settings" size={45} onPress={() => navigation.navigate('Setting', { mode: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu })} style={styles.wrenchIcon} />
         <View style={styles.titleContainer}>
           <Text style={styles.ButtonText}>VOC-AB</Text>
         </View>
         <View style={styles.Progress}>
+        <ProgressCircle
+            percent={(xp/levels[lvl])*100}
+            radius={25}
+            borderWidth={8}
+            color="#3399FF"
+            shadowColor="#e6e6e6"
+            bgColor="#fff">
+            <Text style={{ fontSize: 20 }}>{lvl}</Text>
+        </ProgressCircle>
         </View>
-        <IconSetting name="book-open" size={35} onPress={()=> navigation.navigate('Dictionary', { mode: ans, perweek: ans2,lvl:lvl,xp:xp,pu:pu })} style={styles.wrenchIcon} />
       </View>
       <View style={styles.buttonContainer}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -144,7 +154,8 @@ function HomeScreen({ navigation, route }) {
       </View>
 
       <View style={styles.textContainer}>
-        <Text style={{ fontSize: 38, fontWeight: '600' }}>Word Of the day</Text>
+        <IconSetting name="book-open" size={40} onPress={()=> navigation.navigate('Dictionary', { mode: ans, perweek: ans2,lvl:lvl,xp:xp,pu:pu })} style={styles.Dictionary} />
+        <Text style={{ fontSize: 38, fontWeight: '600', }}>Word Of the day</Text>
       </View>
 
       <View style={styles.WordOfDay}>
@@ -163,53 +174,26 @@ export default HomeScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#f5fcfc',
   },
   buttonContainer: {
     alignItems: 'center',
     alignSelf: 'center',
     justifyContent: 'center',
-    height: screenHeight / 3.5,
-    marginTop: 70,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 12,
-    },
-    shadowOpacity: 0.58,
-    shadowRadius: 16.00,
-    elevation: 24,
+    height: screenHeight / 3.6,
+    marginTop: screenHeight / 20,
   },
   ButtonText: {
     fontSize: 60,
     fontWeight: '700',
     fontFamily: 'serif',
   },
-  LvlText: {
-    fontSize: 16,
-    fontWeight: '700',
-    fontFamily: 'serif',
-    paddingTop: 10,
-  },
-  xpText: {
-    fontSize: 16,
-    fontWeight: '700',
-    fontFamily: 'serif',
-    paddingTop: 10,
-  },
-  puText: {
-    fontSize: 16,
-    fontWeight: '700',
-    fontFamily: 'serif',
-    paddingTop: 10,
-  },
   wrenchIcon: {
     paddingTop: screenHeight / 15,
-    paddingLeft: 10,
+    paddingLeft: screenHeight / 40,
     alignSelf: "flex-start",
     justifyContent: "flex-start",
     color: 'black',
-    left: 10,
   },
   play: {
     alignItems: 'center',
@@ -218,6 +202,14 @@ const styles = StyleSheet.create({
     width: screenWidth - 50,
     backgroundColor: '#0b5cd5',
     marginLeft: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,
+      height: 20,
+    },
+    shadowOpacity: 0.38,
+    shadowRadius: 16.00,
+    elevation: 24,
   },
   timeTrial: {
     alignItems: 'center',
@@ -227,6 +219,14 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     paddingRight: 10,
     marginLeft: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,
+      height: 20,
+    },
+    shadowOpacity: 0.38,
+    shadowRadius: 16.00,
+    elevation: 24,
   },
   wordUp: {
     alignItems: 'center',
@@ -235,17 +235,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffc300',
     borderRadius: 35,
     marginLeft: 15,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,
+      height: 20,
+    },
+    shadowOpacity: 0.38,
+    shadowRadius: 16.00,
+    elevation: 24,
   },
   textContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: screenHeight / 13,
   },
   titleContainer: {
-    alignItems: 'center',
+    flex : 1,
+    alignItems : 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: screenHeight / 20,
+    marginTop: screenHeight / 20, 
   },
   WordText: {
     fontWeight: '700',
@@ -268,7 +277,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     backgroundColor: 'white',
     width: screenWidth - 40,
-    height: screenHeight / 4,
+    height: screenHeight / 3.7,
     alignSelf: 'center',
     shadowColor: "#000",
     shadowOffset: {
@@ -280,6 +289,15 @@ const styles = StyleSheet.create({
     elevation: 24,
   },
   Progress: {
-    paddingTop: screenHeight / 15,
+    paddingBottom : screenHeight / 70,
+    paddingRight : screenWidth / 20,
+    alignItems : "flex-end",
+    justifyContent : 'flex-end',
+  },
+  Dictionary : {
+    paddingLeft: screenHeight / 45,
+    alignSelf: "flex-start",
+    justifyContent: "flex-start",
+    color: 'black',
   }
 });
