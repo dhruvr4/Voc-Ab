@@ -119,19 +119,12 @@ function HomeScreen({ navigation, route }) {
   let cor = ''
   let arr = []
   load('default')
- 
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
         <IconSetting name="settings" size={45} onPress={() => navigation.navigate('Setting', { mode: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu })} style={styles.wrenchIcon} />
         <View style={styles.titleContainer}>
-          <Text style={styles.ButtonText}>VOC-AB</Text>
-        </View>
-        <View style={styles.Progress}>
-        <ProgressCircle
-            percent={(xp/levels[lvl])*100}
-            radius={25}
-            borderWidth={8}
+            <ProgressCircle borderWidth={8}
             color="#3399FF"
             shadowColor="#e6e6e6"
             bgColor="#fff">
