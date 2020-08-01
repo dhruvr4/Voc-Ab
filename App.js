@@ -10,7 +10,6 @@ import LearnItResult from './screens/LearnItResult.js';
 import ChallengeResult from './screens/ChallengeResult.js';
 import TimeTrialResult from './screens/TimeTrialResult.js';
 
-
 import SettingsScreen from './screens/SettingsScreen.js';
 import Dictionary from './screens/Dictionary'
 
