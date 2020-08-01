@@ -9,9 +9,11 @@ import TimeTrial from './screens/TimeTrial.js';
 import LearnItResult from './screens/LearnItResult.js';
 import ChallengeResult from './screens/ChallengeResult.js';
 import TimeTrialResult from './screens/TimeTrialResult.js';
-
+import Login from './screens/Login.js';
+import Create from './screens/Create.js';
 
 import SettingsScreen from './screens/SettingsScreen.js';
+import Dictionary from './screens/Dictionary'
 
 import useCachedResources from './hooks/useCachedResources';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
@@ -32,6 +34,11 @@ function App (){
         <Stack.Screen name="ChallengeResult" component={ChallengeResult} />
         <Stack.Screen name="TimeTrialResult" component={TimeTrialResult} />
         <Stack.Screen name="Setting" component={SettingsScreen} /> 
+        <Stack.Screen name="Dictionary" component={Dictionary} /> 
+        <Stack.Screen name="Login" component={Login} /> 
+        <Stack.Screen name="Create" component={Create} /> 
+
+
         </Stack.Navigator>
     </NavigationContainer>
   );
