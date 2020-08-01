@@ -8,69 +8,19 @@ import IconSetting from 'react-native-vector-icons/Feather';
 import IconLeader from 'react-native-vector-icons/MaterialCommunityIcons';
 import { MonoText } from '../components/StyledText';
 import * as Progress from 'react-native-progress';
-import GRE1 from './Data/GRE_list_1.json';
-import GRE2 from './Data/GRE_list_2.json';
-import GRE3 from './Data/GRE_list_3.json';
-import GRE4 from './Data/GRE_list_4.json';
-import GRE5 from './Data/GRE_list_5.json';
 import ProgressCircle from 'react-native-progress-circle'
-
+import datab from './WordsDatabase'
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
 function HomeScreen({ navigation, route }) {
-  class Question {
-    question = "";
-    correctanswer = "";
-    constructor(a, c) {
-      this.question = a;
-      this.correctanswer = c;
-    }
-  }
-  const datab = {
-    easy: [],
-    medium: [],
-    hard: [],
-    default: []
-  }
-  function create_database() {
-    for (var i = 0; i < 262; i++) {
-      add(GRE1.Adjective[i], GRE1.Word[i], "default");
-    }
-    for (var i = 0; i < 262; i++) {
-      add(GRE2.Adjective[i], GRE2.Word[i], "default");
-    }
-    for (var i = 0; i < 262; i++) {
-      add(GRE3.Adjective[i], GRE3.Word[i], "default");
-    }
-    for (var i = 0; i < 262; i++) {
-      add(GRE4.Adjective[i], GRE4.Word[i], "default");
-    }
-    for (var i = 0; i < 262; i++) {
-      add(GRE5.Adjective[i], GRE5.Word[i], "default");
-    }
-  }
-  function add(a, def, type) {
-    const toAdd = new Question(a, def);
-    datab[type].push(toAdd)
-  }
   function load(val) {
-    console.log("Load function started")
-    create_database()
-
-    const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
+    const today = new Date().getFullYear()*365+new Date().getMonth()*31+new Date().getDate()
+    var num = Math.abs((today) % datab['default'].length)
+    const ques = datab['default'][num]
     txt = ques.question
     cor = ques.correctanswer
-
-    var ar = [ques.correctanswer]
-    while (ar.length < 4) {
-      const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
-      if (!(arr.includes(ques.correctanswer))) {
-        ar.push(ques.correctanswer)
-      }
-    }
-    arr = ar
-  }
+   }
   function lvlupdate() {
     while (xp > levels[lvl]) {
       xp = xp - levels[lvl]

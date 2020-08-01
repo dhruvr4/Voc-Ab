@@ -121,16 +121,14 @@ function SettingsScreen({ navigation, route }) {
         <VerticalMenu diff1={() => answer(1)} diff2={() => answer(2)} diff3={() => answer(3)} />
       </View>
       <Text style={styles.subHeads}>Connect</Text>
-      <TouchableOpacity activeOpacity={0.8}>
-        <Image source={require('../assets/images/fb-login.png')} style={{ marginLeft: 15, marginTop: 10, height: 50, width: 280, borderRadius: 1 }} />
+      <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Login', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})}>
+      
+      <Text style={styles.settings}>Login to existing account</Text>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.8}>
-        <Image source={require('../assets/images/g-login.png')} style={{ height: 49, width: 286, marginVertical: 10, marginLeft: 12 }} />
-      </TouchableOpacity>
-      <Text style={styles.subHeads}>Weekly Goal</Text>
-      <View style={styles.goalMenu}>
-        <MultiSwitch g1={() => answer2(1)} g2={() => answer2(2)} g3={() => answer2(3)} selected={retu2} />
-      </View>
+      <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Create', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})}>
+      
+      <Text style={styles.settings}>Create New Account</Text>
+      </TouchableOpacity>      
     </View>
   )
 }
@@ -182,7 +180,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   settings: {
-    fontSize: 48,
+    fontSize: 38,
     fontWeight: '700',
     paddingLeft: 15,
   },
