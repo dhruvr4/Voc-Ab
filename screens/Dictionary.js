@@ -97,7 +97,7 @@ export default function Dictionary({navigation, route}) {
 
     renderItem = ({item}) => (
     <View style={{minHeight:70, padding:3, borderBottomWidth:1, borderBottomColor:'grey',}}>
-        <Text style={{fontSize:20, paddingLeft:3, marginBottom:4, fontWeight:'bold'}}>{item.word}</Text>
+        <Text style={{fontSize:20, paddingLeft:3, marginBottom:4,}}>{item.word}</Text>
         <Text style={{paddingLeft:3}}>{item.adj}</Text>
     </View>
     );
