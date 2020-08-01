@@ -125,7 +125,7 @@ function HomeScreen({ navigation, route }) {
       <View style={{ flexDirection: 'row' }}>
         <IconSetting name="settings" size={45} onPress={() => navigation.navigate('Setting', { mode: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu })} style={styles.wrenchIcon} />
         <View style={styles.titleContainer}>
-          <Text style={styles.ButtonText}>VOC-AB</Text>
+        <Text style={styles.ButtonText}>VOC-AB</Text>
         </View>
         <View style={styles.Progress}>
         <ProgressCircle
@@ -153,9 +153,13 @@ function HomeScreen({ navigation, route }) {
         </ScrollView>
       </View>
 
-      <View style={styles.textContainer}>
-        <IconSetting name="book-open" size={40} onPress={()=> navigation.navigate('Dictionary', { mode: ans, perweek: ans2,lvl:lvl,xp:xp,pu:pu })} style={styles.Dictionary} />
-        <Text style={{ fontSize: 38, fontWeight: '600', }}>Word Of the day</Text>
+      <View style={{flexDirection : 'row', paddingTop : screenHeight / 13, alignItems : 'center', justifyContent : 'center'}}>
+        <View style = {{paddingRight : screenWidth / 10, paddingTop : 6}}>
+          <IconSetting name="book-open" size={40} onPress={()=> navigation.navigate('Dictionary', { mode: ans, perweek: ans2,lvl:lvl,xp:xp,pu:pu })} style={styles.Dictionary} />
+        </View>
+        <View style = {{paddingRight : screenWidth /10}}>
+          <Text style={{ fontSize: 38, fontWeight: '600', }}>Word Of the day</Text>  
+        </View>  
       </View>
 
       <View style={styles.WordOfDay}>
@@ -245,10 +249,6 @@ const styles = StyleSheet.create({
     shadowRadius: 16.00,
     elevation: 24,
   },
-  textContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   titleContainer: {
     flex : 1,
     alignItems : 'center',
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     backgroundColor: 'white',
     width: screenWidth - 40,
-    height: screenHeight / 3.7,
+    height: screenHeight / 3.2,
     alignSelf: 'center',
     shadowColor: "#000",
     shadowOffset: {

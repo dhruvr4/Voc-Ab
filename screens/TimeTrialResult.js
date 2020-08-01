@@ -12,7 +12,7 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 
 export default function TimeTrialResult({ route, navigation }) {
   let answer = "Time Up"
-  const result = "You got " + JSON.stringify(route.params.answer) + "correct"
+  const result = "You got " + JSON.stringify(route.params.answer) + " correct"
   const correct = route.params.correct
   const mod = route.params.mode
   const per = route.params.perwee
@@ -40,7 +40,7 @@ export default function TimeTrialResult({ route, navigation }) {
   const r = []
   for(var f = 0; f < correct.length; f++)
   {
-      const a = (correct[f][1] === correct[f][2])? "green":"red"
+      const a = (correct[f][1] === correct[f][2])? "#5cb908":"#ff5252"
       r.push({
         ans: correct[f][0], 
         def: correct[f][2],
@@ -141,7 +141,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize : 32,
     alignSelf : 'center',
-    paddingTop : screenHeight / 60
+    paddingTop : screenHeight / 60,
+    color : 'white'
   },
   DefinitionText : {
     fontWeight : '300',
@@ -149,6 +150,7 @@ const styles = StyleSheet.create({
     paddingLeft : screenWidth / 10,
     paddingRight : screenWidth / 10,
     paddingTop : screenHeight / 20,
-    alignSelf : 'center'
+    alignSelf : 'center',
+    color : 'white'
   },
 });
