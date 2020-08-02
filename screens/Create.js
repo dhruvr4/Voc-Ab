@@ -1,16 +1,26 @@
 import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button, Settings,TextInput } from 'react-native';
+//import firebase from 'firebase';
 
 function Login({ navigation, route }) {
-    function login_existing() {
+    function login_new() {
         navigation.navigate('Home', { mode: route.params.mode, perweek: route.params.perweek,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})
     }
     var txt2=''
+    const [text, setText] = React.useState(txt2)
     const [text2, setText2] = React.useState(txt2)
     const [text3, setText3] = React.useState(txt2)
     return (
         <View>
-         <Text style = {styles.AnswerText}>Login to existing Account</Text>
+            <Text style = {styles.AnswerText}>Create New Account</Text>
+            <TextInput
+            paddingTop={10}
+            style={{ height: 40 }}
+            placeholder="Name"
+            onChangeText={text => setText(text)}
+            defaultValue={text}
+          />
+        
          <TextInput
             paddingTop={10}
             style={{ height: 40 }}
@@ -25,10 +35,9 @@ function Login({ navigation, route }) {
             onChangeText={text3 => setText3(text3)}
             defaultValue={text3}
           />
-   <TouchableOpacity style={styles.AnswerButtonBlack} onPress={() => { login_existing() }}>
+            <TouchableOpacity style={styles.AnswerButtonBlack} onPress={() => { login_new() }}>
         <Text style={styles.LoginText}>Enter</Text>
-      </TouchableOpacity>
-      
+      </TouchableOpacity>      
         </View>
     )
 }
