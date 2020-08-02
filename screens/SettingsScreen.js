@@ -1,11 +1,9 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
-import { MonoText } from '../components/StyledText';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button, Linking } from 'react-native';
 import IconBack from 'react-native-vector-icons/EvilIcons';
 import { Dimensions } from "react-native";
-import MultiSwitch from '../components/MultiSwitch';
-import VerticalMenu from '../components/VerticalSwitch';
+import { SocialIcon } from 'react-native-elements';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -117,17 +115,40 @@ function SettingsScreen({ navigation, route }) {
         <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})} style={styles.back} />
       </View>
       <Text style={styles.subHeads}>In App Difficulty</Text>
-      <View style={styles.goalMenu}>
-        <VerticalMenu diff1={() => answer(1)} diff2={() => answer(2)} diff3={() => answer(3)} />
-      </View>
+
+      
+
       <Text style={styles.subHeads}>Connect</Text>
-      <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Login', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})}>
-      <Text style={styles.settings}>Login</Text>
+      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Login', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})}>
+        <Text style={styles.connectOptionsText}>Login to existing account</Text>
       </TouchableOpacity>
-      <Text style={styles.subHeads}>Weekly Goal</Text>
-      <View style={styles.goalMenu}>
-        <MultiSwitch g1={() => answer2(1)} g2={() => answer2(2)} g3={() => answer2(3)} selected={retu2} />
-      </View>
+      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Create', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})}>
+        <Text style={styles.connectOptionsText}>Create New Account</Text>
+      </TouchableOpacity>
+      <Text style={styles.subHeads}>Connect with Us</Text>
+      <View style={{ flex: 1, flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'column', paddingLeft: 60}}>
+          <SocialIcon 
+            type="facebook"
+            onPress={() => Linking.openURL('https://www.facebook.com/Voc-AB-104139488054172')}
+            />
+        </View>
+        <View style={{ flexDirection: 'column',paddingLeft: 45 }}>
+          <SocialIcon
+            type="instagram"
+            onPress={() => Linking.openURL('https://www.instagram.com/vocabulary.app')
+            }
+          />
+        </View>
+        <View style={{ flexDirection: 'column', paddingLeft: 45 }}>
+          <SocialIcon
+            type="linkedin"
+            onPress={() => {
+              Linking.openURL('https://www.linkedin.com/company/68693070')
+            }}
+          />
+        </View>    
+      </View>  
     </View>
   )
 }
@@ -178,8 +199,25 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 30,
   },
+  connectOptions: {
+    marginTop:10,
+    alignContent: "center",
+    padding:15,
+    paddingBottom:15,
+    marginLeft:30,
+    marginRight:30,
+    backgroundColor:'#0099FF',
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor: '#fff'
+  },
+  connectOptionsText: {
+    fontSize: 24,
+    color: '#FFFFFF',
+    textAlign: 'center'
+  },
   settings: {
-    fontSize: 48,
+    fontSize: 56,
     fontWeight: '700',
     paddingLeft: 15,
   },
@@ -188,15 +226,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingTop: 50,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    fontFamily: 'Reem-Kufi'
   },
   subHeads: {
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
-    fontSize: 28,
+    fontSize: 33,
     fontWeight: '700',
     paddingLeft: 18,
     marginVertical: 15,
+    paddingTop: 20
   },
   goalMenu: {
     //flex: 1,
