@@ -1,9 +1,10 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button, Linking } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button, Linking, Animated } from 'react-native';
 import IconBack from 'react-native-vector-icons/EvilIcons';
 import { Dimensions } from "react-native";
 import { SocialIcon } from 'react-native-elements';
+import AnimatedTab from '../components/AnimatedTab'
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -44,42 +45,7 @@ function SettingsScreen({ navigation, route }) {
       setretu("hard")
     }
   }
-  function answer2(num) {
-    console.log("Hi")
-    if (num == 1) {
-      setfifty2()
-    }
-    if (num == 2) {
-      sethundred2()
-    }
-    if (num == 3) {
-      settwohundred2()
-    }
-  }
-  function setfifty2() {
-    if (fifty == styles.AnswerButtonBlue) {
-      setfifty(styles.AnswerButtonBlack)
-      sethundred(styles.AnswerButtonBlue)
-      settwohundred(styles.AnswerButtonBlue)
-      setretu2("fifty")
-    }
-  }
-  function sethundred2() {
-    if (hundred == styles.AnswerButtonBlue) {
-      setfifty(styles.AnswerButtonBlue)
-      sethundred(styles.AnswerButtonBlack)
-      settwohundred(styles.AnswerButtonBlue)
-      setretu2("hundred")
-    }
-  }
-  function settwohundred2() {
-    if (twohundred == styles.AnswerButtonBlue) {
-      setfifty(styles.AnswerButtonBlue)
-      sethundred(styles.AnswerButtonBlue)
-      settwohundred(styles.AnswerButtonBlack)
-      setretu2("twohundred")
-    }
-  }
+  
   const [easy, seteasy] = React.useState(styles.AnswerButtonBlue)
   const [medium, setmedium] = React.useState(styles.AnswerButtonBlack)
   const [hard, sethard] = React.useState(styles.AnswerButtonBlue)
@@ -94,30 +60,18 @@ function SettingsScreen({ navigation, route }) {
   if (retu == "hard") {
     sethard2()
   }
-  const [fifty, setfifty] = React.useState(styles.AnswerButtonBlue)
-  const [hundred, sethundred] = React.useState(styles.AnswerButtonBlack)
-  const [twohundred, settwohundred] = React.useState(styles.AnswerButtonBlue)
-  const perweek = route.params.perweek
-  const [retu2, setretu2] = React.useState(perweek)
-  if (retu2 == "fifty") {
-    setfifty2()
-  }
-  if (retu2 == "hundred") {
-    sethundred2()
-  }
-  if (retu2 == "twohundred") {
-    settwohundred2()
-  }
+
   return (
     <View style={styles.page}>
       <View style={styles.head}>
         <Text style={styles.settings}>Settings</Text>
-        <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})} style={styles.back} />
+        <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})} style={styles.back} />
       </View>
+      {/*Easy, Medium, Hard*/}
       <Text style={styles.subHeads}>In App Difficulty</Text>
+      <AnimatedTab/>
 
-      
-
+      {/*Login Buttons*/}
       <Text style={styles.subHeads}>Connect</Text>
       <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Login', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})}>
         <Text style={styles.connectOptionsText}>Login to existing account</Text>
@@ -125,6 +79,8 @@ function SettingsScreen({ navigation, route }) {
       <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Create', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})}>
         <Text style={styles.connectOptionsText}>Create New Account</Text>
       </TouchableOpacity>
+      
+      {/*Socials*/}
       <Text style={styles.subHeads}>Connect with Us</Text>
       <View style={{ flex: 1, flexDirection: 'row'}}>
         <View style={{ flexDirection: 'column', paddingLeft: 60}}>
@@ -236,7 +192,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     paddingLeft: 18,
     marginVertical: 15,
-    paddingTop: 20
+    paddingTop: 0
   },
   goalMenu: {
     //flex: 1,
