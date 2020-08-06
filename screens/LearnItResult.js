@@ -17,8 +17,21 @@ export default function LearnItResult({ route, navigation }) {
   const question = (route.params.question)
   const mod = route.params.mode
   const per = route.params.perwee
+  var lvl = route.params.lvl
+  var xp=route.params.xp
+  const pu = route.params.pu
+  
   let Color = ""
   if (result === 'true') {
+    if (mod == "easy") {
+      xp = xp+20
+    }
+    if (mod == "medium") {
+      xp = xp+30
+    }
+    if (mod == "hard") {
+      xp = xp+50
+    }
     answer = "Correct"
     Color = "green"
   }
@@ -26,11 +39,11 @@ export default function LearnItResult({ route, navigation }) {
     answer = "Incorrect"
     Color = "red"
   }
-  const pushAction = StackActions.push('LearnIt', { answer: "hard" });
+  const pushAction = StackActions.push('LearnIt', { answer: mod,perweek:per,lvl:lvl,xp:xp,pu:pu});
   
   return (
     <View style = {{flex : 1, backgroundColor : 'white'}}>
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per })} style={styles.home} />
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per,lvl:lvl,xp:xp,pu:pu })} style={styles.home} />
 
       <Text style={{
         paddingTop: screenHeight/20,
@@ -95,15 +108,15 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize : 32,
     alignSelf : 'center',
-    paddingLeft : screenWidth / 30,
     paddingTop : screenHeight / 60
   },
   DefinitionText : {
     fontWeight : '300',
     fontSize : 24,
     paddingLeft : screenWidth / 10,
-    paddingRight : screenWidth / 35,
-    paddingTop : screenHeight / 20
+    paddingRight : screenWidth / 10,
+    paddingTop : screenHeight / 20,
+    alignSelf : 'center'
   },
   WordOfDay : {
     alignItems: 'flex-start', 

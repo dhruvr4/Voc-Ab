@@ -1,22 +1,14 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import DropDownPicker from 'react-native-dropdown-picker';
-import { MonoText } from '../components/StyledText';
-//import IconBack from 'react-native-vector-icons/AntDesign';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button, Linking } from 'react-native';
 import IconBack from 'react-native-vector-icons/EvilIcons';
-import Icon from 'react-native-vector-icons/FontAwesome'
 import { Dimensions } from "react-native";
-import MultiSwitch from '../components/MultiSwitch';
+import { SocialIcon } from 'react-native-elements';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
 
 function SettingsScreen({ navigation, route }) {
-  function navigat(ans) {
-    navigation.navigate("LearnIt", { answer: ans })
-  }
   function answer(num) {
     if (num == 1) {
       seteasy2()
@@ -117,60 +109,66 @@ function SettingsScreen({ navigation, route }) {
     settwohundred2()
   }
   return (
-    <View >
+    <View style={styles.page}>
       <View style={styles.head}>
         <Text style={styles.settings}>Settings</Text>
-        <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu, perweek: retu2 })} style={styles.back}/>
+        <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})} style={styles.back} />
       </View>
-
       <Text style={styles.subHeads}>In App Difficulty</Text>
+
       
-      <TouchableOpacity style={easy} onPress={() => { answer(1) }}>
-        <Text style={styles.AnswerText}>Easy</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={medium} onPress={() => { answer(2) }}>
-        <Text style={styles.AnswerText}>Medium</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={hard} onPress={() => { answer(3) }}>
-        <Text style={styles.AnswerText}>Hard</Text>
-      </TouchableOpacity>
 
       <Text style={styles.subHeads}>Connect</Text>
-
-      <TouchableOpacity activeOpacity={0.8}>
-        <Image  source={require('../assets/images/fb-login.png')} style={{marginLeft:2, marginTop:10, height:50, width:280, borderRadius:1}}/>
+      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Login', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})}>
+        <Text style={styles.connectOptionsText}>Login to existing account</Text>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.8}>
-        <Image  source={require('../assets/images/g-login.png')} style={{height:50, width:283, marginVertical:10}}/>
+      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Create', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})}>
+        <Text style={styles.connectOptionsText}>Create New Account</Text>
       </TouchableOpacity>
-
-      <Text style={styles.subHeads}>Weekly Goal</Text>
-
-      <View style={styles.goalMenu}>
-        <MultiSwitch g1={() => answer2(1) } g2={() => answer2(2) } g3={() => answer2(3) }/>
-      </View>
+      <Text style={styles.subHeads}>Connect with Us</Text>
+      <View style={{ flex: 1, flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'column', paddingLeft: 60}}>
+          <SocialIcon 
+            type="facebook"
+            onPress={() => Linking.openURL('https://www.facebook.com/Voc-AB-104139488054172')}
+            />
+        </View>
+        <View style={{ flexDirection: 'column',paddingLeft: 45 }}>
+          <SocialIcon
+            type="instagram"
+            onPress={() => Linking.openURL('https://www.instagram.com/vocabulary.app')
+            }
+          />
+        </View>
+        <View style={{ flexDirection: 'column', paddingLeft: 45 }}>
+          <SocialIcon
+            type="linkedin"
+            onPress={() => {
+              Linking.openURL('https://www.linkedin.com/company/68693070')
+            }}
+          />
+        </View>    
+      </View>  
     </View>
   )
 }
+
 SettingsScreen.navigationOptions = {
   header: null,
 };
+
 const styles = StyleSheet.create({
   page: {
-    flexDirection:'column'
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#fff',
   },
   AnswerText: {
     fontWeight: 'bold',
     fontSize: 24,
     color: 'white'
   },
-  // back: {
-  //   alignSelf:'flex-end',
-  //   paddingTop: 50,
-  //   paddingRight: 20,
-  //   color: 'black',
-  //   left: 10,
-  // },
+
   pick: {
     paddingTop: 100,
     paddingBottom: 50,
@@ -189,7 +187,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#4455BB',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
+    marginVertical: 20,
     borderRadius: 30,
   },
   AnswerButtonBlack: {
@@ -201,9 +199,25 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 30,
   },
-  settings: { 
-    //fontFamily: 'ReemKufi-Regular', 
-    fontSize: 48, 
+  connectOptions: {
+    marginTop:10,
+    alignContent: "center",
+    padding:15,
+    paddingBottom:15,
+    marginLeft:30,
+    marginRight:30,
+    backgroundColor:'#0099FF',
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor: '#fff'
+  },
+  connectOptionsText: {
+    fontSize: 24,
+    color: '#FFFFFF',
+    textAlign: 'center'
+  },
+  settings: {
+    fontSize: 56,
     fontWeight: '700',
     paddingLeft: 15,
   },
@@ -212,15 +226,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingTop: 50,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    fontFamily: 'Reem-Kufi'
   },
   subHeads: {
+    backgroundColor: '#fff',
     justifyContent: 'flex-start',
-    //fontFamily: 'ReemKufi-Regular',
-    fontSize: 28, 
+    fontSize: 33,
     fontWeight: '700',
     paddingLeft: 18,
-    marginTop: 15,
+    marginVertical: 15,
+    paddingTop: 20
   },
   goalMenu: {
     //flex: 1,
