@@ -37,6 +37,7 @@ export default function LearnIt({ navigation, route }) {
     array.sort(() => Math.random() - 0.5);
   }
   var words_done = route.params.words_done
+  //console.log(words_done)
   var result = route.params.answer
   const perweek = route.params.perweek
   const lvl = route.params.lvl

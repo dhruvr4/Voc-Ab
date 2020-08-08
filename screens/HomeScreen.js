@@ -78,6 +78,7 @@ function HomeScreen({ navigation, route }) {
   let cor = ''
   let arr = []
   load('default')
+  //console.log(ans)
  
   return (
     <View style={styles.container}>
