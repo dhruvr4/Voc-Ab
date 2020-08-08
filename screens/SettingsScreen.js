@@ -10,61 +10,14 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 
 
 function SettingsScreen({ navigation, route }) {
-  function answer(num) {
-    if (num == 1) {
-      seteasy2()
-    }
-    if (num == 2) {
-      setmedium2()
-    }
-    if (num == 3) {
-      sethard2()
-    }
-  }
-  function seteasy2() {
-    if (easy == styles.AnswerButtonBlue) {
-      seteasy(styles.AnswerButtonBlack)
-      setmedium(styles.AnswerButtonBlue)
-      sethard(styles.AnswerButtonBlue)
-      setretu("easy")
-    }
-  }
-  function setmedium2() {
-    if (medium == styles.AnswerButtonBlue) {
-      seteasy(styles.AnswerButtonBlue)
-      setmedium(styles.AnswerButtonBlack)
-      sethard(styles.AnswerButtonBlue)
-      setretu("medium")
-    }
-  }
-  function sethard2() {
-    if (hard == styles.AnswerButtonBlue) {
-      seteasy(styles.AnswerButtonBlue)
-      setmedium(styles.AnswerButtonBlue)
-      sethard(styles.AnswerButtonBlack)
-      setretu("hard")
-    }
-  }
-  
-  const [easy, seteasy] = React.useState(styles.AnswerButtonBlue)
-  const [medium, setmedium] = React.useState(styles.AnswerButtonBlack)
-  const [hard, sethard] = React.useState(styles.AnswerButtonBlue)
   const mode = route.params.mode
   const [retu, setretu] = React.useState(mode)
-  if (retu == "easy") {
-    seteasy2()
-  }
-  if (retu == "medium") {
-    setmedium2()
-  }
-  if (retu == "hard") {
-    sethard2()
-  }
+  
   return (
     <View style={styles.page}>
       <View style={styles.head}>
         <Text style={styles.settings}>Settings</Text>
-        <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})} style={styles.back} />
+        <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu,words_done:route.params.word_done})} style={styles.back} />
       </View>
       {/*Easy, Medium, Hard*/}
       <Text style={styles.subHeads}>In App Difficulty</Text>
@@ -72,10 +25,10 @@ function SettingsScreen({ navigation, route }) {
 
       {/*Login Buttons*/}
       <Text style={styles.subHeads}>Connect</Text>
-      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Login', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})}>
+      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Login', { mode: retu,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu,words_done:route.params.word_done})}>
         <Text style={styles.connectOptionsText}>Login to existing account</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Create', { mode: retu, perweek: retu2,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})}>
+      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Create', { mode: retu,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu,words_done:route.params.word_done})}>
         <Text style={styles.connectOptionsText}>Create New Account</Text>
       </TouchableOpacity>
       

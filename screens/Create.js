@@ -8,10 +8,9 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 
 function Login({ navigation, route }) {
     function login_new() {
-        navigation.navigate('Home', { mode: route.params.mode, perweek: route.params.perweek,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})
+        navigation.navigate('Home', { mode: route.params.mode,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu,words_done:route.params.words_done})
     }
     var result = route.params.answer
-    const perweek = route.params.perweek
     const lvl = route.params.lvl
     const xp=route.params.xp
     const pu = route.params.pu
@@ -21,7 +20,7 @@ function Login({ navigation, route }) {
     const [text3, setText3] = React.useState(txt2)
     return (
         <View>
-            <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, perweek: perweek,lvl:lvl,xp:xp,pu:pu })} style={styles.home} />
+            <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result,lvl:lvl,xp:xp,pu:pu,words_done:route.params.words_done })} style={styles.home} />
             <Text style = {styles.AnswerText}>Welcome to Voc-AB</Text>
             <View>
             <View style = {styles.FieldContainer}>

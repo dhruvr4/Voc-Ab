@@ -13,7 +13,10 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 
 export default function LearnIt({ navigation, route }) {
   function load(val) {
-    const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
+    var ques = datab[val][0]   
+    do {
+     ques = datab[val][Math.floor(Math.random() * datab[val].length)]
+    }while(words_done[val].includes(ques.question))
     txt = ques.question
     cor = ques.correctanswer
     var ar = [ques.correctanswer]
@@ -28,17 +31,19 @@ export default function LearnIt({ navigation, route }) {
   }
   function answer(answer) {
     let ans = ((options).indexOf(correct) === answer)
-    navigation.navigate("LearnItResult", { answer: ans, correct: correct, mode: result, perwee: perweek, question : text,lvl:lvl,xp:xp,pu:pu })
+    navigation.navigate("LearnItResult", { answer: ans, correct: correct, mode: result, perwee: perweek, question : text,lvl:lvl,xp:xp,pu:pu,words_done:words_done })
   }
   function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
   }
+  var words_done = route.params.words_done
   var result = route.params.answer
   const perweek = route.params.perweek
   const lvl = route.params.lvl
   const xp=route.params.xp
   const pu = route.params.pu
-  console.log(result)
+  //console.log(result)
+ // console.log(words_done)
   let txt = ''
   let cor = ''
   let arr = []
@@ -48,7 +53,7 @@ export default function LearnIt({ navigation, route }) {
   const [correct, setCorrect] = React.useState(cor)
   return (
     <View style={{ flex: 1, backgroundColor: '#F0FFF0' }}>
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, perweek: perweek,lvl:lvl,xp:xp,pu:pu })} style={styles.home} />
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, perweek: perweek,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
       <View style={styles.QuestionContainer}>
         <Text style={styles.text}>{text}</Text>
       </View>

@@ -111,7 +111,7 @@ export default function Dictionary({navigation, route}) {
 
             <View style={styles.head}>
                 <Text style={styles.heading}>Dictionary</Text>
-                <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', {mode: route.params.mode, perweek: route.params.perweek,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu})} style={styles.back} />
+                <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', {mode: route.params.mode,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu,words_done:route.params.words_done})} style={styles.back} />
             </View>
             <SearchBar 
             placeholder="Look up a word..." 

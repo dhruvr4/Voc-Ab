@@ -12,6 +12,7 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 
 export default function LearnItResult({ route, navigation }) {
   let answer = "Time Up"
+  var words_done = route.params.words_done
   const result = JSON.stringify(route.params.answer)
   const correct = (route.params.correct)
   const question = (route.params.question)
@@ -20,9 +21,9 @@ export default function LearnItResult({ route, navigation }) {
   var lvl = route.params.lvl
   var xp=route.params.xp
   const pu = route.params.pu
-  
   let Color = ""
   if (result === 'true') {
+    words_done[mod].push(question)
     if (mod == "easy") {
       xp = xp+20
     }
@@ -39,11 +40,11 @@ export default function LearnItResult({ route, navigation }) {
     answer = "Incorrect"
     Color = "red"
   }
-  const pushAction = StackActions.push('LearnIt', { answer: mod,perweek:per,lvl:lvl,xp:xp,pu:pu});
+  const pushAction = StackActions.push('LearnIt', { answer: mod,perweek:per,lvl:lvl,xp:xp,pu:pu,words_done:words_done});
   
   return (
     <View style = {{flex : 1, backgroundColor : 'white'}}>
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per,lvl:lvl,xp:xp,pu:pu })} style={styles.home} />
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
 
       <Text style={{
         paddingTop: screenHeight/20,

@@ -20,10 +20,13 @@ export default function ChallengeResult({ route, navigation }) {
   var lvl = route.params.lvl
   var xp=route.params.xp
   var pu = route.params.pu
-      
-  console.log(result)
+  var words_done= route.params.words_done
+  
+  
+  //console.log(result)
   let Color = " "
   if (result === true) {
+    words_done[mod].push(question)
     if (mod == "easy") {
       xp = xp+20
     }
@@ -53,10 +56,10 @@ export default function ChallengeResult({ route, navigation }) {
       levels[i / 10 - 10] = i
     }
     lvlupdate();
-  const pushAction = StackActions.push('Challenge', { answer: mod,perweek:per,lvl:lvl,xp:xp,pu:pu });
+  const pushAction = StackActions.push('Challenge', { answer: mod,perweek:per,lvl:lvl,xp:xp,pu:pu,words_done:words_done });
   return (
     <View style = {{flex : 1, backgroundColor : 'white'}}>
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per,lvl:lvl,xp:xp,pu:pu })} style={styles.home} />
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
 
       <Text style={{
         paddingTop: screenHeight/20,

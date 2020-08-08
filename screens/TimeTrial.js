@@ -16,21 +16,24 @@ const screenHeight = Math.round(Dimensions.get('window').height)
 
 export default function TimeTrial({ navigation, route }) {
   function load(val) {
-    console.log("Load function started")
+   // console.log("Load function started")
     var incorrects = []
 
-    const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
-    //console.log(ques)
+    var ques = datab[val][0]   
+    do {
+     ques = datab[val][Math.floor(Math.random() * datab[val].length)]
+    }while(words_done[val].includes(ques.question))
+       //console.log(ques)
     txt = ques.question
     cor = ques.correctanswer
     var ar = [ques.correctanswer]
     var pups = [true, true, true, true]
    
     while (ar.length < 4) {
-      const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
+      const ques2 = datab[val][Math.floor(Math.random() * datab[val].length)]
       if (!(arr.includes(ques.correctanswer))) {
-        ar.push(ques.correctanswer)
-        incorrects.push(ques.correctanswer)
+        ar.push(ques2.correctanswer)
+        incorrects.push(ques2.correctanswer)
     
       }
     }
@@ -61,8 +64,11 @@ export default function TimeTrial({ navigation, route }) {
   function nextQuestion() {
     var incorrects = []
     const val = mode
-    const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
-    txt = ques.question
+    var ques = datab[val][0]   
+    do {
+     ques = datab[val][Math.floor(Math.random() * datab[val].length)]
+    }while(words_done[val].includes(ques.question))
+      txt = ques.question
     cor = ques.correctanswer
     var ar = [ques.correctanswer]
     var pups = [true, true, true, true]
@@ -84,10 +90,10 @@ export default function TimeTrial({ navigation, route }) {
     setOptions(arr)
   }
   function navigat() {
-    console.log("Navigat called")
+  //  console.log("Navigat called")
     clearInterval(time)
-    console.log(pu)
-    const pushAction2 = StackActions.push("TimeTrialResult", { answer: totscore, correct: totwrong, mode: mode, perwee: perweek, lvl: lvl, xp: xp, pu: powerupp, question: text});
+   // console.log(pu)
+    const pushAction2 = StackActions.push("TimeTrialResult", { answer: totscore, correct: totwrong, mode: mode, perwee: perweek, lvl: lvl, xp: xp, pu: powerupp, question: text,words_done:words_done});
     navigation.dispatch(pushAction2)
   }
 
@@ -109,10 +115,10 @@ export default function TimeTrial({ navigation, route }) {
     array.sort(() => Math.random() - 0.5);
   }
   function powerup() {
-    console.log(powerupp)
-    console.log(to_show)
+    //console.log(powerupp)
+    //console.log(to_show)
     if(powerupp > 0 && JSON.stringify(to_show) == JSON.stringify([true,true,true,true])) {
-    console.log("Hi")
+   // console.log("Hi")
     //console.log(show)
     setto_show(show)
     setpowerupp(powerupp-1)
@@ -125,7 +131,8 @@ export default function TimeTrial({ navigation, route }) {
   const lvl = route.params.lvl
   const xp = route.params.xp
   var pu = route.params.pu
-
+  var words_done = route.params.words_done
+  
   let txt = ''
   let cor = ''
   let arr = []
@@ -147,7 +154,7 @@ export default function TimeTrial({ navigation, route }) {
   return (
     <View style={{ flex: 1, backgroundColor: '#F0FFF0' }}>
       <View style={{ flexDirection: 'row' }}>
-        <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mode, perweek: perweek, lvl: lvl, xp: xp, pu: powerupp })} style={styles.home} />
+        <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mode, perweek: perweek, lvl: lvl, xp: xp, pu: powerupp,words_done:words_done })} style={styles.home} />
         <View style = {styles.PowerButton}>
           <IconPower name = "star" size = {40} onPress={() => { powerup() }} style = {{alignSelf:'flex-end'}} color = 'black'/>
         </View>

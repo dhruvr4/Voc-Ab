@@ -14,8 +14,11 @@ const screenHeight = Math.round(Dimensions.get('window').height)
 
 export default function Challenge({ navigation, route }) {
   function load(val) {
-    console.log("Load function started")
-    const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
+    //console.log("Load function started")
+    var ques = datab[val][0]   
+    do {
+     ques = datab[val][Math.floor(Math.random() * datab[val].length)]
+    }while(words_done[val].includes(ques.question))
     txt = ques.question
     cor = ques.correctanswer
     var ar = [ques.correctanswer]
@@ -30,7 +33,7 @@ export default function Challenge({ navigation, route }) {
   }
   function answer(answer) {
     let ans = (correct.toLocaleLowerCase() === answer.toLocaleLowerCase())
-    navigation.navigate("ChallengeResult", { answer: ans, correct: correct, mode: result, perwee: perweek, question: text, lvl: lvl, xp: xp, pu: powerupp })
+    navigation.navigate("ChallengeResult", { answer: ans, correct: correct, mode: result, perwee: perweek, question: text, lvl: lvl, xp: xp, pu: powerupp,words_done:words_done })
   }
   function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
@@ -48,6 +51,7 @@ export default function Challenge({ navigation, route }) {
   const lvl = route.params.lvl
   const xp = route.params.xp
   var pu = route.params.pu
+  var words_done= route.params.words_done
 
   let txt = ''
   let cor = ''
@@ -71,7 +75,7 @@ export default function Challenge({ navigation, route }) {
     behavior= "position" 
     style={{ flex: 1, backgroundColor : 'white'}} keyboardVerticalOffset = {-160}>
     <View style ={{flexDirection : 'row'}}>  
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, perweek: perweek, lvl: lvl, xp: xp, pu: powerupp })} style={styles.home} />
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, perweek: perweek, lvl: lvl, xp: xp, pu: powerupp,words_done:words_done })} style={styles.home} />
       <View style = {styles.PowerButton}>
         <IconPower name = "star" size = {40} onPress={() => { powerup() }} style = {{alignSelf:'flex-end'}} color = 'black'/>
       </View>

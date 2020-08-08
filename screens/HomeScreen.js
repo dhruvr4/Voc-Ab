@@ -39,6 +39,15 @@ function HomeScreen({ navigation, route }) {
   } catch {
     ans = "hard"
   }
+  let words_done = {"easy":[],"medium":[],"hard":[]}
+  try {
+    words_done = route.params.words_done
+  } catch {
+    words_done = {"easy":[],"medium":[],"hard":[]}
+  }
+
+  
+
   let ans2 = "fifty"
   try {
     ans2 = route.params.perweek
@@ -73,7 +82,7 @@ function HomeScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
-        <IconSetting name="settings" size={45} onPress={() => navigation.navigate('Setting', { mode: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu })} style={styles.wrenchIcon} />
+        <IconSetting name="settings" size={45} onPress={() => navigation.navigate('Setting', { mode: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu,words_done:words_done })} style={styles.wrenchIcon} />
         <View style={styles.titleContainer}>
         <Text style={styles.ButtonText}>VOC-AB</Text>
         </View>
@@ -91,13 +100,13 @@ function HomeScreen({ navigation, route }) {
       </View>
       <View style={styles.buttonContainer}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu })}>
+          <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu,words_done:words_done })}>
             <Text style={{ fontFamily: 'serif', fontSize: 48, fontWeight: '700', color: 'white' }}>Learn It</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", { answer: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu })}>
+          <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", { answer: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu,words_done:words_done })}>
             <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color: 'white' }}>Time Trial</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", { answer: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu })}>
+          <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", { answer: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu ,words_done:words_done})}>
             <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color: 'white' }}>Challenge</Text>
           </TouchableOpacity>
         </ScrollView>
@@ -105,7 +114,7 @@ function HomeScreen({ navigation, route }) {
 
       <View style={{flexDirection : 'row', paddingTop : screenHeight / 13, alignItems : 'center', justifyContent : 'center'}}>
         <View style = {{paddingRight : screenWidth / 10, paddingTop : 6}}>
-          <IconSetting name="book-open" size={40} onPress={()=> navigation.navigate('Dictionary', { mode: ans, perweek: ans2,lvl:lvl,xp:xp,pu:pu })} style={styles.Dictionary} />
+          <IconSetting name="book-open" size={40} onPress={()=> navigation.navigate('Dictionary', { mode: ans, perweek: ans2,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.Dictionary} />
         </View>
         <View style = {{paddingRight : screenWidth /10}}>
           <Text style={{ fontSize: 38, fontWeight: '600', }}>Word Of the day</Text>  

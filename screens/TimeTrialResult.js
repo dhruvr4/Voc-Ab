@@ -17,11 +17,13 @@ export default function TimeTrialResult({ route, navigation }) {
   const mod = route.params.mode
   const per = route.params.perwee
   var lvl = route.params.lvl
+  var words_done=route.params.words_done
   var xp=route.params.xp
   var pu = route.params.pu
   for (var i = 0; i < correct.length; i++) {
     const ab = correct[i][3]? "Correct":"Wrong"
     if(ab == "Correct") {
+      words_done[mod].push(correct[i][0])
       if (mod == "easy") {
         xp = xp+20
       }
@@ -33,6 +35,7 @@ export default function TimeTrialResult({ route, navigation }) {
       }
     }
   }
+  //console.log(words_done)
   function lvlupdate() {
     while (xp > levels[lvl]) {
       xp = xp - levels[lvl]
@@ -84,11 +87,11 @@ export default function TimeTrialResult({ route, navigation }) {
   const renderItem = ({item}) => (
     <Item def={item.def} correctAns = {item.ans} color = {item.color}/>
   );
-  const pushAction2 = StackActions.push('TimeTrial', { answer: mod,perweek:per,lvl:lvl,xp:xp,pu:pu});
+  const pushAction2 = StackActions.push('TimeTrial', { answer: mod,perweek:per,lvl:lvl,xp:xp,pu:pu,words_done:words_done});
   return (
     <View style = {{flex : 1, backgroundColor : 'white'}}>
       <ScrollView>
-        <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per,lvl:lvl,xp:xp,pu:pu })} style={styles.home} />
+        <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
         <Text style={styles.result}> {result}</Text>
         <FlatList
           data = {r}
