@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 15,
-    marginTop : screenHeight/15,
+    marginTop : screenHeight/35,
   },
   text: {
     alignSelf: 'center',
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   },
   text2: {
     textAlign: "center",
-    paddingTop: 30,
+    marginTop: 0,
     fontWeight: 'bold',
     fontSize: 30,
     paddingLeft: screenWidth / 8,

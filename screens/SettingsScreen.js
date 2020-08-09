@@ -57,7 +57,7 @@ function SettingsScreen({ navigation, route }) {
           >
             <View style={{
               flexDirection: 'row',
-              marginTop: 40,
+              marginTop: 10,
               height: 50,
               borderRadius: 4,
               backgroundColor: '#EBEBEB',
@@ -151,7 +151,7 @@ function SettingsScreen({ navigation, route }) {
         </View>
       </View>
       {/*Login Buttons*/}
-      <Text style={styles.subHeads}>Connect</Text>
+      <Text style={styles.subHeads2}>Connect</Text>
       <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Login', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.word_done })}>
         <Text style={styles.connectOptionsText}>Login to existing account</Text>
       </TouchableOpacity>
@@ -271,7 +271,16 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     paddingLeft: 18,
     marginVertical: 15,
-    paddingTop: 0
+    paddingTop: 10
+  },
+  subHeads2: {
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    fontSize: 33,
+    fontWeight: '700',
+    paddingLeft: 18,
+    marginVertical: 15,
+    marginTop: 70
   },
   goalMenu: {
     //flex: 1,
