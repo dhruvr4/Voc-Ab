@@ -38,7 +38,7 @@ function Login({ navigation, route }) {
                     />
                 </View>
             </View>
-            <TouchableOpacity style={styles.sumbitButton} onPress={() => { login_new() }}>
+            <TouchableOpacity style={styles.sumbitButton} onPress={() => { login_existing() }}>
               <Text style={styles.EnterText}>Submit !</Text>
             </TouchableOpacity>  
         </View>

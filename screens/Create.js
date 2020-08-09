@@ -8,9 +8,9 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 
 function Login({ navigation, route }) {
     function login_new() {
-        navigation.navigate('Home', { mode: route.params.mode,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu,words_done:route.params.words_done})
+        navigation.navigate('Home', { mode: result,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu,words_done:route.params.words_done})
     }
-    var result = route.params.answer
+    var result = route.params.mode
     const lvl = route.params.lvl
     const xp=route.params.xp
     const pu = route.params.pu
