@@ -32,10 +32,14 @@ function HomeScreen({ navigation, route }) {
   for (var i = 100; i < 400; i = i + 10) {
     levels[i / 10 - 10] = i
   }
+  const liss = ["easy","medium","hard"]
   //console.log(levels)
   let ans = "hard"
   try {
     ans = route.params.mode
+    if (!liss.includes(ans)) {
+      throw Error
+    }
   } catch {
     ans = "hard"
   }

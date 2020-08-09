@@ -152,10 +152,10 @@ function SettingsScreen({ navigation, route }) {
       </View>
       {/*Login Buttons*/}
       <Text style={styles.subHeads2}>Connect</Text>
-      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Login', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.word_done })}>
+      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Login', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })}>
         <Text style={styles.connectOptionsText}>Login to existing account</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Create', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.word_done })}>
+      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Create', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })}>
         <Text style={styles.connectOptionsText}>Create New Account</Text>
       </TouchableOpacity>
 
