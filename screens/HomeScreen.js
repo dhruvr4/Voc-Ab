@@ -1,13 +1,9 @@
 
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button, Settings } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Dimensions } from "react-native";
 import { ScrollView } from 'react-native-gesture-handler';
 import IconSetting from 'react-native-vector-icons/Feather';
-import IconLeader from 'react-native-vector-icons/MaterialCommunityIcons';
-import { MonoText } from '../components/StyledText';
-import * as Progress from 'react-native-progress';
 import ProgressCircle from 'react-native-progress-circle'
 import datab from './WordsDatabase'
 const screenWidth = Math.round(Dimensions.get('window').width);

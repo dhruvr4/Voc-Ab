@@ -1,16 +1,11 @@
-import { Ionicons } from '@expo/vector-icons';
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
-import { selectAssetSource } from 'expo-asset/build/AssetSources';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Dimensions } from "react-native";
 import datab from './WordsDatabase'
 import IconBack from 'react-native-vector-icons/AntDesign';
 import IconPower from 'react-native-vector-icons/AntDesign';
 
 import { StackActions } from '@react-navigation/native';
-import { Redirect } from 'react-router-dom';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height)
 

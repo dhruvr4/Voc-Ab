@@ -1,13 +1,7 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button, Linking, Animated } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Linking, Animated } from 'react-native';
 import IconBack from 'react-native-vector-icons/EvilIcons';
-import { Dimensions } from "react-native";
 import { SocialIcon } from 'react-native-elements';
-import AnimatedTab from '../components/AnimatedTab'
-const screenWidth = Math.round(Dimensions.get('window').width);
-const screenHeight = Math.round(Dimensions.get('window').height);
-
 
 function SettingsScreen({ navigation, route }) {
   var mode = route.params.mode

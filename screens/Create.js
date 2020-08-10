@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button, Settings,TextInput, Dimensions } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, TextInput, Dimensions } from 'react-native';
 //import firebase from 'firebase';
 import IconBack from 'react-native-vector-icons/AntDesign';
 

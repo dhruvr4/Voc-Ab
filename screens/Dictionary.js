@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Dimensions, View, TextInput, StyleSheet, Text, FlatList, ActivityIndicator } from "react-native";
+import { View, StyleSheet, Text, FlatList, ActivityIndicator } from "react-native";
 import IconBack from 'react-native-vector-icons/EvilIcons';
 import { SearchBar } from 'react-native-elements'
 
