@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { StackActions } from '@react-navigation/native';
 import IconBack from 'react-native-vector-icons/AntDesign';
 import IconForward from 'react-native-vector-icons/SimpleLineIcons'
+import firebase from 'firebase'
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -14,10 +15,9 @@ export default function LearnItResult({ route, navigation }) {
   const correct = (route.params.correct)
   const question = (route.params.question)
   const mod = route.params.mode
-  const per = route.params.perwee
   var lvl = route.params.lvl
   var xp=route.params.xp
-  const pu = route.params.pu
+  var pu = route.params.pu
   let Color = ""
   if (result === 'true') {
     words_done[mod].push(question)
@@ -37,11 +37,46 @@ export default function LearnItResult({ route, navigation }) {
     answer = "Incorrect"
     Color = "red"
   }
-  const pushAction = StackActions.push('LearnIt', { answer: mod,perweek:per,lvl:lvl,xp:xp,pu:pu,words_done:words_done});
+  const levels = []
+  for (var i = 100; i < 400; i = i + 10) {
+    levels[i / 10 - 10] = i
+  }
+
+  function lvlupdate() {
+    while (xp > levels[lvl]) {
+      xp = xp - levels[lvl]
+      lvl = lvl + 1
+      pu = pu + 1
+    }}
+lvlupdate()
+
+var user = firebase.auth().currentUser;
+var db = firebase.firestore();
+var signed_in = false
+try {
+var userInfoRef = db.collection("Users").doc(user);  
+signed_in= true
+}
+catch{}
+if (signed_in){
+  userInfoRef.update({
+    "mode":mod,
+    "wordsDone": words_done,
+    "level":lvl,
+    "xp":xp,
+    "powerups":pu
+  })
+}
+
+
+
+
+
+  const pushAction = StackActions.push('LearnIt', { answer: mod,lvl:lvl,xp:xp,pu:pu,words_done:words_done});
   
   return (
     <View style = {{flex : 1, backgroundColor : 'white'}}>
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
 
       <Text style={{
         paddingTop: screenHeight/20,

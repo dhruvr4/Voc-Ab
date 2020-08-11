@@ -88,7 +88,7 @@ export default function TimeTrial({ navigation, route }) {
   //  console.log("Navigat called")
     clearInterval(time)
    // console.log(pu)
-    const pushAction2 = StackActions.push("TimeTrialResult", { answer: totscore, correct: totwrong, mode: mode, perwee: perweek, lvl: lvl, xp: xp, pu: powerupp, question: text,words_done:words_done});
+    const pushAction2 = StackActions.push("TimeTrialResult", { answer: totscore, correct: totwrong, mode: mode, lvl: lvl, xp: xp, pu: powerupp, question: text,words_done:words_done});
     navigation.dispatch(pushAction2)
   }
 
@@ -122,7 +122,6 @@ export default function TimeTrial({ navigation, route }) {
 
   }
   const mode = route.params.answer
-  const perweek = route.params.perweek
   const lvl = route.params.lvl
   const xp = route.params.xp
   var pu = route.params.pu
@@ -149,7 +148,7 @@ export default function TimeTrial({ navigation, route }) {
   return (
     <View style={{ flex: 1, backgroundColor: '#F0FFF0' }}>
       <View style={{ flexDirection: 'row' }}>
-        <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mode, perweek: perweek, lvl: lvl, xp: xp, pu: powerupp,words_done:words_done })} style={styles.home} />
+        <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mode, lvl: lvl, xp: xp, pu: powerupp,words_done:words_done })} style={styles.home} />
         <View style = {styles.PowerButton}>
           <IconPower name = "star" size = {40} onPress={() => { powerup() }} style = {{alignSelf:'flex-end'}} color = 'black'/>
         </View>

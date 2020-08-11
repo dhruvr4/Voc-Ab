@@ -1,13 +1,39 @@
 import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, TextInput, Dimensions } from 'react-native';
 import IconBack from 'react-native-vector-icons/AntDesign';
+import firebase from 'firebase'
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
 function Login({ navigation, route }) {
     function login_existing() {
-        navigation.navigate('Home', { mode: route.params.mode,lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu,words_done:route.params.words_done })
+        let words_done = { "easy": [], "medium": [], "hard": [] }
+        let ans = "hard"
+        let lvl = 1
+        let xp = 0
+        let pu = 0
+        
+
+        var user = firebase.auth().currentUser;
+        var db = firebase.firestore();
+        try {
+        var userInfoRef = db.collection("Users").doc(user);
+        userInfoRef.onSnapshot((doc) => {
+        
+            words_done = doc.data().wordsDone;
+            ans = doc.data().mode
+            lvl = doc.data().level
+            xp = doc.data().xp
+            pu = doc.data().powerups
+          }
+          );
+          navigation.navigate('Home', { mode: ans,lvl: lvl, xp: xp, pu: pu,words_done:words_done })
+            
+        }
+        catch{
+            alert("Account Doesnt Exist")
+        }
     }
     var result = route.params.mode
     const lvl = route.params.lvl

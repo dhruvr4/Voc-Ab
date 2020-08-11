@@ -2,18 +2,18 @@ import { NavigationContainer, Link } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import HomeScreen from './screens/HomeScreen.js';
-import LearnIt from './screens/LearnIt.js';
-import Challenge from './screens/Challenge.js';
-import TimeTrial from './screens/TimeTrial.js';
-import LearnItResult from './screens/LearnItResult.js';
-import ChallengeResult from './screens/ChallengeResult.js';
-import TimeTrialResult from './screens/TimeTrialResult.js';
-import Login from './screens/Login.js';
-import Create from './screens/Create.js';
+import HomeScreen from './src/screens/HomeScreen.js';
+import LearnIt from './src/screens/LearnIt.js';
+import Challenge from './src/screens/Challenge.js';
+import TimeTrial from './src/screens/TimeTrial.js';
+import LearnItResult from './src/screens/LearnItResult.js';
+import ChallengeResult from './src/screens/ChallengeResult.js';
+import TimeTrialResult from './src/screens/TimeTrialResult.js';
+import Login from './src/screens/Login.js';
+import Create from './src/screens/Create.js';
 
-import SettingsScreen from './screens/SettingsScreen.js';
-import Dictionary from './screens/Dictionary'
+import SettingsScreen from './src/screens/SettingsScreen.js';
+import Dictionary from './src/screens/Dictionary'
 
 import useCachedResources from './hooks/useCachedResources';
 import BottomTabNavigator from './navigation/BottomTabNavigator';

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Dimensions} from 'react-native';
 import { StackActions } from '@react-navigation/native';
 import IconBack from 'react-native-vector-icons/AntDesign';
 import IconForward from 'react-native-vector-icons/SimpleLineIcons'
+import firebase from 'firebase'
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -13,7 +14,6 @@ export default function ChallengeResult({ route, navigation }) {
   const correct = route.params.correct
   const question = route.params.question
   const mod = route.params.mode
-  const per = route.params.perwee
   var lvl = route.params.lvl
   var xp=route.params.xp
   var pu = route.params.pu
@@ -53,10 +53,29 @@ export default function ChallengeResult({ route, navigation }) {
       levels[i / 10 - 10] = i
     }
     lvlupdate();
-  const pushAction = StackActions.push('Challenge', { answer: mod,perweek:per,lvl:lvl,xp:xp,pu:pu,words_done:words_done });
+
+    var user = firebase.auth().currentUser;
+    var db = firebase.firestore();
+    var signed_in = false
+    try {
+    var userInfoRef = db.collection("Users").doc(user);  
+    signed_in= true
+    }
+    catch{}
+    if (signed_in){
+      userInfoRef.update({
+        "mode":mod,
+        "wordsDone": words_done,
+        "level":lvl,
+        "xp":xp,
+        "powerups":pu
+      })
+    }
+
+  const pushAction = StackActions.push('Challenge', { answer: mod,lvl:lvl,xp:xp,pu:pu,words_done:words_done });
   return (
     <View style = {{flex : 1, backgroundColor : 'white'}}>
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
 
       <Text style={{
         paddingTop: screenHeight/20,

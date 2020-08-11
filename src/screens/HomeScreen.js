@@ -6,17 +6,75 @@ import { ScrollView } from 'react-native-gesture-handler';
 import IconSetting from 'react-native-vector-icons/Feather';
 import ProgressCircle from 'react-native-progress-circle'
 import datab from './WordsDatabase'
+
+import firebase from 'firebase'
+
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
+let unsubscribe;
 
 function HomeScreen({ navigation, route }) {
+  let words_done = { "easy": [], "medium": [], "hard": [] }
+  let ans = "hard"
+  let lvl = 1
+  let xp = 0
+  let pu = 0
+  var user = firebase.auth().currentUser;
+  var db = firebase.firestore();
+  var signed_in = false
+  try {
+  var userInfoRef = db.collection("Users").doc(user);  
+  signed_in= true
+  }
+  catch{}
+  const levels = []
+  for (var i = 100; i < 400; i = i + 10) {
+    levels[i / 10 - 10] = i
+  }
+
+  lvlupdate()
+  try{
+
+  if (route.params.words_done == undefined) {
+if (signed_in){
+    userInfoRef.onSnapshot((doc) => {
+      words_done = doc.data().wordsDone;
+      ans = doc.data().mode
+      lvl = doc.data().level
+      xp = doc.data().xp
+      pu = doc.data().powerups
+    }
+    );
+  }
+  } else {
+    words_done = route.params.words_done
+    ans = route.params.mode
+    lvl = route.params.lvl
+    xp = route.params.xp
+    pu = route.params.pu
+    }
+if (signed_in) {
+    userInfoRef.update({
+      "mode":ans,
+      "wordsDone": words_done,
+      "level":lvl,
+      "xp":xp,
+      "powerups":pu
+    })
+  }
+  }
+  catch{}
+
+
+
+
   function load(val) {
-    const today = new Date().getFullYear()*365+new Date().getMonth()*31+new Date().getDate()
+    const today = new Date().getFullYear() * 365 + new Date().getMonth() * 31 + new Date().getDate()
     var num = Math.abs((today) % datab['default'].length)
     const ques = datab['default'][num]
     txt = ques.question
     cor = ques.correctanswer
-   }
+  }
   function lvlupdate() {
     while (xp > levels[lvl]) {
       xp = xp - levels[lvl]
@@ -24,102 +82,53 @@ function HomeScreen({ navigation, route }) {
       pu = pu + 1
     }
   }
-  const levels = []
-  for (var i = 100; i < 400; i = i + 10) {
-    levels[i / 10 - 10] = i
-  }
-  const liss = ["easy","medium","hard"]
-  //console.log(levels)
-  let ans = "hard"
-  try {
-    ans = route.params.mode
-    if (!liss.includes(ans)) {
-      throw Error
-    }
-  } catch {
-    ans = "hard"
-  }
-  let words_done = {"easy":[],"medium":[],"hard":[]}
-  try {
-    words_done = route.params.words_done
-  } catch {
-    words_done = {"easy":[],"medium":[],"hard":[]}
-  }
-
   
-
-  let ans2 = "fifty"
-  try {
-    ans2 = route.params.perweek
-  } catch {
-    ans2 = "fifty"
-  }
-  let lvl = 1
-  try {
-    lvl = route.params.lvl
-  } catch {
-    lvl = 1
-  }
-  let xp = 0
-  try {
-    xp = route.params.xp
-  } catch {
-    xp = 0
-  }
-  let pu = 0
-  try {
-    pu = route.params.pu
-  } catch {
-    pu = 0
-  }
-
-  lvlupdate()
   let txt = ''
   let cor = ''
   let arr = []
   load('default')
   //console.log(ans)
- 
+
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
-        <IconSetting name="settings" size={45} onPress={() => navigation.navigate('Setting', { mode: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu,words_done:words_done })} style={styles.wrenchIcon} />
+        <IconSetting name="settings" size={45} onPress={() => navigation.navigate('Setting', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.wrenchIcon} />
         <View style={styles.titleContainer}>
-        <Text style={styles.ButtonText}>VOC-AB</Text>
+          <Text style={styles.ButtonText}>VOC-AB</Text>
         </View>
         <View style={styles.Progress}>
-        <ProgressCircle
-            percent={(xp/levels[lvl])*100}
+          <ProgressCircle
+            percent={(xp / levels[lvl]) * 100}
             radius={25}
             borderWidth={8}
             color="#3399FF"
             shadowColor="#e6e6e6"
             bgColor="#fff">
             <Text style={{ fontSize: 20 }}>{lvl}</Text>
-        </ProgressCircle>
+          </ProgressCircle>
         </View>
       </View>
       <View style={styles.buttonContainer}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu,words_done:words_done })}>
+          <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
             <Text style={{ fontFamily: 'serif', fontSize: 48, fontWeight: '700', color: 'white' }}>Learn It</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", { answer: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu,words_done:words_done })}>
+          <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
             <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color: 'white' }}>Time Trial</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", { answer: ans, perweek: ans2, lvl: lvl, xp: xp, pu: pu ,words_done:words_done})}>
+          <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
             <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color: 'white' }}>Challenge</Text>
           </TouchableOpacity>
         </ScrollView>
       </View>
 
-      <View style={{flexDirection : 'row', paddingTop : screenHeight / 13, alignItems : 'center', justifyContent : 'center'}}>
-        <View style = {{paddingRight : screenWidth / 10, paddingTop : 6}}>
-          <IconSetting name="book-open" size={40} onPress={()=> navigation.navigate('Dictionary', { mode: ans, perweek: ans2,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.Dictionary} />
+      <View style={{ flexDirection: 'row', paddingTop: screenHeight / 13, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ paddingRight: screenWidth / 10, paddingTop: 6 }}>
+          <IconSetting name="book-open" size={40} onPress={() => navigation.navigate('Dictionary', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.Dictionary} />
         </View>
-        <View style = {{paddingRight : screenWidth /10}}>
-          <Text style={{ fontSize: 38, fontWeight: '600', }}>Word Of the day</Text>  
-        </View>  
+        <View style={{ paddingRight: screenWidth / 10 }}>
+          <Text style={{ fontSize: 38, fontWeight: '600', }}>Word Of the day</Text>
+        </View>
       </View>
 
       <View style={styles.WordOfDay}>
@@ -210,11 +219,11 @@ const styles = StyleSheet.create({
     elevation: 24,
   },
   titleContainer: {
-    flex : 1,
-    alignItems : 'center',
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: screenHeight / 20, 
+    marginTop: screenHeight / 20,
   },
   WordText: {
     fontWeight: '700',
@@ -249,12 +258,12 @@ const styles = StyleSheet.create({
     elevation: 24,
   },
   Progress: {
-    paddingBottom : screenHeight / 70,
-    paddingRight : screenWidth / 20,
-    alignItems : "flex-end",
-    justifyContent : 'flex-end',
+    paddingBottom: screenHeight / 70,
+    paddingRight: screenWidth / 20,
+    alignItems: "flex-end",
+    justifyContent: 'flex-end',
   },
-  Dictionary : {
+  Dictionary: {
     paddingLeft: screenHeight / 45,
     alignSelf: "flex-start",
     justifyContent: "flex-start",

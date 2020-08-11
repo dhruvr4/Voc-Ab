@@ -2,8 +2,26 @@ import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Linking, Animated } from 'react-native';
 import IconBack from 'react-native-vector-icons/EvilIcons';
 import { SocialIcon } from 'react-native-elements';
+import firebase from 'firebase'
 
 function SettingsScreen({ navigation, route }) {
+function navigat(a,b){
+  var user = firebase.auth().currentUser;
+  var db = firebase.firestore();
+  var signed_in = false
+  try {
+  var userInfoRef = db.collection("Users").doc(user);  
+  userInfoRef.update({
+    "mode":retu,
+  })
+}
+  catch{}
+
+
+navigation.navigate(a,b)
+}
+
+
   var mode = route.params.mode
   const [retu, setretu] = React.useState(mode)
   handleSlide = type => {
@@ -37,7 +55,7 @@ function SettingsScreen({ navigation, route }) {
     <View style={styles.page}>
       <View style={styles.head}>
         <Text style={styles.settings}>Settings</Text>
-        <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })} style={styles.back} />
+        <IconBack name="arrow-left" size={55} onPress={() => navigat('Home', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })} style={styles.back} />
       </View>
       {/*Easy, Medium, Hard*/}
       <Text style={styles.subHeads}>In App Difficulty</Text>
@@ -146,10 +164,10 @@ function SettingsScreen({ navigation, route }) {
       </View>
       {/*Login Buttons*/}
       <Text style={styles.subHeads2}>Connect</Text>
-      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Login', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })}>
+      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigat('Login', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })}>
         <Text style={styles.connectOptionsText}>Login to existing account</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigation.navigate('Create', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })}>
+      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigat('Create', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })}>
         <Text style={styles.connectOptionsText}>Create New Account</Text>
       </TouchableOpacity>
 

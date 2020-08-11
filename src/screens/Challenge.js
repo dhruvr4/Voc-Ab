@@ -29,7 +29,7 @@ export default function Challenge({ navigation, route }) {
   }
   function answer(answer) {
     let ans = (correct.toLocaleLowerCase() === answer.toLocaleLowerCase())
-    navigation.navigate("ChallengeResult", { answer: ans, correct: correct, mode: result, perwee: perweek, question: text, lvl: lvl, xp: xp, pu: powerupp,words_done:words_done })
+    navigation.navigate("ChallengeResult", { answer: ans, correct: correct, mode: result, question: text, lvl: lvl, xp: xp, pu: powerupp,words_done:words_done })
   }
   function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
@@ -43,7 +43,6 @@ export default function Challenge({ navigation, route }) {
   }
 
   const result = route.params.answer
-  const perweek = route.params.perweek
   const lvl = route.params.lvl
   const xp = route.params.xp
   var pu = route.params.pu
@@ -71,7 +70,7 @@ export default function Challenge({ navigation, route }) {
     behavior= "position" 
     style={{ flex: 1, backgroundColor : 'white'}} keyboardVerticalOffset = {-160}>
     <View style ={{flexDirection : 'row'}}>  
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, perweek: perweek, lvl: lvl, xp: xp, pu: powerupp,words_done:words_done })} style={styles.home} />
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, lvl: lvl, xp: xp, pu: powerupp,words_done:words_done })} style={styles.home} />
       <View style = {styles.PowerButton}>
         <IconPower name = "star" size = {40} onPress={() => { powerup() }} style = {{alignSelf:'flex-end'}} color = 'black'/>
       </View>

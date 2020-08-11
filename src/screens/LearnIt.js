@@ -27,7 +27,7 @@ export default function LearnIt({ navigation, route }) {
   }
   function answer(answer) {
     let ans = ((options).indexOf(correct) === answer)
-    navigation.navigate("LearnItResult", { answer: ans, correct: correct, mode: result, perwee: perweek, question : text,lvl:lvl,xp:xp,pu:pu,words_done:words_done })
+    navigation.navigate("LearnItResult", { answer: ans, correct: correct, mode: result, question : text,lvl:lvl,xp:xp,pu:pu,words_done:words_done })
   }
   function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
@@ -35,7 +35,6 @@ export default function LearnIt({ navigation, route }) {
   var words_done = route.params.words_done
   //console.log(words_done)
   var result = route.params.answer
-  const perweek = route.params.perweek
   const lvl = route.params.lvl
   const xp=route.params.xp
   const pu = route.params.pu
@@ -50,7 +49,7 @@ export default function LearnIt({ navigation, route }) {
   const [correct, setCorrect] = React.useState(cor)
   return (
     <View style={{ flex: 1, backgroundColor: '#F0FFF0' }}>
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, perweek: perweek,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
       <View style={styles.QuestionContainer}>
         <Text style={styles.text}>{text}</Text>
       </View>

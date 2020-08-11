@@ -4,6 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { StackActions } from '@react-navigation/native';
 import IconBack from 'react-native-vector-icons/AntDesign';
 import IconForward from 'react-native-vector-icons/SimpleLineIcons';
+import firebase from 'firebase'
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -13,7 +14,6 @@ export default function TimeTrialResult({ route, navigation }) {
   const result = "You got " + JSON.stringify(route.params.answer) + " correct"
   const correct = route.params.correct
   const mod = route.params.mode
-  const per = route.params.perwee
   var lvl = route.params.lvl
   var words_done=route.params.words_done
   var xp=route.params.xp
@@ -46,6 +46,26 @@ export default function TimeTrialResult({ route, navigation }) {
       levels[i / 10 - 10] = i
     }
     lvlupdate();
+
+    var user = firebase.auth().currentUser;
+    var db = firebase.firestore();
+    var signed_in = false
+    try {
+    var userInfoRef = db.collection("Users").doc(user);  
+    signed_in= true
+    }
+    catch{}
+    if (signed_in){
+      userInfoRef.update({
+        "mode":mod,
+        "wordsDone": words_done,
+        "level":lvl,
+        "xp":xp,
+        "powerups":pu
+      })
+    }
+
+
   const r = []
   for(var f = 0; f < correct.length; f++)
   {
@@ -85,11 +105,11 @@ export default function TimeTrialResult({ route, navigation }) {
   const renderItem = ({item}) => (
     <Item def={item.def} correctAns = {item.ans} color = {item.color}/>
   );
-  const pushAction2 = StackActions.push('TimeTrial', { answer: mod,perweek:per,lvl:lvl,xp:xp,pu:pu,words_done:words_done});
+  const pushAction2 = StackActions.push('TimeTrial', { answer: mod,lvl:lvl,xp:xp,pu:pu,words_done:words_done});
   return (
     <View style = {{flex : 1, backgroundColor : 'white'}}>
       <ScrollView>
-        <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, perweek: per,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
+        <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
         <Text style={styles.result}> {result}</Text>
         <FlatList
           data = {r}
