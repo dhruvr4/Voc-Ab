@@ -10,11 +10,19 @@ function navigat(a,b){
   var db = firebase.firestore();
   var signed_in = false
   try {
-  var userInfoRef = db.collection("Users").doc(user);  
+    var userInfoRef = db.collection("Users").doc(user.uid);
+    signed_in = true
+  }
+  catch{}
+  try {
+    if (signed_in) {
+      
+  var userInfoRef = db.collection("Users").doc(user.uid);  
   userInfoRef.update({
     "mode":retu,
   })
 }
+  }
   catch{}
 
 

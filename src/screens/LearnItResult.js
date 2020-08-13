@@ -54,14 +54,14 @@ var user = firebase.auth().currentUser;
 var db = firebase.firestore();
 var signed_in = false
 try {
-var userInfoRef = db.collection("Users").doc(user);  
+var userInfoRef = db.collection("Users").doc(user.uid);  
 signed_in= true
 }
 catch{}
 if (signed_in){
   userInfoRef.update({
     "mode":mod,
-    "wordsDone": words_done,
+    "words_done": words_done,
     "level":lvl,
     "xp":xp,
     "powerups":pu

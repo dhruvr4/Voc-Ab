@@ -23,47 +23,48 @@ function HomeScreen({ navigation, route }) {
   var db = firebase.firestore();
   var signed_in = false
   try {
-  var userInfoRef = db.collection("Users").doc(user);  
-  signed_in= true
+    var userInfoRef = db.collection("Users").doc(user.uid);
+    signed_in = true
   }
-  catch{}
+  catch{ }
   const levels = []
   for (var i = 100; i < 400; i = i + 10) {
     levels[i / 10 - 10] = i
   }
 
   lvlupdate()
-  try{
+  console.log(user)
 
-  if (route.params.words_done == undefined) {
-if (signed_in){
-    userInfoRef.onSnapshot((doc) => {
-      words_done = doc.data().wordsDone;
-      ans = doc.data().mode
-      lvl = doc.data().level
-      xp = doc.data().xp
-      pu = doc.data().powerups
+  try {
+    if (route.params.words_done == undefined) {
+      if (signed_in) {
+        userInfoRef.onSnapshot((doc) => {
+          words_done = doc.data().words_done;
+          ans = doc.data().mode
+          lvl = doc.data().level
+          xp = doc.data().xp
+          pu = doc.data().powerups
+        }
+        );
+      }
+    } else {
+      words_done = route.params.words_done
+      ans = route.params.mode
+      lvl = route.params.lvl
+      xp = route.params.xp
+      pu = route.params.pu
+      if (signed_in) {
+        userInfoRef.update({
+          "mode": ans,
+          "words_done": words_done,
+          "level": lvl,
+          "xp": xp,
+          "powerups": pu
+        })
+      }  
     }
-    );
   }
-  } else {
-    words_done = route.params.words_done
-    ans = route.params.mode
-    lvl = route.params.lvl
-    xp = route.params.xp
-    pu = route.params.pu
-    }
-if (signed_in) {
-    userInfoRef.update({
-      "mode":ans,
-      "wordsDone": words_done,
-      "level":lvl,
-      "xp":xp,
-      "powerups":pu
-    })
-  }
-  }
-  catch{}
+  catch{ }
 
 
 
@@ -82,7 +83,7 @@ if (signed_in) {
       pu = pu + 1
     }
   }
-  
+
   let txt = ''
   let cor = ''
   let arr = []

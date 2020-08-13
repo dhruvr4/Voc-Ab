@@ -9,18 +9,18 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 function Login({ navigation, route }) {
     function login_existing() {
         let words_done = { "easy": [], "medium": [], "hard": [] }
-        let ans = "hard"
+        let ans = "medium"
         let lvl = 1
         let xp = 0
         let pu = 0
         
+console.log("kkk")
 
         var user = firebase.auth().currentUser;
         var db = firebase.firestore();
         try {
-        var userInfoRef = db.collection("Users").doc(user);
+        var userInfoRef = db.collection("Users").doc(user.uid);
         userInfoRef.onSnapshot((doc) => {
-        
             words_done = doc.data().wordsDone;
             ans = doc.data().mode
             lvl = doc.data().level
@@ -28,7 +28,8 @@ function Login({ navigation, route }) {
             pu = doc.data().powerups
           }
           );
-          navigation.navigate('Home', { mode: ans,lvl: lvl, xp: xp, pu: pu,words_done:words_done })
+          console.log(ans)
+         // navigation.navigate('Home', { mode: ans,lvl: lvl, xp: xp, pu: pu,words_done:words_done })
             
         }
         catch{

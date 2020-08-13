@@ -30,9 +30,13 @@ function Login({ navigation, route }) {
                     console.log("Error happened");
                 });
                 const data = {
-                    id: uid,
-                    text2,
-                    text,
+                    name: text,
+                    email: text2,
+                    words_done: [],
+                    level: 1,
+                    xp: 0,
+                    powerups: 0,
+                    mode: "medium"
                 };
 
                 const usersRef = firebase.firestore().collection('Users')
@@ -61,52 +65,52 @@ function Login({ navigation, route }) {
     const [text4, settext4] = React.useState(txt2)
     return (
         <View>
-                <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, lvl: lvl, xp: xp, pu: pu, words_done: route.params.words_done })} style={styles.home} />
+            <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, lvl: lvl, xp: xp, pu: pu, words_done: route.params.words_done })} style={styles.home} />
 
 
-                <TextInput
-                    style={styles.input}
-                    placeholder='Full Name'
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => settext(text)}
-                    value={text}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder='E-mail'
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => settext2(text)}
-                    value={text2}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    placeholder='Password'
-                    onChangeText={(text) => settext3(text)}
-                    value={text3}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    placeholder='Confirm Password'
-                    onChangeText={(text) => settext4(text)}
-                    value={text4}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => login_new()}>
-                    <Text style={styles.buttonTitle}>Create account</Text>
-                </TouchableOpacity>
+            <TextInput
+                style={styles.input}
+                placeholder='Full Name'
+                placeholderTextColor="#aaaaaa"
+                onChangeText={(text) => settext(text)}
+                value={text}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='E-mail'
+                placeholderTextColor="#aaaaaa"
+                onChangeText={(text) => settext2(text)}
+                value={text2}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+            <TextInput
+                style={styles.input}
+                placeholderTextColor="#aaaaaa"
+                secureTextEntry
+                placeholder='Password'
+                onChangeText={(text) => settext3(text)}
+                value={text3}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+            <TextInput
+                style={styles.input}
+                placeholderTextColor="#aaaaaa"
+                secureTextEntry
+                placeholder='Confirm Password'
+                onChangeText={(text) => settext4(text)}
+                value={text4}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => login_new()}>
+                <Text style={styles.buttonTitle}>Create account</Text>
+            </TouchableOpacity>
         </View>
     )
 }
