@@ -38,7 +38,6 @@ function logout() {
 }
 
 
-
   var mode = route.params.mode
   const [retu, setretu] = React.useState(mode)
   handleSlide = type => {
@@ -47,6 +46,8 @@ function logout() {
       duration: 100
     }).start();
   };
+  
+
   const [active, setactive] = React.useState(10)
   const [xeasy, setxeasy] = React.useState(0)
   const [xmedium, setxmedium] = React.useState(0)
@@ -180,6 +181,7 @@ function logout() {
         </View>
       </View>
       {/*Login Buttons*/}
+      <Text style={styles.subHeads2}>Connect</Text>
       <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => logout()}>
         <Text style={styles.connectOptionsText}>Log Out</Text>
       </TouchableOpacity>

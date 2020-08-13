@@ -12,8 +12,6 @@ export default function LoginScreen({navigation}) {
         navigation.navigate('Registration')
     }
 
-   
-
     const onLoginPress = () => {
 
         firebase
@@ -31,7 +29,7 @@ export default function LoginScreen({navigation}) {
                         return;
                     }
                     const user = firestoreDocument.data()
-                    navigation.navigate('Home', {user})
+                    navigation.navigate('Home', {user,"xp":-1})
                 })
                 .catch(error => {
                     alert(error)
@@ -72,7 +70,7 @@ export default function LoginScreen({navigation}) {
                     <Text style={styles.buttonTitle}>Log in</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
+                    <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text> 
                 </View>
             </KeyboardAwareScrollView>
         </View>

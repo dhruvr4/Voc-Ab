@@ -21,54 +21,48 @@ function HomeScreen({ navigation, route }) {
   let pu = 0
   var user = firebase.auth().currentUser;
   var db = firebase.firestore();
-  var signed_in = false
-  try {
-    var userInfoRef = db.collection("Users").doc(user.uid);
-    signed_in = true
-  }
-  catch{ }
+  var userInfoRef = db.collection("Users").doc(user.uid);
   const levels = []
   for (var i = 100; i < 400; i = i + 10) {
     levels[i / 10 - 10] = i
   }
 
   lvlupdate()
-  console.log(user)
+  console.log("Data Received"+route.params)
 
   try {
-    if (route.params.words_done == undefined) {
-      if (signed_in) {
-        userInfoRef.onSnapshot((doc) => {
-          words_done = doc.data().words_done;
-          ans = doc.data().mode
-          lvl = doc.data().level
-          xp = doc.data().xp
-          pu = doc.data().powerups
-        }
-        );
-      }
-    } else {
-      words_done = route.params.words_done
-      ans = route.params.mode
-      lvl = route.params.lvl
-      xp = route.params.xp
-      pu = route.params.pu
-      if (signed_in) {
-        userInfoRef.update({
-          "mode": ans,
-          "words_done": words_done,
-          "level": lvl,
-          "xp": xp,
-          "powerups": pu
-        })
-      }  
-    }
+    if (route.params.xp >-1){
+    console.log("Pulling from phone ")
+    words_done = route.params.words_done
+    ans = route.params.mode
+    lvl = route.params.lvl
+    xp = route.params.xp
+    pu = route.params.pu
+    userInfoRef.update({
+      "mode": ans,
+      "words_done": words_done,
+      "level": lvl,
+      "xp": xp,
+      "powerups": pu
+    })
   }
-  catch{ }
+  else {
+    throw Error
+  }
+}
+catch {
+if (route.params== undefined || route.params.xp <0){
+  console.log("Pulling from firebase")
+  userInfoRef.onSnapshot((doc) => {
+    words_done = doc.data().words_done;
+    ans = doc.data().mode
+    lvl = doc.data().level
+    xp = doc.data().xp
+    pu = doc.data().powerups
+  })
+}
 
-
-
-
+}
   function load(val) {
     const today = new Date().getFullYear() * 365 + new Date().getMonth() * 31 + new Date().getDate()
     var num = Math.abs((today) % datab['default'].length)

@@ -41,8 +41,7 @@ export default function RegistrationScreen({navigation}) {
                     level: 1,
                     xp: 0,
                     powerups: 0,
-                    mode: "medium"
-                 
+                    mode: "medium"                 
                 };
                 
                 const usersRef = firebase.firestore().collection('Users')
@@ -50,7 +49,7 @@ export default function RegistrationScreen({navigation}) {
                     .doc(uid)
                     .set(data)
                     .then(() => {
-                        navigation.navigate('Home', {user: data})
+                        navigation.navigate('Home', {user: data,xp:-2})
                     })
                     .catch((error) => {
                         alert(error)
