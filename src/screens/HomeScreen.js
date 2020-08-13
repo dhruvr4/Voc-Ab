@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import IconSetting from 'react-native-vector-icons/Feather';
 import ProgressCircle from 'react-native-progress-circle'
 import datab from './WordsDatabase'
-
+import Coverflow from 'react-native-coverflow';
 import firebase from 'firebase'
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -61,7 +61,6 @@ if (route.params== undefined || route.params.xp <0){
     pu = doc.data().powerups
   })
 }
-
 }
   function load(val) {
     const today = new Date().getFullYear() * 365 + new Date().getMonth() * 31 + new Date().getDate()
@@ -103,20 +102,20 @@ if (route.params== undefined || route.params.xp <0){
           </ProgressCircle>
         </View>
       </View>
-      <View style={styles.buttonContainer}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
-            <Text style={{ fontFamily: 'serif', fontSize: 48, fontWeight: '700', color: 'white' }}>Learn It</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
-            <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color: 'white' }}>Time Trial</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
-            <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color: 'white' }}>Challenge</Text>
-          </TouchableOpacity>
-        </ScrollView>
+      <View>
+        <Coverflow style={styles.buttonContainer} onChange={(index) => console.log('Current item', index)}>
+            <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
+              <Text style={{ fontFamily: 'serif', fontSize: 48, fontWeight: '700', color: 'white' }}>Learn It</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
+              <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color: 'white' }}>Time Trial</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
+              <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color: 'white' }}>Challenge</Text>
+            </TouchableOpacity>
+        </Coverflow>
       </View>
-
+      
       <View style={{ flexDirection: 'row', paddingTop: screenHeight / 13, alignItems: 'center', justifyContent: 'center' }}>
         <View style={{ paddingRight: screenWidth / 10, paddingTop: 6 }}>
           <IconSetting name="book-open" size={40} onPress={() => navigation.navigate('Dictionary', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.Dictionary} />
@@ -149,6 +148,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     height: screenHeight / 3.6,
+    width : screenWidth,
     marginTop: screenHeight / 20,
   },
   ButtonText: {
@@ -168,6 +168,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 35,
     width: screenWidth - 50,
+    height : screenHeight / 3.2,
     backgroundColor: '#0b5cd5',
     marginLeft: 15,
     shadowColor: "#000",
@@ -183,6 +184,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: screenWidth - 50,
+    height : screenHeight / 3.2,
     backgroundColor: '#bd0a0a',
     borderRadius: 35,
     paddingRight: 10,
@@ -203,7 +205,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffc300',
     borderRadius: 35,
     marginLeft: 15,
-
+    height : screenHeight / 3.2,
     shadowColor: "#000",
     shadowOffset: {
       width: 5,
