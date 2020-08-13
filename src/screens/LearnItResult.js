@@ -16,19 +16,19 @@ export default function LearnItResult({ route, navigation }) {
   const question = (route.params.question)
   const mod = route.params.mode
   var lvl = route.params.lvl
-  var xp=route.params.xp
+  var xp = route.params.xp
   var pu = route.params.pu
   let Color = ""
   if (result === 'true') {
     words_done[mod].push(question)
     if (mod == "easy") {
-      xp = xp+20
+      xp = xp + 20
     }
     if (mod == "medium") {
-      xp = xp+30
+      xp = xp + 30
     }
     if (mod == "hard") {
-      xp = xp+50
+      xp = xp + 50
     }
     answer = "Correct"
     Color = "green"
@@ -47,57 +47,47 @@ export default function LearnItResult({ route, navigation }) {
       xp = xp - levels[lvl]
       lvl = lvl + 1
       pu = pu + 1
-    }}
-lvlupdate()
+    }
+  }
+  lvlupdate()
 
-var user = firebase.auth().currentUser;
-var db = firebase.firestore();
-var signed_in = false
-try {
-var userInfoRef = db.collection("Users").doc(user);  
-signed_in= true
-}
-catch{}
-if (signed_in){
+  var user = firebase.auth().currentUser;
+  var db = firebase.firestore();
+  var userInfoRef = db.collection("Users").doc(user.uid);
   userInfoRef.update({
-    "mode":mod,
-    "wordsDone": words_done,
-    "level":lvl,
-    "xp":xp,
-    "powerups":pu
+    "mode": mod,
+    "words_done": words_done,
+    "level": lvl,
+    "xp": xp,
+    "powerups": pu
   })
-}
 
+  const pushAction = StackActions.push('LearnIt', { answer: mod, lvl: lvl, xp: xp, pu: pu, words_done: words_done });
 
-
-
-
-  const pushAction = StackActions.push('LearnIt', { answer: mod,lvl:lvl,xp:xp,pu:pu,words_done:words_done});
-  
   return (
-    <View style = {{flex : 1, backgroundColor : 'white'}}>
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.home} />
 
       <Text style={{
-        paddingTop: screenHeight/20,
+        paddingTop: screenHeight / 20,
         fontWeight: '700',
         fontSize: 48,
-        alignSelf : 'center',
-        color : Color,
+        alignSelf: 'center',
+        color: Color,
       }}> {answer}</Text>
-      <Text style = {{fontSize : 40, alignSelf : 'center', paddingTop : screenHeight/ 10,}}>The answer is </Text>
+      <Text style={{ fontSize: 40, alignSelf: 'center', paddingTop: screenHeight / 10, }}>The answer is </Text>
       <View style={styles.WordOfDay}>
-        <Text style={styles.WordText}>{correct.charAt(0).toUpperCase()+correct.substring(1,correct.length)}</Text>
-        <Text style={styles.DefinitionText}>{question.charAt(0).toUpperCase()+question.substring(1,question.length)}</Text>
-    </View>
-      <IconForward name = "control-forward" size={50} onPress={() => navigation.dispatch(pushAction)} style = {styles.forward}/>
+        <Text style={styles.WordText}>{correct.charAt(0).toUpperCase() + correct.substring(1, correct.length)}</Text>
+        <Text style={styles.DefinitionText}>{question.charAt(0).toUpperCase() + question.substring(1, question.length)}</Text>
+      </View>
+      <IconForward name="control-forward" size={50} onPress={() => navigation.dispatch(pushAction)} style={styles.forward} />
     </View>
   );
 }
 const styles = StyleSheet.create({
   forward: {
-    alignSelf : 'center',
-    paddingTop : screenHeight / 10
+    alignSelf: 'center',
+    paddingTop: screenHeight / 10
   },
   correct: {
     paddingTop: 40,
@@ -131,7 +121,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginTop: 1,
   },
-  home : {
+  home: {
     paddingTop: screenHeight / 15 + 4,
     paddingLeft: 10,
     color: 'black',
@@ -139,30 +129,30 @@ const styles = StyleSheet.create({
   },
   WordText: {
     fontWeight: '700',
-    fontSize : 32,
-    alignSelf : 'center',
-    paddingTop : screenHeight / 60
+    fontSize: 32,
+    alignSelf: 'center',
+    paddingTop: screenHeight / 60
   },
-  DefinitionText : {
-    fontWeight : '300',
-    fontSize : 24,
-    paddingLeft : screenWidth / 10,
-    paddingRight : screenWidth / 10,
-    paddingTop : screenHeight / 20,
-    alignSelf : 'center'
+  DefinitionText: {
+    fontWeight: '300',
+    fontSize: 24,
+    paddingLeft: screenWidth / 10,
+    paddingRight: screenWidth / 10,
+    paddingTop: screenHeight / 20,
+    alignSelf: 'center'
   },
-  WordOfDay : {
-    alignItems: 'flex-start', 
-    justifyContent: 'flex-start', 
+  WordOfDay: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     marginTop: screenHeight / 20,
-    backgroundColor: 'white', 
-    width: screenWidth - 40, 
-    height : screenHeight/4, 
-    alignSelf : 'center',
+    backgroundColor: 'white',
+    width: screenWidth - 40,
+    height: screenHeight / 4,
+    alignSelf: 'center',
     shadowColor: "#000",
     shadowOffset: {
-	      width: 0,
-	      height: 12,
+      width: 0,
+      height: 12,
     },
     shadowOpacity: 0.58,
     shadowRadius: 16.00,

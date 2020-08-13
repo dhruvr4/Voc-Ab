@@ -10,15 +10,31 @@ function navigat(a,b){
   var db = firebase.firestore();
   var signed_in = false
   try {
-  var userInfoRef = db.collection("Users").doc(user);  
+    var userInfoRef = db.collection("Users").doc(user.uid);
+    signed_in = true
+  }
+  catch{}
+  try {
+    if (signed_in) {
+      
+  var userInfoRef = db.collection("Users").doc(user.uid);  
   userInfoRef.update({
     "mode":retu,
   })
 }
+  }
   catch{}
 
 
 navigation.navigate(a,b)
+}
+function logout() {
+  firebase.auth().signOut().then(function () {
+      console.log('Signed Out');
+  }, function (error) {
+      console.error('Sign Out Error', error);
+  });
+  navigation.navigate('Login')
 }
 
 
@@ -30,6 +46,8 @@ navigation.navigate(a,b)
       duration: 100
     }).start();
   };
+  
+
   const [active, setactive] = React.useState(10)
   const [xeasy, setxeasy] = React.useState(0)
   const [xmedium, setxmedium] = React.useState(0)
@@ -164,11 +182,8 @@ navigation.navigate(a,b)
       </View>
       {/*Login Buttons*/}
       <Text style={styles.subHeads2}>Connect</Text>
-      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigat('Login', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })}>
-        <Text style={styles.connectOptionsText}>Login to existing account</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigat('Create', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })}>
-        <Text style={styles.connectOptionsText}>Create New Account</Text>
+      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => logout()}>
+        <Text style={styles.connectOptionsText}>Log Out</Text>
       </TouchableOpacity>
 
       {/*Socials*/}
