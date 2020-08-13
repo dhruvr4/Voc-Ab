@@ -28,6 +28,15 @@ function navigat(a,b){
 
 navigation.navigate(a,b)
 }
+function logout() {
+  firebase.auth().signOut().then(function () {
+      console.log('Signed Out');
+  }, function (error) {
+      console.error('Sign Out Error', error);
+  });
+  navigation.navigate('Login')
+}
+
 
 
   var mode = route.params.mode
@@ -171,12 +180,8 @@ navigation.navigate(a,b)
         </View>
       </View>
       {/*Login Buttons*/}
-      <Text style={styles.subHeads2}>Connect</Text>
-      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigat('Login', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })}>
-        <Text style={styles.connectOptionsText}>Login to existing account</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => navigat('Create', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })}>
-        <Text style={styles.connectOptionsText}>Create New Account</Text>
+      <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => logout()}>
+        <Text style={styles.connectOptionsText}>Log Out</Text>
       </TouchableOpacity>
 
       {/*Socials*/}
