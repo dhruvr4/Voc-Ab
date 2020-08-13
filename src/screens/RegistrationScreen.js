@@ -35,10 +35,8 @@ export default function RegistrationScreen({navigation}) {
                 });
                 const data = {
                     id: uid,
-                    UserName,
                     email,
                     fullName,
-                    groupsList : [] ,
                     words_done: {easy:[],medium:[],hard:[]},
                     level: 1,
                     xp: 0,
@@ -78,16 +76,7 @@ export default function RegistrationScreen({navigation}) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
-                        <TextInput
-                    style={styles.input}
-                    placeholder='UserName'
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setUserName(text)}
-                    value={UserName}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-        
+                 
                 <TextInput
                     style={styles.input}
                     placeholder='E-mail'
