@@ -215,6 +215,7 @@ const styles = StyleSheet.create({
     fontSize: 36,
     color: 'white',
     textAlign : 'center',
+    fontFamily: 'ReemKufi'
   },
   QuestionContainer: {
     width: screenWidth - 40,
@@ -229,7 +230,8 @@ const styles = StyleSheet.create({
   AnswerText: {
     fontWeight: 'bold',
     fontSize: 24,
-    color: 'white'
+    color: 'white',
+    fontFamily: 'ReemKufi'
   },
   AnswerButton: {
     width: screenWidth - 40,
