@@ -18,6 +18,7 @@ import ChallengeResult from './src/screens/ChallengeResult.js';
 import TimeTrialResult from './src/screens/TimeTrialResult.js';
 import Login from './src/screens/LoginScreen.js';
 import Create from './src/screens/RegistrationScreen.js';
+import tutorial from './src/screens/tutorial.js';
 
 import SettingsScreen from './src/screens/SettingsScreen.js';
 import Dictionary from './src/screens/Dictionary'
@@ -128,6 +129,7 @@ class App extends React.Component {
         <Stack.Screen name="Dictionary" component={Dictionary} /> 
         <Stack.Screen name="Login" component={Login} /> 
         <Stack.Screen name="Registration" component={Create} /> 
+        <Stack.Screen name="Tutorial" component={tutorial} /> 
 
         </>
           ) : (
@@ -144,7 +146,8 @@ class App extends React.Component {
         <Stack.Screen name="Setting" component={SettingsScreen} /> 
         <Stack.Screen name="Dictionary" component={Dictionary} /> 
         <Stack.Screen name="Registration" component={Create} /> 
-        
+        <Stack.Screen name="Tutorial" component={tutorial} /> 
+ 
         </>
             )}
         </Stack.Navigator>

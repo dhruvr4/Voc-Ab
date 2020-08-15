@@ -14,6 +14,7 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 let unsubscribe;
 
 function HomeScreen({ navigation, route }) {
+  console.log("lollll")
   let words_done = { "easy": [], "medium": [], "hard": [] }
   let ans = "hard"
   let lvl = 1
@@ -103,7 +104,10 @@ if (route.params== undefined || route.params.xp <0){
         </View>
       </View>
       <View>
-        <Coverflow style={styles.buttonContainer} onChange={(index) => console.log('Current item', index)}>
+        <Coverflow style={styles.buttonContainer} onChange={(index) => {
+          console.log('Current item', index)
+          setTimeout(function(){},10000)
+          }}>
             <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
               <Text style={{ fontFamily: 'serif', fontSize: 48, fontWeight: '700', color: 'white' }}>Learn It</Text>
             </TouchableOpacity>

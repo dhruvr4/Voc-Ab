@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
-import { StyleSheet,Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { firebase } from '.././firebase/config'
 
-export default function RegistrationScreen({navigation}) {
+export default function RegistrationScreen({ navigation }) {
     const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [UserName, setUserName] = useState('')
+    const [err, seterr] = useState('')
 
     const onFooterLinkPress = () => {
         navigation.navigate('Login')
     }
 
     const onRegisterPress = () => {
-        
+
         if (password !== confirmPassword) {
             alert("Passwords don't match.")
             return
@@ -31,33 +31,36 @@ export default function RegistrationScreen({navigation}) {
                 }).then(function () {
                     console.log("Updated");
                 }, function (error) {
+                    seterr(error)
                     console.log("Error happened");
                 });
                 const data = {
                     id: uid,
                     email,
                     fullName,
-                    words_done: {easy:[],medium:[],hard:[]},
+                    words_done: { easy: [], medium: [], hard: [] },
                     level: 1,
                     xp: 0,
                     powerups: 0,
-                    mode: "medium"                 
+                    mode: "medium"
                 };
-                
+
                 const usersRef = firebase.firestore().collection('Users')
                 usersRef
                     .doc(uid)
                     .set(data)
                     .then(() => {
-                        navigation.navigate('Home', {user: data,xp:-2})
+                        navigation.navigate('Home', { xp: -2 })
                     })
                     .catch((error) => {
-                        alert(error)
+                        seterr(error)
+                        console.log(error)
                     });
             })
             .catch((error) => {
-                alert(error)
-        });
+                seterr(error)
+                console.log(error)
+            });
     }
 
     return (
@@ -65,7 +68,7 @@ export default function RegistrationScreen({navigation}) {
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
-                
+
                 <TextInput
                     style={styles.input}
                     placeholder='Full Name'
@@ -75,7 +78,7 @@ export default function RegistrationScreen({navigation}) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
-                 
+
                 <TextInput
                     style={styles.input}
                     placeholder='E-mail'
@@ -105,6 +108,8 @@ export default function RegistrationScreen({navigation}) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
+
+
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onRegisterPress()}>

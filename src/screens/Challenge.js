@@ -5,6 +5,7 @@ import datab from './WordsDatabase'
 import IconPower from 'react-native-vector-icons/AntDesign';
 import IconForward from 'react-native-vector-icons/SimpleLineIcons';
 
+
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height)
 
