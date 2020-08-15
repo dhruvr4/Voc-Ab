@@ -23,7 +23,11 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier":"com.NerdDevz.VocAB",
       "supportsTablet": true
+    },
+    "android":{
+"package":"com.NerdDevz.VocAB"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
