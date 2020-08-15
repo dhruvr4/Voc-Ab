@@ -104,11 +104,8 @@ if (route.params== undefined || route.params.xp <0){
         </View>
       </View>
       <View>
-        <Coverflow style={styles.buttonContainer} onChange={(index) => {
-          console.log('Current item', index)
-          setTimeout(function(){},10000)
-          }}>
-            <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                  <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
               <Text style={{ fontFamily: 'serif', fontSize: 48, fontWeight: '700', color: 'white' }}>Learn It</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
@@ -117,7 +114,7 @@ if (route.params== undefined || route.params.xp <0){
             <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
               <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color: 'white' }}>Challenge</Text>
             </TouchableOpacity>
-        </Coverflow>
+    </ScrollView>
       </View>
       
       <View style={{ flexDirection: 'row', paddingTop: screenHeight / 13, alignItems: 'center', justifyContent: 'center' }}>
