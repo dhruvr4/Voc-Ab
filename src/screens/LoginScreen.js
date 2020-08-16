@@ -80,6 +80,7 @@ export default function LoginScreen({navigation}) {
 
 const styles = StyleSheet.create({
     container: {
+        paddingTop: 70,
         flex: 1,
         alignItems: 'center'
     },

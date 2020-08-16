@@ -22,12 +22,21 @@ import tutorial from './src/screens/tutorial.js';
 
 import SettingsScreen from './src/screens/SettingsScreen.js';
 import Dictionary from './src/screens/Dictionary'
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
 
 if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
 
 const Stack = createStackNavigator();
+
+let customFonts = {
+  'ReemKufi': require('./assets/fonts/ReemKufi-Regular.ttf'),
+  'SansForge': require('./assets/fonts/SansForgetica-Regular.otf'),
+  
+};
+
 
 YellowBox.ignoreWarnings(['Setting a timer']);
     const _console = _.clone(console);
@@ -37,15 +46,27 @@ YellowBox.ignoreWarnings(['Setting a timer']);
       }
     }
     (window).Expo = Object.freeze({ ...(window).Expo, SQLite });
-class App extends React.Component {
+
+    class App extends React.Component {
   constructor() {
     super();
     this.state = {
       loading: true,
       authenticated: false,
+      fontsLoaded: false,
     };
   }
+
+  async _loadFontsAsync() {
+    await Font.loadAsync(customFonts);
+    console.log("fonts loaded");
+    this.setState({ fontsLoaded: true });
+  }
+
   componentDidMount() {
+    //loadFonts
+    this._loadFontsAsync();
+
 //https://gist.github.com/zwily/e9e97e0f9f523a72c24c7df01d889482
     window.openDatabase = SQLite.openDatabase;
 
@@ -110,7 +131,7 @@ class App extends React.Component {
     });
   }
   render() {
-    if (this.state.loading) return null;
+    if (this.state.loading || !this.state.fontsLoaded) return <AppLoading />;
     return (
       <NavigationContainer>
 <Stack.Navigator screenOptions={{

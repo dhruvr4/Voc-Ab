@@ -127,7 +127,7 @@ function logout() {
                   setretu("easy")
                 }}
               >
-                <Text style={{ color: active === 0 ? '#0099FF' : '#C2C2C2', fontWeight: 'bold', fontSize: 20 }}>Easy</Text>
+                <Text style={{ color: active === 0 ? '#0099FF' : '#C2C2C2', fontWeight: 'bold', fontSize: 20, fontFamily:'ReemKufi' }}>Easy</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -152,7 +152,7 @@ function logout() {
                   handleSlide(xmedium)
                 }}
               >
-                <Text style={{ color: active === 1 ? '#0099FF' : '#C2C2C2', fontWeight: 'bold', fontSize: 20 }}>Medium</Text>
+                <Text style={{ color: active === 1 ? '#0099FF' : '#C2C2C2', fontWeight: 'bold', fontSize: 20, fontFamily:'ReemKufi' }}>Medium</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -174,7 +174,7 @@ function logout() {
                   setretu("hard")
                 }}
               >
-                <Text style={{ color: active === 2 ? '#0099FF' : '#C2C2C2', fontWeight: 'bold', fontSize: 20 }}>Hard</Text>
+                <Text style={{ color: active === 2 ? '#0099FF' : '#C2C2C2', fontWeight: 'bold', fontSize: 20, fontFamily:'ReemKufi' }}>Hard</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -276,12 +276,14 @@ const styles = StyleSheet.create({
   connectOptionsText: {
     fontSize: 24,
     color: '#FFFFFF',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily:'ReemKufi'
   },
   settings: {
     fontSize: 56,
     fontWeight: '700',
     paddingLeft: 15,
+    fontFamily: 'ReemKufi',
   },
   head: {
     width: '95%',
@@ -298,7 +300,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     paddingLeft: 18,
     marginVertical: 15,
-    paddingTop: 10
+    paddingTop: 10,
+    fontFamily: 'ReemKufi'
   },
   subHeads2: {
     backgroundColor: '#fff',
@@ -307,7 +310,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     paddingLeft: 18,
     marginVertical: 15,
-    marginTop: 70
+    marginTop: 70,
+    fontFamily: 'ReemKufi'
   },
   goalMenu: {
     //flex: 1,

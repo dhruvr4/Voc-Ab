@@ -100,19 +100,19 @@ function HomeScreen({ navigation, route}) {
       <View style={styles.buttonContainer}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", {answer: ans, perweek: ans2,})}>
-            <Text style={{ fontFamily: 'serif', fontSize: 48, fontWeight: '700', color : 'white'}}>Learn It</Text>
+            <Text style={{ fontFamily: 'ReemKufi', fontSize: 48, fontWeight: '700', color : 'white'}}>Learn It</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", {answer: ans, perweek: ans2,})}>
-            <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color : 'white'}}>Time Trial</Text>
+            <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'ReemKufi', color : 'white'}}>Time Trial</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", {answer: ans, perweek: ans2})}>
-            <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color : 'white'}}>Challenge</Text>
+            <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'ReemKufi', color : 'white'}}>Challenge</Text>
           </TouchableOpacity>
         </ScrollView>
       </View>
 
       <View style={styles.textContainer}>
-        <Text style={{fontSize: 38,fontWeight : '600'}}>Word Of the day</Text>
+        <Text style={{fontSize: 38,fontWeight : '600', fontFamily:'ReemKufi'}}>Word Of the Day</Text>
       </View>
 
       <View style={styles.WordOfDay}>
@@ -148,9 +148,9 @@ const styles = StyleSheet.create({
     elevation: 24,
   },
   ButtonText: {
-    fontSize: 60,
+    fontSize: 55,
     fontWeight: '700',
-    fontFamily: 'serif',
+    fontFamily: 'SansForge',
     paddingLeft : screenWidth / 15
   },
   wrenchIcon: {
