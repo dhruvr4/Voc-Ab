@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
-import { StyleSheet, Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Dimensions,StyleSheet, Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { firebase } from '.././firebase/config'
+
+
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height);
 
 export default function RegistrationScreen({ navigation }) {
     const [fullName, setFullName] = useState('')
@@ -66,7 +70,7 @@ export default function RegistrationScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <KeyboardAwareScrollView
-                style={{ flex: 1, width: '100%' }}
+                style={{ flex: 1, width: '100%',paddingTop:screenHeight*0.25 }}
                 keyboardShouldPersistTaps="always">
 
                 <TextInput

@@ -9,8 +9,8 @@ import datab from './WordsDatabase'
 import Coverflow from 'react-native-coverflow';
 import firebase from 'firebase'
 
-const screenWidth = Math.round(Dimensions.get('window').width);
-const screenHeight = Math.round(Dimensions.get('window').height);
+  const screenWidth = Math.round(Dimensions.get('window').width);
+  const screenHeight = Math.round(Dimensions.get('window').height);
 let unsubscribe;
 
 function HomeScreen({ navigation, route }) {
