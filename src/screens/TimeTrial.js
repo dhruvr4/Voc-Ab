@@ -53,6 +53,7 @@ export default function TimeTrial({ navigation, route }) {
     nextQuestion()
     setTimer(tim - (new Date().getMinutes() * 60 + new Date().getSeconds()) + tx)
     if (timer < 0.5) {
+      //setTimer(-1)
       navigat()
     }
   }
@@ -85,7 +86,7 @@ export default function TimeTrial({ navigation, route }) {
     setOptions(arr)
   }
   function navigat() {
-  //  console.log("Navigat called")
+    console.log("Navigat called")
     clearInterval(time)
    // console.log(pu)
     const pushAction2 = StackActions.push("TimeTrialResult", { answer: totscore, correct: totwrong, mode: mode, lvl: lvl, xp: xp, pu: powerupp, question: text,words_done:words_done});
@@ -94,6 +95,7 @@ export default function TimeTrial({ navigation, route }) {
 
   function tick() {
     if (timer < 0.5) {
+//      setTimer(-1)
       navigat()
     }
     else {
@@ -101,20 +103,20 @@ export default function TimeTrial({ navigation, route }) {
     }
   }
   React.useEffect(() => {
-    time = setInterval(tick, 1000)
+    do2()
     return () => {
       clearInterval(time)
     }
   })
+  function do2(){
+
+    time = setInterval(tick, 100)
+  }
   function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
   }
   function powerup() {
-    //console.log(powerupp)
-    //console.log(to_show)
     if(powerupp > 0 && JSON.stringify(to_show) == JSON.stringify([true,true,true,true])) {
-   // console.log("Hi")
-    //console.log(show)
     setto_show(show)
     setpowerupp(powerupp-1)
     }

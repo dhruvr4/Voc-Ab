@@ -57,12 +57,12 @@ export default function RegistrationScreen({ navigation }) {
                         navigation.navigate('Home', { xp: -2 })
                     })
                     .catch((error) => {
-                        seterr(error)
+                        alert(error)
                         console.log(error)
                     });
             })
             .catch((error) => {
-                seterr(error)
+                alert(error)
                 console.log(error)
             });
     }
