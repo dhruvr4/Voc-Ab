@@ -14,12 +14,12 @@ import firebase from 'firebase'
 let unsubscribe;
 
 function HomeScreen({ navigation, route }) {
-  console.log("lollll")
-  let words_done = { "easy": [], "medium": [], "hard": [] }
-  let ans = "hard"
-  let lvl = 1
-  let xp = 0
-  let pu = 0
+ // console.log("lollll")
+  const [words_done,setwords_done] = React.useState({ "easy": [], "medium": [], "hard": [] })
+  const [ans,setans] = React.useState("hard")
+  const [lvl,setlvl] = React.useState(1)
+  const [xp,setxp] = React.useState(0)
+  const [pu,setpu] = React.useState(0)
   var user = firebase.auth().currentUser;
   var db = firebase.firestore();
   var userInfoRef = db.collection("Users").doc(user.uid);
@@ -29,16 +29,16 @@ function HomeScreen({ navigation, route }) {
   }
 
   lvlupdate()
-  console.log("Data Received"+route.params)
-
+ // console.log("Data Received"+route.params)
+ React.useEffect(() => {
   try {
     if (route.params.xp >-1){
-    console.log("Pulling from phone ")
-    words_done = route.params.words_done
-    ans = route.params.mode
-    lvl = route.params.lvl
-    xp = route.params.xp
-    pu = route.params.pu
+   //console.log("Pulling from phone ")
+    setwords_done(route.params.words_done)
+    setans(route.params.mode)
+    setlvl(route.params.lvl)
+    setxp(route.params.xp)
+    setpu(route.params.pu)
     userInfoRef.update({
       "mode": ans,
       "words_done": words_done,
@@ -53,16 +53,18 @@ function HomeScreen({ navigation, route }) {
 }
 catch {
 if (route.params== undefined || route.params.xp <0){
-  console.log("Pulling from firebase")
+  //console.log("Pulling from firebase")
   userInfoRef.onSnapshot((doc) => {
-    words_done = doc.data().words_done;
-    ans = doc.data().mode
-    lvl = doc.data().level
-    xp = doc.data().xp
-    pu = doc.data().powerups
+    setwords_done(doc.data().words_done)
+    setans(doc.data().mode)
+    setlvl(doc.data().level)
+    setxp(doc.data().xp)
+    setpu(doc.data().powerups)
   })
 }
-}
+}}
+,[])
+
   function load(val) {
     const today = new Date().getFullYear() * 365 + new Date().getMonth() * 31 + new Date().getDate()
     var num = Math.abs((today) % datab['default'].length)

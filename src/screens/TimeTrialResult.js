@@ -33,7 +33,7 @@ export default function TimeTrialResult({ route, navigation }) {
       }
     }
   }
-  console.log(words_done)
+ // console.log(words_done)
   function lvlupdate() {
     while (xp > levels[lvl]) {
       xp = xp - levels[lvl]
@@ -64,7 +64,7 @@ export default function TimeTrialResult({ route, navigation }) {
   const r = []
   for (var f = 0; f < correct.length; f++) {
     const a = (correct[f][1] === correct[f][2]) ? "#5cb908" : "#ff5252"
-    console.log("Result = " + correct[f][0] + correct[f][1] + correct[f][2])
+    //console.log("Result = " + correct[f][0] + correct[f][1] + correct[f][2])
 
     r.push({
       ans: correct[f][0],
