@@ -109,19 +109,22 @@ if (route.params== undefined || route.params.xp <0){
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
               <Text style={styles.cardText}>Learn It</Text>
+              <IconSetting name="book-open" size={40} color="white" style={{paddingTop:'15%', paddingLeft:'79%',}} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
               <Text style={styles.cardText}>Time Trial</Text>
+              <IconSetting name="clock" size={40} color="white" style={{paddingTop:'15%', paddingLeft:'79%',}}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
               <Text style={styles.cardText}>Challenge</Text>
+              <IconSetting name="edit-2" size={40} color="white" style={{paddingTop:'15%', paddingLeft:'79%',}}/>
             </TouchableOpacity>
       </ScrollView>
       </View>
       
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
         <View style={{ paddingRight: screenWidth / 25, paddingTop: 6 }}>
-          <IconSetting name="book-open" size={40} onPress={() => navigation.navigate('Dictionary', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.Dictionary} />
+          <IconSetting name="book" size={40} onPress={() => navigation.navigate('Dictionary', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.Dictionary} />
         </View>
         <View style={{ paddingRight: screenWidth / 9 }}>
           <Text style={{ fontSize: 38, fontWeight: '600', fontFamily:'ReemKufi', }}>Word Of the day</Text>
