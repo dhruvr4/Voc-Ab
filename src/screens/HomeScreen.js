@@ -89,9 +89,9 @@ if (route.params== undefined || route.params.xp <0){
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
-        <IconSetting name="settings" size={45} onPress={() => navigation.navigate('Setting', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.wrenchIcon} />
+        <IconSetting name="settings" size={35} onPress={() => navigation.navigate('Setting', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.wrenchIcon} />
         <View style={styles.titleContainer}>
-          <Text style={styles.ButtonText}>VOC-AB</Text>
+          <Text style={styles.vocab}>VOC-AB</Text>
         </View>
         <View style={styles.Progress}>
           <ProgressCircle
@@ -105,26 +105,26 @@ if (route.params== undefined || route.params.xp <0){
           </ProgressCircle>
         </View>
       </View>
-      <View>
+      <View style={{marginTop:'7%',}}>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                  <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
-              <Text style={{ fontFamily: 'serif', fontSize: 48, fontWeight: '700', color: 'white' }}>Learn It</Text>
+            <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
+              <Text style={styles.cardText}>Learn It</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
-              <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color: 'white' }}>Time Trial</Text>
+              <Text style={styles.cardText}>Time Trial</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
-              <Text style={{ fontSize: 48, fontWeight: '700', fontFamily: 'serif', color: 'white' }}>Challenge</Text>
+              <Text style={styles.cardText}>Challenge</Text>
             </TouchableOpacity>
-    </ScrollView>
+      </ScrollView>
       </View>
       
-      <View style={{ flexDirection: 'row', paddingTop: screenHeight / 13, alignItems: 'center', justifyContent: 'center' }}>
-        <View style={{ paddingRight: screenWidth / 10, paddingTop: 6 }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ paddingRight: screenWidth / 25, paddingTop: 6 }}>
           <IconSetting name="book-open" size={40} onPress={() => navigation.navigate('Dictionary', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.Dictionary} />
         </View>
-        <View style={{ paddingRight: screenWidth / 10 }}>
-          <Text style={{ fontSize: 38, fontWeight: '600', }}>Word Of the day</Text>
+        <View style={{ paddingRight: screenWidth / 9 }}>
+          <Text style={{ fontSize: 38, fontWeight: '600', fontFamily:'ReemKufi', }}>Word Of the day</Text>
         </View>
       </View>
 
@@ -142,10 +142,12 @@ HomeScreen.navigationOptions = {
 export default HomeScreen
 
 const styles = StyleSheet.create({
+  
   container: {
     flex: 1,
     backgroundColor: '#f5fcfc',
   },
+
   buttonContainer: {
     alignItems: 'center',
     alignSelf: 'center',
@@ -154,11 +156,15 @@ const styles = StyleSheet.create({
     width : screenWidth,
     marginTop: screenHeight / 20,
   },
-  ButtonText: {
-    fontSize: 60,
+
+  vocab: {
+    marginTop: '3%',
+    fontSize: 55,
     fontWeight: '700',
-    fontFamily: 'serif',
+    color: '#0b5cd5',
+    fontFamily: 'SansForge',
   },
+
   wrenchIcon: {
     paddingTop: screenHeight / 15,
     paddingLeft: screenHeight / 40,
@@ -166,12 +172,19 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     color: 'black',
   },
+
+  Progress: {
+    paddingBottom: screenHeight / 39,
+    paddingRight: screenWidth / 20,
+    alignItems: "flex-end",
+    justifyContent: 'flex-end',
+  },
+
   play: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginBottom: screenHeight/14,
     borderRadius: 35,
     width: screenWidth - 50,
-    height : screenHeight / 3.2,
+    height : screenHeight / 4,
     backgroundColor: '#0b5cd5',
     marginLeft: 15,
     shadowColor: "#000",
@@ -179,15 +192,16 @@ const styles = StyleSheet.create({
       width: 5,
       height: 20,
     },
+
     shadowOpacity: 0.38,
     shadowRadius: 16.00,
     elevation: 24,
   },
+
   timeTrial: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginBottom: screenHeight/14,
     width: screenWidth - 50,
-    height : screenHeight / 3.2,
+    height : screenHeight / 4,
     backgroundColor: '#bd0a0a',
     borderRadius: 35,
     paddingRight: 10,
@@ -201,14 +215,14 @@ const styles = StyleSheet.create({
     shadowRadius: 16.00,
     elevation: 24,
   },
+
   wordUp: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginBottom: screenHeight/14,
     width: screenWidth - 50,
     backgroundColor: '#ffc300',
     borderRadius: 35,
     marginLeft: 15,
-    height : screenHeight / 3.2,
+    height : screenHeight / 4,
     shadowColor: "#000",
     shadowOffset: {
       width: 5,
@@ -218,6 +232,17 @@ const styles = StyleSheet.create({
     shadowRadius: 16.00,
     elevation: 24,
   },
+
+  cardText: { 
+    paddingLeft: '10%',
+    paddingTop: '5%',
+    fontFamily: 'serif', 
+    fontSize: 48, 
+    fontWeight: '700', 
+    color: 'white', 
+    fontFamily:'ReemKufi', 
+  },
+
   titleContainer: {
     flex: 1,
     alignItems: 'center',
@@ -225,20 +250,25 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: screenHeight / 20,
   },
+
   WordText: {
-    fontWeight: '700',
-    fontSize: 32,
+    fontWeight: '800',
+    fontSize: 50,
     alignSelf: 'flex-start',
-    paddingLeft: screenWidth / 30,
-    paddingTop: screenHeight / 60
+    paddingLeft: screenWidth / 15,
+    paddingTop: screenHeight / 60,
+    fontFamily:'ReemKufi',
   },
+
   DefinitionText: {
     fontWeight: '300',
     fontSize: 24,
     paddingLeft: screenWidth / 10,
     paddingRight: screenWidth / 35,
-    paddingTop: screenHeight / 55
+    paddingTop: screenHeight / 55,
+    fontFamily:'ReemKufi',
   },
+
   WordOfDay: {
     borderRadius: 25,
     alignItems: 'flex-start',
@@ -257,12 +287,7 @@ const styles = StyleSheet.create({
     shadowRadius: 16.00,
     elevation: 24,
   },
-  Progress: {
-    paddingBottom: screenHeight / 70,
-    paddingRight: screenWidth / 20,
-    alignItems: "flex-end",
-    justifyContent: 'flex-end',
-  },
+  
   Dictionary: {
     paddingLeft: screenHeight / 45,
     alignSelf: "flex-start",
