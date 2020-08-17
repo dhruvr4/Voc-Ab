@@ -111,14 +111,15 @@ if (route.params== undefined || route.params.xp <0){
               <Text style={styles.cardText}>Learn It</Text>
               <IconSetting name="book-open" size={40} color="white" style={{paddingTop:'15%', paddingLeft:'79%',}} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
-              <Text style={styles.cardText}>Time Trial</Text>
-              <IconSetting name="clock" size={40} color="white" style={{paddingTop:'15%', paddingLeft:'79%',}}/>
-            </TouchableOpacity>
             <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
               <Text style={styles.cardText}>Challenge</Text>
               <IconSetting name="edit-2" size={40} color="white" style={{paddingTop:'15%', paddingLeft:'79%',}}/>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
+              <Text style={styles.cardText}>Time Trial</Text>
+              <IconSetting name="clock" size={40} color="white" style={{paddingTop:'15%', paddingLeft:'79%',}}/>
+            </TouchableOpacity>
+            
       </ScrollView>
       </View>
       
