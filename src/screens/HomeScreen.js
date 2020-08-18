@@ -24,7 +24,7 @@ function HomeScreen({ navigation, route }) {
   var db = firebase.firestore();
   var userInfoRef = db.collection("Users").doc(user.uid);
   const levels = []
-  for (var i = 100; i < 400; i = i + 10) {
+  for (var i = 100; i < 10000; i = i + 10) {
     levels[i / 10 - 10] = i
   }
 

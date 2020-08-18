@@ -23,13 +23,13 @@ export default function TimeTrialResult({ route, navigation }) {
     if (ab == "Correct") {
       words_done[mod].push(correct[i][0])
       if (mod == "easy") {
-        xp = xp + 20
+        xp = xp + 5
       }
       if (mod == "medium") {
-        xp = xp + 30
+        xp = xp + 10
       }
       if (mod == "hard") {
-        xp = xp + 50
+        xp = xp + 20
       }
     }
   }
@@ -43,7 +43,7 @@ export default function TimeTrialResult({ route, navigation }) {
   }
 
   const levels = []
-  for (var i = 100; i < 400; i = i + 10) {
+  for (var i = 100; i < 10000; i = i + 10) {
     levels[i / 10 - 10] = i
   }
   lvlupdate();
