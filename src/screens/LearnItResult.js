@@ -22,13 +22,13 @@ export default function LearnItResult({ route, navigation }) {
   if (result === 'true') {
     words_done[mod].push(question)
     if (mod == "easy") {
-      xp = xp + 20
+      xp = xp + 5
     }
     if (mod == "medium") {
-      xp = xp + 30
+      xp = xp + 10
     }
     if (mod == "hard") {
-      xp = xp + 50
+      xp = xp + 20
     }
     answer = "Correct"
     Color = "green"
@@ -38,7 +38,7 @@ export default function LearnItResult({ route, navigation }) {
     Color = "red"
   }
   const levels = []
-  for (var i = 100; i < 400; i = i + 10) {
+  for (var i = 100; i < 10000; i = i + 10) {
     levels[i / 10 - 10] = i
   }
 
