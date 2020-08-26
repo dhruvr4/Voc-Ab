@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View, Linking, Animated } from 'rea
 import IconBack from 'react-native-vector-icons/EvilIcons';
 import { SocialIcon } from 'react-native-elements';
 import firebase from 'firebase'
+import { normalize } from '../util';
 
 function SettingsScreen({ navigation, route }) {
 function navigat(a,b){
@@ -72,8 +73,8 @@ function logout() {
   return (
     <View style={styles.page}>
       <View style={styles.head}>
-        <Text style={styles.settings}>Settings</Text>
-        <IconBack name="arrow-left" size={55} onPress={() => navigat('Home', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })} style={styles.back} />
+        <Text style={styles.heading}>Settings</Text>
+        <IconBack name="arrow-left" size={normalize(55)} onPress={() => navigat('Home', { mode: retu, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })} style={styles.back} />
       </View>
       {/*Easy, Medium, Hard*/}
       <Text style={styles.subHeads}>In App Difficulty</Text>
@@ -127,7 +128,7 @@ function logout() {
                   setretu("easy")
                 }}
               >
-                <Text style={{ color: active === 0 ? '#0099FF' : '#C2C2C2', fontWeight: 'bold', fontSize: 20, fontFamily:'ReemKufi' }}>Easy</Text>
+                <Text style={{ color: active === 0 ? '#0099FF' : '#C2C2C2', fontSize: normalize(23), fontFamily:'ReemKufi' }}>Easy</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -152,7 +153,7 @@ function logout() {
                   handleSlide(xmedium)
                 }}
               >
-                <Text style={{ color: active === 1 ? '#0099FF' : '#C2C2C2', fontWeight: 'bold', fontSize: 20, fontFamily:'ReemKufi' }}>Medium</Text>
+                <Text style={{ color: active === 1 ? '#0099FF' : '#C2C2C2', fontSize: normalize(23), fontFamily:'ReemKufi' }}>Medium</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -174,12 +175,13 @@ function logout() {
                   setretu("hard")
                 }}
               >
-                <Text style={{ color: active === 2 ? '#0099FF' : '#C2C2C2', fontWeight: 'bold', fontSize: 20, fontFamily:'ReemKufi' }}>Hard</Text>
+                <Text style={{ color: active === 2 ? '#0099FF' : '#C2C2C2', fontSize: normalize(23), fontFamily:'ReemKufi' }}>Hard</Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
       </View>
+
       {/*Login Buttons*/}
       <Text style={styles.subHeads2}>Connect</Text>
       <TouchableOpacity style={styles.connectOptions} activeOpacity={0.8} onPress={() => logout()}>
@@ -188,21 +190,21 @@ function logout() {
 
       {/*Socials*/}
       <Text style={styles.subHeads}>Connect with Us</Text>
-      <View style={{ flex: 1, flexDirection: 'row' }}>
-        <View style={{ flexDirection: 'column', paddingLeft: 60 }}>
+      <View style={{flexDirection: 'row', flex:1, marginHorizontal: '5%'}}>
+        <View style={{flex:1, marginLeft: '9%'}}>
           <SocialIcon
             type="facebook"
             onPress={() => Linking.openURL('https://www.facebook.com/Voc-AB-104139488054172')}
           />
         </View>
-        <View style={{ flexDirection: 'column', paddingLeft: 45 }}>
+        <View style={{flex:1}}>
           <SocialIcon
             type="instagram"
             onPress={() => Linking.openURL('https://www.instagram.com/vocabulary.app')
             }
           />
         </View>
-        <View style={{ flexDirection: 'column', paddingLeft: 45 }}>
+        <View style={{flex:1}}>
           <SocialIcon
             type="linkedin"
             onPress={() => {
@@ -262,26 +264,23 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   connectOptions: {
-    marginTop: 10,
+    marginTop: '2%',
     alignContent: "center",
-    padding: 15,
-    paddingBottom: 15,
-    marginLeft: 30,
-    marginRight: 30,
+    padding: normalize(15),
+    marginHorizontal: '15%',
     backgroundColor: '#0099FF',
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#fff'
   },
   connectOptionsText: {
-    fontSize: 24,
+    fontSize: normalize(24),
     color: '#FFFFFF',
     textAlign: 'center',
     fontFamily:'ReemKufi'
   },
-  settings: {
-    fontSize: 56,
-    fontWeight: '700',
+  heading: {
+    fontSize: normalize(48),
     paddingLeft: 15,
     fontFamily: 'ReemKufi',
   },
@@ -296,25 +295,22 @@ const styles = StyleSheet.create({
   subHeads: {
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
-    fontSize: 33,
-    fontWeight: '700',
+    fontSize: normalize(33),
     paddingLeft: 18,
-    marginVertical: 15,
+    marginVertical: '4%',
     paddingTop: 10,
     fontFamily: 'ReemKufi'
   },
   subHeads2: {
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
-    fontSize: 33,
-    fontWeight: '700',
+    fontSize: normalize(33),
     paddingLeft: 18,
-    marginVertical: 15,
-    marginTop: 70,
+    marginVertical: '4%',
+    marginTop: '22%',
     fontFamily: 'ReemKufi'
   },
   goalMenu: {
-    //flex: 1,
     marginVertical: 20,
     backgroundColor: '#fff',
     alignItems: 'center',
