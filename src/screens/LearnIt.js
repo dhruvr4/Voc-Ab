@@ -50,8 +50,10 @@ export default function LearnIt({ navigation, route }) {
   return (
     <View style={{ flex: 1, backgroundColor: '#F0FFF0' }}>
       <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
-      <View style={styles.QuestionContainer}>
-        <Text style={styles.text}>{text}</Text>
+      <View style = {{flexWrap : 'wrap'}}>
+        <TouchableOpacity style={styles.QuestionContainer}>
+          <Text style={styles.text}>{text}</Text>
+        </TouchableOpacity>
       </View>
       <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#F0FFF0' }}>
         <TouchableOpacity style={styles.FirstAnswerButton} onPress={() => { answer(0) }}>
@@ -78,25 +80,30 @@ const styles = StyleSheet.create({
     left: 10,
   },
   text: {
-    fontWeight: 'bold',
     fontSize: 36,
+    fontWeight: '900',
     color: 'white',
+    fontFamily : 'ReemKufi',
     textAlign : 'center'
   },
   QuestionContainer: {
-    width: screenWidth - 40,
-    height: screenHeight/4.2,
+    alignItems : 'center',
     backgroundColor: '#003f9e',
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 40,
-    marginTop: screenHeight/17,
+    borderRadius: 20,
+    marginTop: screenHeight/30,
+    marginLeft : screenWidth / 20,
+    marginRight : screenWidth / 20,
+    paddingTop : screenHeight / 18,
+    paddingBottom : screenHeight / 18,
+    paddingLeft : screenWidth / 20,
+    paddingRight : screenWidth / 20,
+    width : screenWidth  - 40,
   },
   AnswerText: {
-    fontWeight: 'bold',
     fontSize: 24,
     color: 'white',
+    fontWeight : '900',
+    fontFamily : 'ReemKufi'
   },
   AnswerButton: {
     width: screenWidth - 40,

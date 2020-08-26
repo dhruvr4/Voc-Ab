@@ -88,10 +88,12 @@ if (route.params== undefined || route.params.xp <0){
 
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: 'row' }}>
-        <IconSetting name="settings" size={35} onPress={() => navigation.navigate('Setting', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.wrenchIcon} />
+      <View style={{flexDirection: 'row', width : screenWidth, height : screenHeight/10, marginTop : screenHeight / 26,}}>
+        <View style = {styles.wrenchIcon}>
+          <IconSetting name="settings" size={45} onPress={() => navigation.navigate('Setting', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={{color : 'black', paddingTop : screenHeight / 43}} />
+        </View>  
         <View style={styles.titleContainer}>
-          <Text style={styles.vocab}>VOC-AB</Text>
+          <Text style={styles.vocab}>Voc-AB</Text>
         </View>
         <View style={styles.Progress}>
           <ProgressCircle
@@ -127,8 +129,8 @@ if (route.params== undefined || route.params.xp <0){
         <View style={{ paddingRight: screenWidth / 25, paddingTop: 6 }}>
           <IconSetting name="book" size={40} onPress={() => navigation.navigate('Dictionary', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.Dictionary} />
         </View>
-        <View style={{ paddingRight: screenWidth / 9 }}>
-          <Text style={{ fontSize: 38, fontWeight: '600', fontFamily:'ReemKufi', }}>Word Of the day</Text>
+        <View style={{ paddingRight: screenWidth / 9, paddingTop : 9}}>
+          <Text style={{ fontSize: 43, fontWeight: '600', fontFamily:'ReemKufi', }}>Word Of the day</Text>
         </View>
       </View>
 
@@ -162,26 +164,24 @@ const styles = StyleSheet.create({
   },
 
   vocab: {
-    marginTop: '3%',
     fontSize: 55,
-    fontWeight: '700',
     color: '#0b5cd5',
     fontFamily: 'SansForge',
   },
 
   wrenchIcon: {
-    paddingTop: screenHeight / 15,
     paddingLeft: screenHeight / 40,
     alignSelf: "flex-start",
     justifyContent: "flex-start",
     color: 'black',
+    flex : 2,
   },
 
   Progress: {
-    paddingBottom: screenHeight / 39,
-    paddingRight: screenWidth / 20,
     alignItems: "flex-end",
-    justifyContent: 'flex-end',
+    paddingTop : screenHeight / 46,
+    paddingRight : screenWidth / 20,
+    flex : 2,
   },
 
   play: {
@@ -242,21 +242,18 @@ const styles = StyleSheet.create({
     paddingTop: '5%',
     fontFamily: 'serif', 
     fontSize: 48, 
-    fontWeight: '700', 
     color: 'white', 
     fontFamily:'ReemKufi', 
   },
 
   titleContainer: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: screenHeight / 20,
+    flex : 5,
   },
 
   WordText: {
-    fontWeight: '800',
     fontSize: 50,
     alignSelf: 'flex-start',
     paddingLeft: screenWidth / 15,
