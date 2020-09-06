@@ -73,40 +73,39 @@ export default function Challenge({ navigation, route }) {
         style={{ flex: 1, backgroundColor : '#f5fcfc'}} 
         keyboardVerticalOffset={-180}
       >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View>
-    <View style ={{flexDirection : 'row'}}>  
-      <IconBack name="home" size={normalize(40)} onPress={() => navigation.navigate('Home', { mode: result, lvl: lvl, xp: xp, pu: powerupp,words_done:words_done })} style={styles.home} />
-      <View style = {styles.PowerButton}>
-        <IconPower name = "star" size = {normalize(40)} onPress={() => { powerup() }} style = {{alignSelf:'flex-end'}} color = 'black'/>
-      </View>
-    </View>
-    <View style = {styles.numberPow}>
-      <Text style = {{fontSize : normalize(24)}}>{powerupp}</Text>
-    </View>
-    <Text style={styles.text}> GUESS THE WORD... </Text>
-        <View style={styles.questionBox}>
-          <Text style={styles.text}> {text.charAt(0).toUpperCase() + text.substring(1, text.length)}</Text>
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View>
+            <View style ={{flexDirection : 'row'}}>  
+              <IconBack name="home" size={normalize(40)} onPress={() => navigation.navigate('Home', { mode: result, lvl: lvl, xp: xp, pu: powerupp,words_done:words_done })} style={styles.home} />
+              <View style = {styles.PowerButton}>
+                <IconPower name = "star" size = {normalize(40)} onPress={() => { powerup() }} style = {{alignSelf:'flex-end'}} color = 'black'/>
+              </View>
+            </View>
+            
+            <View style = {styles.numberPow}>
+              <Text style = {{fontSize : normalize(24)}}>{powerupp}</Text>
+            </View>
+            <Text style={styles.text}> GUESS THE WORD... </Text>
+            <View style={styles.questionBox}>
+              <Text style={styles.text}> {text.charAt(0).toUpperCase() + text.substring(1, text.length)}</Text>
+            </View>
        
-        <View style={{ alignItems: 'center', alignSelf: 'center', justifyContent: 'center', paddingTop: screenHeight / 35 }}>
-          <Text style={styles.text2}> {hint2}</Text>
-        </View>
-        <View style={styles.inputBox}>
-          <TextInput
-            style={{ height: normalize(40), fontSize : normalize(35), fontFamily: 'ReemKufi', }}
-            placeholder="Type here!"
-            onChangeText={text2 => setText2(text2)}
-            defaultValue={text2}
-          />
-        </View>
-        </View>
+            <View style={{ alignItems: 'center', alignSelf: 'center', justifyContent: 'center', paddingTop: screenHeight / 35 }}>
+              <Text style={styles.text2}> {hint2}</Text>
+            </View>
+            
+            <View style={styles.inputBox}>
+              <TextInput
+               style={{ height: normalize(40), fontSize : normalize(35), fontFamily: 'ReemKufi', }}
+               placeholder="Type here!"
+               onChangeText={text2 => setText2(text2)}
+               defaultValue={text2}
+              />
+            </View>
+          </View>
         </TouchableWithoutFeedback>
         <IconForward name = "control-forward" size={normalize(50)} onPress={() => answer(text2)} style = {{alignSelf : 'center', marginTop: normalize(47)}}/>
-
       </KeyboardAvoidingView>
-
-     
     </View>
   );
 }
