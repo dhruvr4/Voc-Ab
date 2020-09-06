@@ -27,7 +27,8 @@
       "supportsTablet": true
     },
     "android":{
-"package":"com.NerdDevz.VocAB"
+      "package":"com.NerdDevz.VocAB",
+      "versionCode": 3 // Notice the versionCode added under android.
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
