@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, TextInput, Dimensions, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Dimensions, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import IconBack from 'react-native-vector-icons/AntDesign';
 import datab from './WordsDatabase'
 import IconPower from 'react-native-vector-icons/AntDesign';
 import IconForward from 'react-native-vector-icons/SimpleLineIcons';
+import {normalize} from '../util';
 
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -66,21 +67,26 @@ export default function Challenge({ navigation, route }) {
   const [hint2, sethint2] = React.useState(hint)
 
   return (
-    <View style = {{flex : 1}}>
-    <KeyboardAvoidingView
-    behavior= "position" 
-    style={{ flex: 1, backgroundColor : 'white'}} keyboardVerticalOffset = {-160}>
+    <View style = {{flex : 1, backgroundColor : '#f5fcfc'}}>
+      <KeyboardAvoidingView
+        behavior= "position" 
+        style={{ flex: 1, backgroundColor : '#f5fcfc'}} 
+        keyboardVerticalOffset={-180}
+      >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View>
     <View style ={{flexDirection : 'row'}}>  
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, lvl: lvl, xp: xp, pu: powerupp,words_done:words_done })} style={styles.home} />
+      <IconBack name="home" size={normalize(40)} onPress={() => navigation.navigate('Home', { mode: result, lvl: lvl, xp: xp, pu: powerupp,words_done:words_done })} style={styles.home} />
       <View style = {styles.PowerButton}>
-        <IconPower name = "star" size = {40} onPress={() => { powerup() }} style = {{alignSelf:'flex-end'}} color = 'black'/>
+        <IconPower name = "star" size = {normalize(40)} onPress={() => { powerup() }} style = {{alignSelf:'flex-end'}} color = 'black'/>
       </View>
     </View>
     <View style = {styles.numberPow}>
-      <Text style = {{fontSize : 24}}>{powerupp}</Text>
+      <Text style = {{fontSize : normalize(24)}}>{powerupp}</Text>
     </View>
+    <Text style={styles.text}> GUESS THE WORD... </Text>
         <View style={styles.questionBox}>
-          <Text style={styles.text}> {text}</Text>
+          <Text style={styles.text}> {text.charAt(0).toUpperCase() + text.substring(1, text.length)}</Text>
         </View>
        
         <View style={{ alignItems: 'center', alignSelf: 'center', justifyContent: 'center', paddingTop: screenHeight / 35 }}>
@@ -88,14 +94,19 @@ export default function Challenge({ navigation, route }) {
         </View>
         <View style={styles.inputBox}>
           <TextInput
-            style={{ height: 40, fontSize : 40}}
+            style={{ height: normalize(40), fontSize : normalize(35), fontFamily: 'ReemKufi', }}
             placeholder="Type here!"
             onChangeText={text2 => setText2(text2)}
             defaultValue={text2}
           />
         </View>
-        <IconForward name = "control-forward" size={50} onPress={() => answer(text2)} style = {{alignSelf : 'center',paddingTop : screenHeight / 20, marginBottom : screenHeight / 20}}/>
-     </KeyboardAvoidingView>
+        </View>
+        </TouchableWithoutFeedback>
+        <IconForward name = "control-forward" size={normalize(50)} onPress={() => answer(text2)} style = {{alignSelf : 'center', marginTop: normalize(47)}}/>
+
+      </KeyboardAvoidingView>
+
+     
     </View>
   );
 }
@@ -120,28 +131,30 @@ const styles = StyleSheet.create({
   },
   questionBox: {
     width: screenWidth - 40,
-    height: screenHeight / 5,
+    height: screenHeight / 6,
     backgroundColor: '#ebb400',
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 15,
     marginTop : screenHeight/35,
+    paddingHorizontal: 0,
   },
   text: {
     alignSelf: 'center',
     justifyContent: 'center',
-    fontWeight: 'bold',
-    fontSize: 36,
+    fontSize: normalize(30),
     textAlign : 'center',
+    fontFamily:'ReemKufi',
+    paddingHorizontal:5,
   },
   text2: {
     textAlign: "center",
     marginTop: 0,
-    fontWeight: 'bold',
-    fontSize: 30,
-    paddingLeft: screenWidth / 8,
-    paddingRight: screenWidth / 8,
+    fontSize: normalize(25),
+    alignSelf: "center",
+    paddingHorizontal: '10%',
+    fontFamily:'ReemKufi',
   },
   inputBox: {
     alignItems: 'center',
@@ -149,7 +162,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: screenHeight / 20,
     width: screenWidth - 40,
-    height : screenHeight / 4,
+    height : screenHeight / 6,
     borderWidth: 1,
     borderRadius : 20,
   },
