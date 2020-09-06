@@ -8,6 +8,7 @@ import ProgressCircle from 'react-native-progress-circle'
 import datab from './WordsDatabase'
 import Coverflow from 'react-native-coverflow';
 import firebase from 'firebase'
+import {heightToDp, widthToDp, normalize} from '../util'
 
   const screenWidth = Math.round(Dimensions.get('window').width);
   const screenHeight = Math.round(Dimensions.get('window').height);
@@ -88,9 +89,9 @@ if (route.params== undefined || route.params.xp <0){
 
   return (
     <View style={styles.container}>
-      <View style={{flexDirection: 'row', width : screenWidth, height : screenHeight/10, marginTop : screenHeight / 26,}}>
+      <View style={{flexDirection: 'row', width : screenWidth, height : screenHeight/10, marginTop : screenHeight / normalize(26),}}>
         <View style = {styles.wrenchIcon}>
-          <IconSetting name="settings" size={45} onPress={() => navigation.navigate('Setting', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={{color : 'black', paddingTop : screenHeight / 43}} />
+          <IconSetting name="settings" size={normalize(45)} onPress={() => navigation.navigate('Setting', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={{color : 'black', paddingTop : screenHeight / 43}} />
         </View>  
         <View style={styles.titleContainer}>
           <Text style={styles.vocab}>Voc-AB</Text>
@@ -99,7 +100,7 @@ if (route.params== undefined || route.params.xp <0){
           <ProgressCircle
             percent={(xp / levels[lvl]) * 100}
             radius={25}
-            borderWidth={8}
+            borderWidth={7}
             color="#3399FF"
             shadowColor="#e6e6e6"
             bgColor="#fff">
@@ -107,30 +108,31 @@ if (route.params== undefined || route.params.xp <0){
           </ProgressCircle>
         </View>
       </View>
-      <View style={{marginTop:'7%',}}>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <TouchableOpacity style={styles.play} onPress={() => navigation.navigate("LearnIt", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
+      <View style={{marginTop:'6%', }}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            
+            <TouchableOpacity style={styles.learnit} onPress={() => navigation.navigate("LearnIt", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
               <Text style={styles.cardText}>Learn It</Text>
-              <IconSetting name="book-open" size={40} color="white" style={{paddingTop:'15%', paddingLeft:'79%',}} />
+              <IconSetting name="book-open" size={normalize(42)} color="white" style={{paddingTop:'12%', paddingLeft:'78%', }} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.wordUp} onPress={() => navigation.navigate("Challenge", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
+            <TouchableOpacity style={styles.challenge} onPress={() => navigation.navigate("Challenge", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
               <Text style={styles.cardText}>Challenge</Text>
-              <IconSetting name="edit-2" size={40} color="white" style={{paddingTop:'15%', paddingLeft:'79%',}}/>
+              <IconSetting name="edit-2" size={normalize(42)} color="white" style={{paddingTop:'12%', paddingLeft:'78%',}}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.timeTrial} onPress={() => navigation.navigate("TimeTrial", { answer: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}>
               <Text style={styles.cardText}>Time Trial</Text>
-              <IconSetting name="clock" size={40} color="white" style={{paddingTop:'15%', paddingLeft:'79%',}}/>
+              <IconSetting name="clock" size={normalize(42)} color="white" style={{paddingTop:'12%', paddingLeft:'78%',}}/>
             </TouchableOpacity>
             
-      </ScrollView>
+        </ScrollView>
       </View>
       
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-        <View style={{ paddingRight: screenWidth / 25, paddingTop: 6 }}>
-          <IconSetting name="book" size={40} onPress={() => navigation.navigate('Dictionary', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.Dictionary} />
+        <View style={{ paddingRight: normalize(6), paddingLeft: normalize(20),paddingTop: normalize(6) }}>
+          <IconSetting name="book" size={normalize(42)} onPress={() => navigation.navigate('Dictionary', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.Dictionary} />
         </View>
-        <View style={{ paddingRight: screenWidth / 9, paddingTop : 9}}>
-          <Text style={{ fontSize: 43, fontWeight: '600', fontFamily:'ReemKufi', }}>Word Of the day</Text>
+        <View style={{ paddingRight: '10%', paddingTop : 9}}>
+          <Text style={{ fontSize: normalize(43), fontWeight: '600', fontFamily:'ReemKufi', }}>Word Of the day</Text>
         </View>
       </View>
 
@@ -164,7 +166,7 @@ const styles = StyleSheet.create({
   },
 
   vocab: {
-    fontSize: 55,
+    fontSize: normalize(55),
     color: '#0b5cd5',
     fontFamily: 'SansForge',
   },
@@ -184,8 +186,8 @@ const styles = StyleSheet.create({
     flex : 2,
   },
 
-  play: {
-    marginBottom: screenHeight/14,
+  learnit: {
+    marginBottom: '4%',
     borderRadius: 35,
     width: screenWidth - 50,
     height : screenHeight / 4,
@@ -194,7 +196,7 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 5,
-      height: 20,
+      height: 15,
     },
 
     shadowOpacity: 0.38,
@@ -203,25 +205,25 @@ const styles = StyleSheet.create({
   },
 
   timeTrial: {
-    marginBottom: screenHeight/14,
+    marginBottom: '4%',
     width: screenWidth - 50,
     height : screenHeight / 4,
     backgroundColor: '#bd0a0a',
     borderRadius: 35,
-    paddingRight: 10,
+    marginRight: 10,
     marginLeft: 15,
     shadowColor: "#000",
     shadowOffset: {
       width: 5,
-      height: 20,
+      height: 15,
     },
     shadowOpacity: 0.38,
     shadowRadius: 16.00,
     elevation: 24,
   },
 
-  wordUp: {
-    marginBottom: screenHeight/14,
+  challenge: {
+    marginBottom: '4%',
     width: screenWidth - 50,
     backgroundColor: '#ffc300',
     borderRadius: 35,
@@ -230,7 +232,7 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 5,
-      height: 20,
+      height: 15,
     },
     shadowOpacity: 0.38,
     shadowRadius: 16.00,
@@ -240,8 +242,7 @@ const styles = StyleSheet.create({
   cardText: { 
     paddingLeft: '10%',
     paddingTop: '5%',
-    fontFamily: 'serif', 
-    fontSize: 48, 
+    fontSize: normalize(50), 
     color: 'white', 
     fontFamily:'ReemKufi', 
   },
@@ -254,7 +255,7 @@ const styles = StyleSheet.create({
   },
 
   WordText: {
-    fontSize: 50,
+    fontSize: normalize(50),
     alignSelf: 'flex-start',
     paddingLeft: screenWidth / 15,
     paddingTop: screenHeight / 60,
@@ -263,9 +264,9 @@ const styles = StyleSheet.create({
 
   DefinitionText: {
     fontWeight: '300',
-    fontSize: 24,
-    paddingLeft: screenWidth / 10,
-    paddingRight: screenWidth / 35,
+    fontSize: normalize(24),
+    paddingLeft: screenWidth / 15,
+    paddingRight: screenWidth / 15,
     paddingTop: screenHeight / 55,
     fontFamily:'ReemKufi',
   },
@@ -274,23 +275,23 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    marginTop: 30,
+    marginTop: normalize(30),
     backgroundColor: 'white',
     width: screenWidth - 40,
-    height: screenHeight / 3.2,
+    height: '30%',
     alignSelf: 'center',
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 12,
     },
-    shadowOpacity: 0.58,
+    shadowOpacity: 0.55,
     shadowRadius: 16.00,
     elevation: 24,
   },
   
   Dictionary: {
-    paddingLeft: screenHeight / 45,
+    paddingLeft: '3%',
     alignSelf: "flex-start",
     justifyContent: "flex-start",
     color: 'black',
