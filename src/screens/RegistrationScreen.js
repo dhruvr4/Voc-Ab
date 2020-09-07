@@ -42,6 +42,7 @@ export default function RegistrationScreen({ navigation }) {
                     id: uid,
                     email,
                     fullName,
+                    password,
                     words_done: { easy: [], medium: [], hard: [] },
                     level: 1,
                     xp: 0,
