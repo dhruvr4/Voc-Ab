@@ -89,9 +89,9 @@ if (route.params== undefined || route.params.xp <0){
 
   return (
     <View style={styles.container}>
-      <View style={{flexDirection: 'row', width : screenWidth, height : screenHeight/10, marginTop : screenHeight / normalize(26),}}>
+      <View style={{flexDirection: 'row', width : screenWidth, height : screenHeight/10, marginTop : '10%', alignContent:'center'}}>
         <View style = {styles.wrenchIcon}>
-          <IconSetting name="settings" size={normalize(45)} onPress={() => navigation.navigate('Setting', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={{color : 'black', paddingTop : screenHeight / 43}} />
+          <IconSetting name="settings" size={normalize(40)} onPress={() => navigation.navigate('Setting', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={{color : 'black', paddingTop : normalize(23)}} />
         </View>  
         <View style={styles.titleContainer}>
           <Text style={styles.vocab}>Voc-AB</Text>
@@ -166,24 +166,25 @@ const styles = StyleSheet.create({
   },
 
   vocab: {
-    fontSize: normalize(55),
+    fontSize: normalize(53),
     color: '#0b5cd5',
     fontFamily: 'SansForge',
+    flex:1
   },
 
   wrenchIcon: {
-    paddingLeft: screenHeight / 40,
+    paddingLeft: '5%',
     alignSelf: "flex-start",
     justifyContent: "flex-start",
     color: 'black',
-    flex : 2,
+    flex : 1,
   },
 
   Progress: {
     alignItems: "flex-end",
     paddingTop : screenHeight / 46,
     paddingRight : screenWidth / 20,
-    flex : 2,
+    flex : 1,
   },
 
   learnit: {
