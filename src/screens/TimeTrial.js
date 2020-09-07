@@ -46,6 +46,8 @@ export default function TimeTrial({ navigation, route }) {
     setto_show([true, true, true, true])
     if (va === true) {
       settotscore(totscore + 1)
+      words_done[mode] = [...words_done[mode],text]
+      check_words_done()
       settotwrong([...totwrong, [text, options[answer], correct, va]])
     }
     if (va === false) {
@@ -58,6 +60,20 @@ export default function TimeTrial({ navigation, route }) {
       navigat()
     }
   }
+  function   check_words_done(){
+    
+    if(words_done["easy"].length==datab["easy"].length){
+      words_done["easy"]=[]
+    }
+    if(words_done["medium"].length==datab["medium"].length){
+      words_done["medium"]=[]
+    }
+    if(words_done["hard"].length==datab["hard"].length){
+      words_done["hard"]=[]
+    }
+    
+  }
+
   function nextQuestion() {
     var incorrects = []
     const val = mode
@@ -71,7 +87,7 @@ export default function TimeTrial({ navigation, route }) {
     var pups = [true, true, true, true]
     while (ar.length < 4) {
       const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
-      if (!(arr.includes(ques.correctanswer))) {
+      if (!(ar.includes(ques.correctanswer))) {
         ar.push(ques.correctanswer)
         incorrects.push(ques.correctanswer)
       }
@@ -134,7 +150,7 @@ export default function TimeTrial({ navigation, route }) {
   let cor = ''
   let arr = []
   let powup = []
-  const [tx] = React.useState(60)
+  const [tx] = React.useState(10)
   let [tim, settim] = React.useState(new Date().getMinutes() * 60 + new Date().getSeconds())
   let [timer, setTimer] = React.useState(tx)
   load(mode)

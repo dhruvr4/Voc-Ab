@@ -6,6 +6,8 @@ import IconBack from 'react-native-vector-icons/AntDesign';
 import IconForward from 'react-native-vector-icons/SimpleLineIcons';
 import firebase from 'firebase'
 import { normalize } from '../util';
+import datab from './WordsDatabase';
+
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -22,7 +24,10 @@ export default function TimeTrialResult({ route, navigation }) {
   for (var i = 0; i < correct.length; i++) {
     const ab = correct[i][3] ? "Correct" : "Wrong"
     if (ab == "Correct") {
-      words_done[mod].push(correct[i][0])
+      if (!words_done[mod].includes(correct[i][0])){
+        words_done[mod].push(correct[i][0])
+        }
+
       if (mod == "easy") {
         xp = xp + 5
       }
@@ -42,12 +47,28 @@ export default function TimeTrialResult({ route, navigation }) {
       pu = pu + 1
     }
   }
+  
+  function   check_words_done(){
+    
+    if(words_done["easy"].length==datab["easy"].length){
+      words_done["easy"]=[]
+    }
+    if(words_done["medium"].length==datab["medium"].length){
+      words_done["medium"]=[]
+    }
+    if(words_done["hard"].length==datab["hard"].length){
+      words_done["hard"]=[]
+    }
+    
+  }
+
 
   const levels = []
   for (var i = 100; i < 10000; i = i + 10) {
     levels[i / 10 - 10] = i
   }
   lvlupdate();
+  check_words_done();
   words_done[mod] = words_done[mod].filter((item, index) => words_done[mod].indexOf(item) === index);
   var user = firebase.auth().currentUser;
   var db = firebase.firestore();
