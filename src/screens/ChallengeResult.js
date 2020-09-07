@@ -5,6 +5,7 @@ import IconBack from 'react-native-vector-icons/AntDesign';
 import IconForward from 'react-native-vector-icons/SimpleLineIcons'
 import firebase from 'firebase'
 import {normalize} from '../util'
+import datab from './WordsDatabase'
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -24,8 +25,10 @@ export default function ChallengeResult({ route, navigation }) {
   //console.log(result)
   let Color = " "
   if (result === true) {
-    words_done[mod].push(question)
-    if (mod == "easy") {
+    if (!words_done[mod].includes(question)){
+      words_done[mod].push(question)
+      }
+          if (mod == "easy") {
       xp = xp + 5
     }
     if (mod == "medium") {
@@ -50,11 +53,28 @@ export default function ChallengeResult({ route, navigation }) {
     }
   }
 
+  function   check_words_done(){
+    
+    if(words_done["easy"].length==datab["easy"].length){
+      words_done["easy"]=[]
+    }
+    if(words_done["medium"].length==datab["medium"].length){
+      words_done["medium"]=[]
+    }
+    if(words_done["hard"].length==datab["hard"].length){
+      words_done["hard"]=[]
+    }
+    
+  }
+
+
+
   const levels = []
   for (var i = 100; i < 10000; i = i + 10) {
     levels[i / 10 - 10] = i
   }
   lvlupdate();
+  check_words_done();
 
   var user = firebase.auth().currentUser;
   var db = firebase.firestore();

@@ -19,7 +19,7 @@ export default function LearnIt({ navigation, route }) {
     var ar = [ques.correctanswer]
     while (ar.length < 4) {
       const ques = datab[val][Math.floor(Math.random() * datab[val].length)]
-      if (!(arr.includes(ques.correctanswer))) {
+      if (!(ar.includes(ques.correctanswer))) {
         ar.push(ques.correctanswer)
       }
     }

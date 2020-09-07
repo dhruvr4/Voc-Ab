@@ -30,6 +30,7 @@ function HomeScreen({ navigation, route }) {
   }
 
   lvlupdate()
+  check_words_done()
  // console.log("Data Received"+route.params)
  React.useEffect(() => {
   try {
@@ -80,6 +81,20 @@ if (route.params== undefined || route.params.xp <0){
       pu = pu + 1
     }
   }
+  function   check_words_done(){
+    
+    if(words_done["easy"].length==datab["easy"].length){
+      words_done["easy"]=[]
+    }
+    if(words_done["medium"].length==datab["medium"].length){
+      words_done["medium"]=[]
+    }
+    if(words_done["hard"].length==datab["hard"].length){
+      words_done["hard"]=[]
+    }
+    
+  }
+
 
   let txt = ''
   let cor = ''
