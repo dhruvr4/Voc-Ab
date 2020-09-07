@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, TextInput, Dimensions } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, TextInput, Dimensions, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 import IconBack from 'react-native-vector-icons/AntDesign';
 
 import { firebase } from './../firebase/config'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { normalize } from '../util';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -65,52 +66,57 @@ function Login({ navigation, route }) {
     const [text4, settext4] = React.useState(txt2)
     return (
         <View>
-            <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, lvl: lvl, xp: xp, pu: pu, words_done: route.params.words_done })} style={styles.home} />
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View>
+                <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result, lvl: lvl, xp: xp, pu: pu, words_done: route.params.words_done })} style={styles.home} />
 
 
-            <TextInput
-                style={styles.input}
-                placeholder='Full Name'
-                placeholderTextColor="#aaaaaa"
-                onChangeText={(text) => settext(text)}
-                value={text}
-                underlineColorAndroid="transparent"
-                autoCapitalize="none"
-            />
-            <TextInput
-                style={styles.input}
-                placeholder='E-mail'
-                placeholderTextColor="#aaaaaa"
-                onChangeText={(text) => settext2(text)}
-                value={text2}
-                underlineColorAndroid="transparent"
-                autoCapitalize="none"
-            />
-            <TextInput
-                style={styles.input}
-                placeholderTextColor="#aaaaaa"
-                secureTextEntry
-                placeholder='Password'
-                onChangeText={(text) => settext3(text)}
-                value={text3}
-                underlineColorAndroid="transparent"
-                autoCapitalize="none"
-            />
-            <TextInput
-                style={styles.input}
-                placeholderTextColor="#aaaaaa"
-                secureTextEntry
-                placeholder='Confirm Password'
-                onChangeText={(text) => settext4(text)}
-                value={text4}
-                underlineColorAndroid="transparent"
-                autoCapitalize="none"
-            />
-            <TouchableOpacity
-                style={styles.button}
-                onPress={() => login_new()}>
-                <Text style={styles.buttonTitle}>Create account</Text>
-            </TouchableOpacity>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Full Name'
+                    placeholderTextColor="#aaaaaa"
+                    onChangeText={(text) => settext(text)}
+                    value={text}
+                    underlineColorAndroid="transparent"
+                    autoCapitalize="none"
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder='E-mail'
+                    placeholderTextColor="#aaaaaa"
+                    onChangeText={(text) => settext2(text)}
+                    value={text2}
+                    underlineColorAndroid="transparent"
+                    autoCapitalize="none"
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholderTextColor="#aaaaaa"
+                    secureTextEntry
+                    placeholder='Password'
+                    onChangeText={(text) => settext3(text)}
+                    value={text3}
+                    underlineColorAndroid="transparent"
+                    autoCapitalize="none"
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholderTextColor="#aaaaaa"
+                    secureTextEntry
+                    placeholder='Confirm Password'
+                    onChangeText={(text) => settext4(text)}
+                    value={text4}
+                    underlineColorAndroid="transparent"
+                    autoCapitalize="none"
+                />
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => login_new()}>
+                    <Text style={styles.buttonTitle}>Create account</Text>
+                </TouchableOpacity>
+                </View>
+            </TouchableWithoutFeedback>
+            
         </View>
     )
 }
@@ -127,13 +133,13 @@ const styles = StyleSheet.create({
     },
     AnswerText: {
         fontWeight: 'bold',
-        fontSize: 42,
+        fontSize: normalize(42),
         paddingTop: screenHeight / 15,
         textAlign: 'center'
     },
     input: {
         fontWeight: 'bold',
-        fontSize: 34,
+        fontSize: normalize(34),
         color: 'white',
         textAlign: 'center'
     },
@@ -152,7 +158,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ebebeb',
         height: screenHeight / 15,
         borderRadius: 20,
-        fontSize: 18,
+        fontSize: normalize(18),
     },
     FieldContainer: {
         paddingTop: screenHeight / 12,

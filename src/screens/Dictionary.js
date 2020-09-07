@@ -13,6 +13,7 @@ import SAT2 from './Data/SAT_list_2.json';
 import SAT3 from './Data/SAT_list_3.json';
 import SAT4 from './Data/SAT_list_4.json';
 import SAT5 from './Data/SAT_list_5.json';
+import { normalize } from '../util';
 
 export default function Dictionary({navigation, route}) {
     
@@ -96,9 +97,9 @@ export default function Dictionary({navigation, route}) {
     }, [])
 
     renderItem = ({item}) => (
-    <View style={{minHeight:70, padding:3, borderBottomWidth:1, borderBottomColor:'grey',}}>
-        <Text style={{fontSize:20, paddingLeft:3, marginBottom:4,}}>{item.word}</Text>
-        <Text style={{paddingLeft:3}}>{item.adj}</Text>
+    <View style={{minHeight:normalize(70), padding:3, borderBottomWidth:1, borderBottomColor:'grey',}}>
+        <Text style={{fontSize:normalize(24), paddingLeft:5, marginBottom:4, fontFamily: 'ReemKufi',}}>{item.word.charAt(0).toUpperCase() + item.word.substring(1, item.word.length)}</Text>
+        <Text style={{paddingLeft:5}}>{item.adj}</Text>
     </View>
     );
 
@@ -106,12 +107,12 @@ export default function Dictionary({navigation, route}) {
         <View style={{
             flex: 1,
             flexDirection: 'column',
-            backgroundColor: '#fff',
+            backgroundColor: '#f5fcfc',
           }}>
 
             <View style={styles.head}>
                 <Text style={styles.heading}>Dictionary</Text>
-                <IconBack name="arrow-left" size={55} onPress={() => navigation.navigate('Home', {mode: route.params.mode,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu,words_done:route.params.words_done})} style={styles.back} />
+                <IconBack name="arrow-left" size={normalize(55)} onPress={() => navigation.navigate('Home', {mode: route.params.mode,lvl:route.params.lvl,xp:route.params.xp,pu:route.params.pu,words_done:route.params.words_done})} style={styles.back} />
             </View>
             <SearchBar 
             placeholder="Look up a word..." 
@@ -119,7 +120,7 @@ export default function Dictionary({navigation, route}) {
             value={search.toString()} 
             lightTheme={true} 
             round={true} 
-            containerStyle={{backgroundColor:'white', borderTopWidth:0}}
+            containerStyle={{backgroundColor:'#f5fcfc', borderTopWidth:0}}
             inputContainerStyle={{backgroundColor:'#EBEBEB', height: 40, width: '97%', marginLeft:'1%',}}/>
             <View style={{flex:1}}>
                 {
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
         width: '95%',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingTop: 50,
+        paddingTop: normalize(55),
         flexDirection: 'row'
     },
 
@@ -169,8 +170,8 @@ const styles = StyleSheet.create({
     },
 
     heading: {
-        fontSize: 48,
-        fontWeight: '700',
+        fontSize: normalize(48),
         paddingLeft: 15,
+        fontFamily: 'ReemKufi',
     },
 })
