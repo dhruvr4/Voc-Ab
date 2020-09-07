@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Dimensions, StyleSheet, Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Dimensions, StyleSheet, Image, Text, TextInput, TouchableOpacity, View, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { firebase } from '.././firebase/config'
+import { normalize } from '../util';
 
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -46,10 +47,18 @@ export default function LoginScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <KeyboardAwareScrollView
-                style={{ flex: 1, width: '100%', paddingTop: screenHeight * 0}}
-                keyboardShouldPersistTaps="always">
+            <KeyboardAvoidingView
+        behavior= "position" 
+        style={{ flex: 1, }} 
+        keyboardVerticalOffset={-240}
+      >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View>
+
+            
+
                 <View style={styles.FieldContainer}>
+                <Text style={{fontSize: normalize(40), alignSelf: 'center', fontFamily: 'ReemKufi', paddingVertical: '10%'}}>Welcome</Text>
 
                     <TextInput
                         style={styles.Field}
@@ -84,7 +93,10 @@ export default function LoginScreen({ navigation }) {
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
                 </View>
-            </KeyboardAwareScrollView>
+            
+            </View>
+            </TouchableWithoutFeedback>
+            </KeyboardAvoidingView>
         </View>
     )
 }
@@ -94,7 +106,7 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: 0,
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     title: {
 
@@ -103,11 +115,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: '#ebebeb',
         height: screenHeight / 15,
-        borderRadius: 20,
-        fontSize: 18,
+        borderRadius: 15,
+        fontSize: normalize(23),
     },
     FieldContainer: {
-        paddingTop: screenHeight / 12,
+        paddingTop: '15%',
         width: screenWidth - 40,
         alignSelf: 'center',
     },
@@ -123,18 +135,18 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: '#ebebeb',
         height: screenHeight / 15,
-        borderRadius: 20,
+        borderRadius: 15,
         fontSize: 18,
     },
     button: {
-        width: screenWidth - 100,
-        height: screenHeight / 14,
+        width: screenWidth - 150,
+        height: normalize(45),
         backgroundColor: '#0b5cd5',
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: 'center',
-        marginTop: screenHeight / 10,
-        borderRadius: 30,
+        marginTop: '10%',
+        borderRadius: 15,
 
     },
     buttonTitle: {
