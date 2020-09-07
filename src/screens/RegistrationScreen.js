@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Dimensions, StyleSheet, Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { firebase } from '.././firebase/config'
+import {normalize} from '../util'
 
 
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -71,6 +72,9 @@ export default function RegistrationScreen({ navigation }) {
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%', paddingTop: screenHeight * 0 }}
                 keyboardShouldPersistTaps="always">
+                
+                <Text style={{fontSize: normalize(40), alignSelf: 'center', fontFamily: 'ReemKufi', paddingTop: '15%'}}>Welcome Onboard</Text>
+
                 <View style={styles.FieldContainer}>
                     <TextInput
                         style={styles.Field}
@@ -134,57 +138,43 @@ export default function RegistrationScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-                container: {
-                flex: 1,
+    container: {
+        flex: 1,
         alignItems: 'center'
     },
-    title: {
-
-            },
     logo: {
-                flex: 1,
+        flex: 1,
         height: 120,
         width: 90,
         alignSelf: "center",
         margin: 30
     },
-    input: {
-                height: 48,
-        borderRadius: 5,
-        overflow: 'hidden',
-        backgroundColor: 'white',
-        marginTop: 10,
-        marginBottom: 10,
-        marginLeft: 30,
-        marginRight: 30,
-        paddingLeft: 16
-    },
     Field: {
-                textAlign: 'center',
+        textAlign: 'center',
         backgroundColor: '#ebebeb',
         height: screenHeight / 15,
-        borderRadius: 20,
-        fontSize: 18,
+        borderRadius: 15,
+        fontSize: normalize(23),
     },
     FieldContainer: {
-                paddingTop: screenHeight / 12,
+        paddingTop: '9%',
         width: screenWidth - 40,
         alignSelf: 'center',
     },
 
     button: {
         width: screenWidth - 100,
-        height: screenHeight / 14,
+        height: normalize(50),
         backgroundColor: '#0b5cd5',
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: 'center',
         marginTop: screenHeight / 10,
-        borderRadius: 30,
+        borderRadius: 15,
 
     },
     buttonTitle: {
-                color: 'white',
+        color: 'white',
         fontSize: 16,
         fontWeight: "bold"
     },

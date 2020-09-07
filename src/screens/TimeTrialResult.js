@@ -5,6 +5,7 @@ import { StackActions } from '@react-navigation/native';
 import IconBack from 'react-native-vector-icons/AntDesign';
 import IconForward from 'react-native-vector-icons/SimpleLineIcons';
 import firebase from 'firebase'
+import { normalize } from '../util';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -77,10 +78,10 @@ export default function TimeTrialResult({ route, navigation }) {
     <View style={{
       alignItems: 'flex-start',
       justifyContent: 'flex-start',
-      marginTop: screenHeight / 20,
+      marginTop: '7%',
       backgroundColor: 'white',
-      width: screenWidth - 40,
-      height: screenHeight / 4,
+      width: screenWidth - 50,
+      minHeight: 135,
       alignSelf: 'center',
       shadowColor: "#000",
       shadowOffset: {
@@ -105,8 +106,8 @@ export default function TimeTrialResult({ route, navigation }) {
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
       <ScrollView>
-        <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mod, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.home} />
-        <Text style={styles.result}> {result}</Text>
+        <IconBack name="home" size={normalize(40)} onPress={() => navigation.navigate('Home', { mode: mod, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.home} />
+        <Text style={styles.result}>{result}!</Text>
         <FlatList
           data={r}
           renderItem={renderItem}
@@ -126,9 +127,10 @@ const styles = StyleSheet.create({
   },
   result: {
     paddingTop: screenHeight / 35,
-    fontWeight: 'bold',
-    fontSize: 40,
-    alignSelf: 'center'
+    fontSize: normalize(40),
+    fontWeight: '300',
+    alignSelf: 'center',
+    fontFamily: 'ReemKufi',
   },
   correct: {
     paddingTop: 40,
@@ -163,18 +165,17 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
   WordText: {
-    fontWeight: '700',
-    fontSize: 32,
+    fontFamily: 'ReemKufi',
+    fontSize: normalize(32),
     alignSelf: 'center',
-    paddingTop: screenHeight / 60,
+    paddingTop: '3%',
     color: 'white'
   },
   DefinitionText: {
-    fontWeight: '300',
-    fontSize: 24,
-    paddingLeft: screenWidth / 10,
-    paddingRight: screenWidth / 10,
-    paddingTop: screenHeight / 20,
+    fontFamily: 'ReemKufi',
+    fontSize: normalize(24),
+    paddingHorizontal: '7%',
+    paddingTop: '4%',
     alignSelf: 'center',
     color: 'white'
   },

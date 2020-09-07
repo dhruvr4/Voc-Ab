@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { Dimensions } from "react-native";
 import datab from './WordsDatabase'
 import IconBack from 'react-native-vector-icons/AntDesign';
 import IconPower from 'react-native-vector-icons/AntDesign';
 
 import { StackActions } from '@react-navigation/native';
+import { normalize } from '../util';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height)
 
@@ -148,26 +149,27 @@ export default function TimeTrial({ navigation, route }) {
 
   let time = null
   return (
-    <View style={{ flex: 1, backgroundColor: '#F0FFF0' }}>
+    <View style={{ flex: 1, backgroundColor: '#f5fcfc' }}>
       <View style={{ flexDirection: 'row' }}>
-        <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: mode, lvl: lvl, xp: xp, pu: powerupp, words_done: words_done })} style={styles.home} />
+        <IconBack name="home" size={normalize(40)} onPress={() => navigation.navigate('Home', { mode: mode, lvl: lvl, xp: xp, pu: powerupp, words_done: words_done })} style={styles.home} />
         <View style={styles.PowerButton}>
-          <IconPower name="star" size={40} onPress={() => { powerup() }} style={{ alignSelf: 'flex-end' }} color='black' />
+          <IconPower name="star" size={normalize(40)} onPress={() => { powerup() }} style={{ alignSelf: 'flex-end' }} color='black' />
         </View>
       </View>
 
       <View style={styles.numberPow}>
-        <Text style={{ fontSize: 24 }}>{powerupp}</Text>
+        <Text style={{ fontSize: normalize(24) }}>{powerupp}</Text>
       </View>
-      <Text style={styles.timer}> {timer}</Text>
+      <Text style={styles.quest}>CHOOSE THE CORRECT WORD...</Text>
+      <Text style={styles.timer}>{timer}</Text>
 
-      <View style={{ flexWrap: 'wrap' }}>
+      <View style={{ flexWrap: 'wrap', alignContent: 'center' }}>
         <TouchableOpacity style={styles.QuestionContainer}>
-          <Text style={styles.text}> {text}</Text>
+          <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>
       </View>
 
-      <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#F0FFF0' }}>
+      <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5fcfc' }}>
         {
           to_show[0] &&
           <TouchableOpacity style={styles.FirstAnswerButton} onPress={() => { answer(0) }}>
@@ -180,12 +182,14 @@ export default function TimeTrial({ navigation, route }) {
             <Text style={styles.AnswerText}>{options[1]}</Text>
           </TouchableOpacity>
         }
-        {to_show[2] &&
+        {
+          to_show[2] &&
           <TouchableOpacity style={styles.AnswerButton} onPress={() => { answer(2) }}>
             <Text style={styles.AnswerText}>{options[2]}</Text>
           </TouchableOpacity>
         }
-        {to_show[3] &&
+        {
+          to_show[3] &&
           <TouchableOpacity style={styles.AnswerButton} onPress={() => { answer(3) }}>
             <Text style={styles.AnswerText}>{options[3]}</Text>
           </TouchableOpacity>
@@ -203,62 +207,70 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   home: {
-    paddingTop: screenHeight / 15,
-    paddingLeft: screenHeight / 40,
-    alignSelf: "flex-start",
-    justifyContent: "flex-start",
+    paddingTop: screenHeight/15,
+    paddingLeft: 10,
     color: 'black',
+    left: 10,
   },
   timer: {
-    fontWeight: 'bold',
-    fontSize: 48,
-    textAlign: "center"
+    fontSize: normalize(46),
+    textAlign: "center",
+    fontFamily:'ReemKufi',
+  },
+  quest: {
+    marginTop: '4%',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    fontSize: normalize(22),
+    textAlign : 'center',
+    fontFamily:'ReemKufi',
+    paddingHorizontal:5,
   },
   text: {
-    fontSize: 36,
+    fontSize: normalize(28),
+    fontWeight: '900',
     color: 'white',
-    textAlign: 'center',
-    fontFamily: 'ReemKufi'
+    fontFamily : 'ReemKufi',
+    textAlign : 'center'
   },
   QuestionContainer: {
-    alignItems: 'center',
+    alignItems : 'center',
+    justifyContent: 'center',
     backgroundColor: '#a50303',
     borderRadius: 20,
-    marginLeft: screenWidth / 20,
-    marginRight: screenWidth / 20,
-    paddingTop: screenHeight / 40,
-    paddingBottom: screenHeight / 40,
-    paddingLeft: screenWidth / 20,
-    paddingRight: screenWidth / 20,
-    width: screenWidth - 40,
+    marginTop: '2%',
+    paddingVertical : normalize(14),
+    paddingHorizontal: normalize(4),
+    width : screenWidth  - 40,
+    minHeight: '18%',
   },
   AnswerText: {
-    fontSize: 24,
+    fontSize: normalize(25),
+    marginVertical:normalize(9),
     color: 'white',
-    fontFamily: 'ReemKufi'
+    fontWeight : '800',
+    fontFamily : 'ReemKufi'
   },
   AnswerButton: {
-    width: screenWidth - 40,
-    height: 55,
+    width: screenWidth - 50,
     backgroundColor: '#bd0a0a',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: screenHeight / 18,
+    marginTop: '8%',
     borderRadius: 30,
   },
   FirstAnswerButton: {
-    width: screenWidth - 40,
-    height: 55,
+    width: screenWidth - 50,
     backgroundColor: '#bd0a0a',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: screenHeight / 15,
+    marginTop: '10%',
     borderRadius: 30,
   },
   numberPow: {
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
     width: screenWidth,
-    paddingRight: screenWidth / 11,
+    paddingRight: screenWidth / 9,
   },
 });

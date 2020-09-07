@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Dimensions } from "react-native";
 import IconBack from 'react-native-vector-icons/AntDesign';
 import datab from './WordsDatabase.js';
+import { normalize } from '../util.js';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -48,14 +49,15 @@ export default function LearnIt({ navigation, route }) {
   const [options, setOptions] = React.useState(arr)
   const [correct, setCorrect] = React.useState(cor)
   return (
-    <View style={{ flex: 1, backgroundColor: '#F0FFF0' }}>
-      <IconBack name="home" size={40} onPress={() => navigation.navigate('Home', { mode: result,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
-      <View style = {{flexWrap : 'wrap'}}>
+    <View style={{ flex: 1, backgroundColor: '#f5fcfc' }}>
+      <IconBack name="home" size={normalize(40)} onPress={() => navigation.navigate('Home', { mode: result,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
+      <Text style={styles.quest}>GIVE ONE WORD FOR...</Text>
+      <View style = {{flexWrap : 'wrap', alignContent: 'center'}}>
         <TouchableOpacity style={styles.QuestionContainer}>
           <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>
       </View>
-      <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#F0FFF0' }}>
+      <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5fcfc' }}>
         <TouchableOpacity style={styles.FirstAnswerButton} onPress={() => { answer(0) }}>
           <Text style={styles.AnswerText}>{options[0]}</Text>
         </TouchableOpacity>
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
     left: 10,
   },
   text: {
-    fontSize: 36,
+    fontSize: normalize(31),
     fontWeight: '900',
     color: 'white',
     fontFamily : 'ReemKufi',
@@ -88,39 +90,45 @@ const styles = StyleSheet.create({
   },
   QuestionContainer: {
     alignItems : 'center',
+    justifyContent: 'center',
     backgroundColor: '#003f9e',
     borderRadius: 20,
-    marginTop: screenHeight/30,
-    marginLeft : screenWidth / 20,
-    marginRight : screenWidth / 20,
-    paddingTop : screenHeight / 18,
-    paddingBottom : screenHeight / 18,
-    paddingLeft : screenWidth / 20,
-    paddingRight : screenWidth / 20,
+    marginTop: '2%',
+    paddingVertical : normalize(15),
+    paddingHorizontal: normalize(5),
     width : screenWidth  - 40,
+    minHeight: '20%',
   },
   AnswerText: {
-    fontSize: 24,
+    fontSize: normalize(25),
+    marginVertical:normalize(10),
     color: 'white',
-    fontWeight : '900',
+    fontWeight : '800',
     fontFamily : 'ReemKufi'
   },
   AnswerButton: {
-    width: screenWidth - 40,
-    height: 55,
+    width: screenWidth - 45,
     backgroundColor: '#0b5cd5',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: screenHeight/16,
+    marginTop: '10%',
     borderRadius: 30,
   },
   FirstAnswerButton: {
-    width: screenWidth - 40,
-    height: 55,
+    width: screenWidth - 45,
     backgroundColor: '#0b5cd5',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: screenHeight/15,
+    marginTop: '13%',
     borderRadius: 30,
-  }
+  },
+  quest: {
+    marginTop: '4%',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    fontSize: normalize(28),
+    textAlign : 'center',
+    fontFamily:'ReemKufi',
+    paddingHorizontal:5,
+  },
 });
