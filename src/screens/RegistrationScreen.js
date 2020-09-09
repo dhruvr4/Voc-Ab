@@ -79,7 +79,7 @@ export default function RegistrationScreen({ navigation }) {
                 <View style={styles.FieldContainer}>
                     <TextInput
                         style={styles.Field}
-                        placeholder='Full Name'
+                        placeholder='User Name'
                         placeholderTextColor="#aaaaaa"
                         onChangeText={(text) => setFullName(text)}
                         value={fullName}

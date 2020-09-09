@@ -8,6 +8,7 @@ import SAT2 from './Data/SAT_list_2.json';
 import SAT3 from './Data/SAT_list_3.json';
 import SAT4 from './Data/SAT_list_4.json';
 import SAT5 from './Data/SAT_list_5.json';
+import Easy from './Data/EasyList.json';
 
 
 class Question {
@@ -26,14 +27,17 @@ const datab = {
 }
 function create_database(val) {
     if (val == "easy") {
-        for (var i = 0; i < Object.values(SAT1.Adjective).length; i++) {
-            add(SAT1.Adjective[i], SAT1.Word[i], "easy");
-        }
-        for (var i = 0; i < Object.values(SAT2.Adjective).length; i++) {
-            add(SAT2.Adjective[i], SAT2.Word[i], "easy");
+        for (var i = 0; i < Object.values(Easy.Adjective).length; i++) {
+            add(Easy.Adjective[i], Easy.Word[i], "easy");
         }
     }
     if (val == "medium") {
+        for (var i = 0; i < Object.values(SAT1.Adjective).length; i++) {
+            add(SAT1.Adjective[i], SAT1.Word[i], "medium");
+        }
+        for (var i = 0; i < Object.values(SAT2.Adjective).length; i++) {
+            add(SAT2.Adjective[i], SAT2.Word[i], "medium");
+        }
         for (var i = 0; i < Object.values(SAT3.Adjective).length; i++) {
             add(SAT3.Adjective[i], SAT3.Word[i], "medium");
         }
