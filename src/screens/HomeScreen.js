@@ -108,20 +108,22 @@ if (route.params== undefined || route.params.xp <0){
         <View style = {styles.wrenchIcon}>
           <IconSetting name="settings" size={normalize(40)} onPress={() => navigation.navigate('Setting', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={{color : 'black', paddingTop : normalize(23)}} />
         </View>  
-        <View style={styles.titleContainer}>
+        <View style={styles.titleContainer} >
           <Text style={styles.vocab}>Voc-AB</Text>
         </View>
-        <View style={styles.Progress}>
+        <TouchableOpacity style={styles.Progress} onPress ={() => navigation.navigate('Leaderboard', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={{color : 'black', paddingTop : normalize(23)}}
+           >
           <ProgressCircle
             percent={(xp / levels[lvl]) * 100}
             radius={25}
             borderWidth={7}
             color="#3399FF"
             shadowColor="#e6e6e6"
-            bgColor="#fff">
+            bgColor="#fff"
+            >
             <Text style={{ fontSize: 20 }}>{lvl}</Text>
           </ProgressCircle>
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={{marginTop:'6%', }}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
