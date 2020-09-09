@@ -85,7 +85,7 @@ export default function Challenge({ navigation, route }) {
             <View style = {styles.numberPow}>
               <Text style = {{fontSize : normalize(24)}}>{powerupp}</Text>
             </View>
-            <Text style={styles.text}> GUESS THE WORD... </Text>
+            <Text style={styles.text}> Guess The Word... </Text>
             <View style={styles.questionBox}>
               <Text style={styles.text}> {text.charAt(0).toUpperCase() + text.substring(1, text.length)}</Text>
             </View>

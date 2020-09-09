@@ -51,7 +51,7 @@ export default function LearnIt({ navigation, route }) {
   return (
     <View style={{ flex: 1, backgroundColor: '#f5fcfc' }}>
       <IconBack name="home" size={normalize(40)} onPress={() => navigation.navigate('Home', { mode: result,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
-      <Text style={styles.quest}>GIVE ONE WORD FOR...</Text>
+      <Text style={styles.quest}>Give One Word for...</Text>
       <View style = {{flexWrap : 'wrap', alignContent: 'center'}}>
         <TouchableOpacity style={styles.QuestionContainer}>
           <Text style={styles.text}>{text}</Text>
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     marginTop: '4%',
     alignSelf: 'center',
     justifyContent: 'center',
-    fontSize: normalize(28),
+    fontSize: normalize(30),
     textAlign : 'center',
     fontFamily:'ReemKufi',
     paddingHorizontal:5,

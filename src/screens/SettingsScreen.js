@@ -208,7 +208,7 @@ function logout() {
           <SocialIcon
             type="linkedin"
             onPress={() => {
-              Linking.openURL('https://www.linkedin.com/company/68693070')
+              Linking.openURL('https://www.linkedin.com/company/voc-ab')
             }}
           />
         </View>

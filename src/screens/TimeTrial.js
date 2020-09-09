@@ -176,7 +176,7 @@ export default function TimeTrial({ navigation, route }) {
       <View style={styles.numberPow}>
         <Text style={{ fontSize: normalize(24) }}>{powerupp}</Text>
       </View>
-      <Text style={styles.quest}>CHOOSE THE CORRECT WORD...</Text>
+      <Text style={styles.quest}>Choose The Correct Word...</Text>
       <Text style={styles.timer}>{timer}</Text>
 
       <View style={{ flexWrap: 'wrap', alignContent: 'center' }}>
@@ -237,13 +237,13 @@ const styles = StyleSheet.create({
     marginTop: '4%',
     alignSelf: 'center',
     justifyContent: 'center',
-    fontSize: normalize(22),
+    fontSize: normalize(28),
     textAlign : 'center',
     fontFamily:'ReemKufi',
     paddingHorizontal:5,
   },
   text: {
-    fontSize: normalize(28),
+    fontSize: normalize(30),
     fontWeight: '900',
     color: 'white',
     fontFamily : 'ReemKufi',
