@@ -111,7 +111,7 @@ if (route.params== undefined || route.params.xp <0){
         <View style={styles.titleContainer} >
           <Text style={styles.vocab}>Voc-AB</Text>
         </View>
-        <TouchableOpacity style={styles.Progress} onPress ={() => navigation.navigate('Leaderboard', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={{color : 'black', paddingTop : normalize(23)}}
+        <TouchableOpacity style={styles.Progress} onPress ={() => navigation.navigate('Leaderboard', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })}
            >
           <ProgressCircle
             percent={(xp / levels[lvl]) * 100}
@@ -121,7 +121,7 @@ if (route.params== undefined || route.params.xp <0){
             shadowColor="#e6e6e6"
             bgColor="#fff"
             >
-            <Text style={{ fontSize: 20 }}>{lvl}</Text>
+            <Text style={{ fontSize: 20, fontFamily:'ReemKufi' }}>{lvl}</Text>
           </ProgressCircle>
         </TouchableOpacity>
       </View>
@@ -149,7 +149,7 @@ if (route.params== undefined || route.params.xp <0){
           <IconSetting name="book" size={normalize(42)} onPress={() => navigation.navigate('Dictionary', { mode: ans, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.Dictionary} />
         </View>
         <View style={{ paddingRight: '10%', paddingTop : 9}}>
-          <Text style={{ fontSize: normalize(43), fontWeight: '600', fontFamily:'ReemKufi', }}>Word Of the day</Text>
+          <Text style={{ fontSize: normalize(43), fontWeight: '600', fontFamily:'ReemKufi', }}>Word of the Day</Text>
         </View>
       </View>
 
@@ -202,6 +202,7 @@ const styles = StyleSheet.create({
     paddingTop : screenHeight / 46,
     paddingRight : screenWidth / 20,
     flex : 1,
+    fontFamily: 'ReemKufi'
   },
 
   learnit: {

@@ -138,7 +138,7 @@ export default function Dictionary({navigation, route}) {
                         <View style={{flex:1, alignItems:'center', justifyContent:'center', marginVertical:20}}>
                             {
                                 isLoading?null:(
-                                    <Text style={{fontSize:15}} >No such word found... try something else</Text>
+                                    <Text style={{fontSize:15, fontFamily:'ReemKufi' }} >No such word found... try something else</Text>
                                 )
                             }
                         </View>
