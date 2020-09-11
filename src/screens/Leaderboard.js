@@ -2,8 +2,6 @@ import * as React from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions, ActivityIndicator } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { StackActions } from '@react-navigation/native';
-import IconBack from 'react-native-vector-icons/AntDesign';
-import IconForward from 'react-native-vector-icons/SimpleLineIcons';
 import firebase from 'firebase'
 import { normalize } from '../util';
 import datab from './WordsDatabase';
