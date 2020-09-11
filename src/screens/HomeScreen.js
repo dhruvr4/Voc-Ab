@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Dimensions } from "react-native";
