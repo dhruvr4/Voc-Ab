@@ -186,7 +186,8 @@ const styles = StyleSheet.create({
     fontSize: normalize(53),
     color: '#0b5cd5',
     fontFamily: 'SansForge',
-    flex:1
+    flex:1,
+    marginTop:'4%'
   },
 
   wrenchIcon: {
