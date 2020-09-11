@@ -150,7 +150,7 @@ export default function TimeTrial({ navigation, route }) {
   let cor = ''
   let arr = []
   let powup = []
-  const [tx] = React.useState(10)
+  const [tx] = React.useState(60)
   let [tim, settim] = React.useState(new Date().getMinutes() * 60 + new Date().getSeconds())
   let [timer, setTimer] = React.useState(tx)
   load(mode)
