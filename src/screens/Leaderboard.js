@@ -12,6 +12,11 @@ import datab from './WordsDatabase';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
+let count = -36;
+function rank() { 
+  return count ++;
+}
+
 export default function Leaderboard({ route, navigation }) {
     let unsubscribe
     class FirebaseInfo extends React.Component {
@@ -25,7 +30,7 @@ export default function Leaderboard({ route, navigation }) {
                         var cities = [];
                         querySnapshot.forEach(function (doc) {
                                 
-                                var color2=doc.data().fullName==user.displayName?"#90ee90":"#add8e6"
+                                var color2=doc.data().fullName==user.displayName?"#D3D3D3":"white"
                                 cities.push({ name: doc.data().fullName, level: doc.data().level,color:color2});
                         });
                         cities.sort((a, b) => (a.level < b.level) ? 1 : -1)
@@ -38,10 +43,21 @@ export default function Leaderboard({ route, navigation }) {
         }
         render() {
             const renderItem = ({ item }) => (
-                <View style={{ minHeight: 70, padding: 3, borderBottomWidth: 1, borderBottomColor: 'grey',backgroundColor:item.color}}>
-                        <Text style={styles.connectOptionsText}>{item.name}</Text>
-                        <Text style={styles.connectOptionsText}>{item.level}</Text>
-                   </View>
+                <View style={{flexDirection : 'row' ,flex : 1, padding: 3, 
+                marginTop : normalize(10),marginLeft : normalize(10), marginRight : normalize(10), 
+                }}>
+                        <View style = {{flex : 0.5, alignItems : 'center', borderRadius : 10, borderWidth: 1, borderColor: 'grey', 
+                        marginRight : normalize(20), backgroundColor:item.color}}>
+                          <Text style={styles.connectOptionsText}>{rank()}</Text>
+                        </View>
+                        <View style = {{flex : 2.5, backgroundColor:item.color, borderRadius : 10, borderWidth: 1, borderColor: 'grey', paddingLeft : 9,
+                        alignItems : 'center'}}>
+                          <Text style={styles.connectOptionsText}>{item.name}</Text>
+                        </View>
+                        <View style = {{flex : 0.5, alignItems : 'center', borderRadius : 10, borderWidth: 1, borderColor: 'grey', marginLeft : normalize(20), backgroundColor:item.color}}>
+                          <Text style={styles.connectOptionsText}>{item.level}</Text>
+                        </View>   
+                </View>
             );
             return (
                 <View>
@@ -60,7 +76,7 @@ export default function Leaderboard({ route, navigation }) {
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginVertical: 20 }}>
                                 {
                                     this.state.loading ? null : (
-                                        <Text style={{ fontSize: 15 }} >No such Group found... try something else</Text>
+                                        <Text style={{ fontSize: 15, fontFamily : 'ReemKufi' }} >No such Group found... try something else</Text>
                                     )
                                 }
                             </View>
@@ -73,6 +89,18 @@ export default function Leaderboard({ route, navigation }) {
     <View style={{ flex: 1, backgroundColor: 'white' }}>         
       <ScrollView>
       <IconBack name="home" size={normalize(35)} onPress={() => navigation.navigate('Home', { mode: route.params.mode, lvl: route.params.lvl, xp: route.params.xp, pu: route.params.pu, words_done: route.params.words_done })} style={styles.home} />
+      <View style={{flexDirection : 'row' ,flex : 1, padding: 3, 
+      marginTop : normalize(10),marginLeft : normalize(10), marginRight : normalize(10),}}>
+        <View style = {{flex : 0.5, alignItems : 'flex-start', borderRadius : 10, marginRight : normalize(10),}}>
+         <Text style={styles.titleText}>Rank</Text>
+        </View>
+        <View style = {{flex : 1, borderRadius : 10, alignItems : 'center'}}>
+          <Text style={styles.titleText}>Name</Text>
+        </View>
+        <View style = {{flex : 0.5, alignItems : 'center', marginLeft : normalize(20)}}>
+          <Text style={styles.titleText}>Level</Text>
+        </View>        
+      </View>
 
 <FirebaseInfo></FirebaseInfo>
       </ScrollView>
@@ -86,8 +114,15 @@ const styles = StyleSheet.create({
     color: 'black',
     left: 10,
   },
+  titleText : {
+    color : 'black',
+    fontFamily : 'ReemKufi',
+    fontSize : normalize(40)
+  },
   connectOptionsText:{
-    color:'green'
+    color:'black',
+    fontFamily : 'ReemKufi',
+    fontSize : normalize(34),
   },
   result: {
     paddingTop: screenHeight / 35,
