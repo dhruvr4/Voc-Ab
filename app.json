@@ -28,7 +28,7 @@
     },
     "android":{
       "package":"com.NerdDevz.VocAB",
-      "versionCode": 4 // Notice the versionCode added under android.
+      "versionCode": 5 // Notice the versionCode added under android.
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
