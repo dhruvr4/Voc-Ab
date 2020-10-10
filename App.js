@@ -1,9 +1,8 @@
-import { NavigationContainer, Link } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import {StyleSheet } from 'react-native';
 import 'react-native-gesture-handler';
-import { useEffect, useState } from 'react'
 import { decode, encode } from 'base-64'
 import { YellowBox } from 'react-native';
 import _ from 'lodash';

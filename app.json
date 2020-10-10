@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Voc-ab",
-    "slug": "Vocab_Up",
+    "name": "Voc-AB",
+    "slug": "Voc-AB",
     "platforms": [
       "ios",
       "android",
@@ -28,7 +28,8 @@
     },
     "android":{
       "package":"com.NerdDevz.VocAB",
-      "versionCode": 4 // Notice the versionCode added under android.
+      "versionCode": 4,
+      "useNextNotificationsApi": true
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

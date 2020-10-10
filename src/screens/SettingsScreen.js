@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Linking, Animated } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Linking, Animated, Switch } from 'react-native';
 import IconBack from 'react-native-vector-icons/EvilIcons';
 import { SocialIcon } from 'react-native-elements';
 import firebase from 'firebase'
 import { normalize } from '../util';
+import Notifications from 'expo-notifications';
+import Permissions from 'expo-permissions';
 
 function SettingsScreen({ navigation, route }) {
 function navigat(a,b){
@@ -17,9 +19,7 @@ function navigat(a,b){
   catch{}
   try {
     if (signed_in) {
-      
-  var userInfoRef = db.collection("Users").doc(user.uid);  
-  userInfoRef.update({
+      userInfoRef.update({
     "mode":retu,
   })
 }
@@ -38,13 +38,34 @@ function logout() {
   navigation.navigate('Login')
 }
 
+askPermissions = async () => {
+  const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+  let finalStatus = existingStatus;
+  if (existingStatus !== "granted") {
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    finalStatus = status;
+  }
+  if (finalStatus !== "granted") {
+    return false;
+  }
+  return true;
+};
 
+function load(val) {
+  const today = new Date().getFullYear() * 365 + new Date().getMonth() * 31 + new Date().getDate()
+  var num = Math.abs((today) % datab['default'].length)
+  const ques = datab['default'][num]
+  txt = ques.question
+  cor = ques.correctanswer
+}
+  
   var mode = route.params.mode
   const [retu, setretu] = React.useState(mode)
   handleSlide = type => {
     Animated.spring(translateX, {
       toValue: type,
-      duration: 100
+      duration: 100,
+      useNativeDriver: true
     }).start();
   };
   
@@ -53,7 +74,7 @@ function logout() {
   const [xeasy, setxeasy] = React.useState(0)
   const [xmedium, setxmedium] = React.useState(0)
   const [xhard, setxhard] = React.useState(0)
-  const [translateX, settranslateX] = React.useState(new Animated.Value(0))
+  const [translateX] = React.useState(new Animated.Value(0))
   if (active == 10) {
     if (mode == "easy") {
       setactive(0)
@@ -69,6 +90,28 @@ function logout() {
     }
   }
   //console.log(active)
+
+  const [isSwitchEnabled, setSwitch] = React.useState(false)
+  if(isSwitchEnabled) {
+    this.askPermissions()
+  }
+  else {
+    Notifications.dismissAllNotificationsAsync()
+  }
+  
+  scheduleNotification = async () => {
+    let notificationId = Notifications.scheduleLocalNotificationAsync(
+      {
+        title: "Hey a new word",
+        body: txt
+      },
+      {
+        repeat: "minute",
+        time: new Date().getTime() + 10000
+      }
+    );
+    console.log(notificationId);
+  };
 
   return (
     <View style={styles.page}>
@@ -181,6 +224,21 @@ function logout() {
           </View>
         </View>
       </View>
+      <View>
+        <Text style={styles.subHeads2}>Reminders</Text>
+        <View style={{flexDirection: 'row', flex:1, marginHorizontal: '2%'}}>
+        <View style={{flex:1, marginLeft: '2%'}}>
+            <Text style={styles.text}>In-App Notifications</Text>
+        </View>
+        <View style={{flex:1}}>
+            <Switch
+                value={isSwitchEnabled}
+                onValueChange={(value) => setSwitch(value)}
+            />
+        </View>
+        </View>
+        
+      </View>
 
       {/*Login Buttons*/}
       <Text style={styles.subHeads2}>Connect</Text>
@@ -227,42 +285,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#fff',
   },
-  AnswerText: {
-    fontWeight: 'bold',
-    fontSize: 24,
-    color: 'white'
-  },
-
-  pick: {
-    paddingTop: 100,
-    paddingBottom: 50,
-    width: 400
-  },
-  result: {
-    paddingTop: 100,
-    fontWeight: 'bold',
-    fontSize: 40,
-    backgroundColor: 'white',
-
-  },
-  AnswerButtonBlue: {
-    width: 250,
-    height: 55,
-    backgroundColor: '#4455BB',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 20,
-    borderRadius: 30,
-  },
-  AnswerButtonBlack: {
-    width: 250,
-    height: 55,
-    backgroundColor: 'black',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-    borderRadius: 30,
-  },
   connectOptions: {
     marginTop: '2%',
     alignContent: "center",
@@ -272,6 +294,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#fff'
+  },
+  text: {
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    fontSize: normalize(23),
+    paddingLeft: 20,
+    fontFamily: 'ReemKufi',
   },
   connectOptionsText: {
     fontSize: normalize(24),
