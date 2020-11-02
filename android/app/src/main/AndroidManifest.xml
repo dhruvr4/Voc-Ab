@@ -2,15 +2,15 @@
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
   <!-- OPTIONAL PERMISSIONS, REMOVE WHATEVER YOU DO NOT NEED -->
- <!-- <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"/>
+  <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"/>
   <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
   <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
   <uses-permission android:name="android.permission.VIBRATE"/>
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-  <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>-->
+  <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
   <!-- These require runtime permissions on M -->
-  <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
   <uses-permission android:name="android.permission.CAMERA"/>
   <uses-permission android:name="android.permission.READ_CONTACTS"/>
@@ -19,7 +19,7 @@
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.RECORD_AUDIO"/>
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-  <uses-permission android:name="android.permission.WRITE_SETTINGS"/> -->
+  <uses-permission android:name="android.permission.WRITE_SETTINGS"/> 
   <!-- END OPTIONAL PERMISSIONS -->
   <application
     android:name=".MainApplication"
@@ -27,30 +27,8 @@
     android:icon="@mipmap/ic_launcher"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:allowBackup="false"
-    android:theme="@style/AppTheme"
-  >
-    <meta-data  android:name="com.dieam.reactnativepushnotification.notification_channel_name"
-                android:value="YOUR NOTIFICATION CHANNEL NAME"/>
-        <meta-data  android:name="com.dieam.reactnativepushnotification.notification_channel_description"
-                    android:value="YOUR NOTIFICATION CHANNEL DESCRIPTION"/>
-
-        <!-- Change the value to true to enable pop-up for in foreground (remote-only, for local use ignoreInForeground) -->
-        <meta-data  android:name="com.dieam.reactnativepushnotification.notification_foreground"
-                    android:value="false"/>
-        <!-- Change the value to false if you don't want the creation of the default channel -->
-        <meta-data  android:name="com.dieam.reactnativepushnotification.channel_create_default"
-                    android:value="true"/>
-        <!-- Change the resource name to your App's accent color - or any other color you want -->
-        <meta-data  android:name="com.dieam.reactnativepushnotification.notification_color"
-                    android:resource="@color/white"/> <!-- or @android:color/{name} to use a standard color -->
-
-        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions" />
-        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
-        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
+    android:theme="@style/AppTheme">
+   
     <meta-data android:name="expo.modules.updates.EXPO_UPDATE_URL" android:value="YOUR-APP-URL-HERE"/>
     <meta-data android:name="expo.modules.updates.EXPO_SDK_VERSION" android:value="YOUR-APP-SDK-VERSION-HERE"/>
     <activity
