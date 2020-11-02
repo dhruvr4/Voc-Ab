@@ -20,7 +20,6 @@ import Login from './src/screens/LoginScreen.js';
 import Create from './src/screens/RegistrationScreen.js';
 import tutorial from './src/screens/tutorial.js';
 import Leaderboard from './src/screens/Leaderboard.js';
-import PushNotification from "react-native-push-notification";
 
 import SettingsScreen from './src/screens/SettingsScreen.js';
 import Dictionary from './src/screens/Dictionary'
@@ -57,27 +56,6 @@ class App extends React.Component {
       authenticated: false,
       fontsLoaded: false,
     };
-    PushNotification.configure({
-      onRegister: function (token) {
-        console.log("TOKEN:", token);
-      },
-      onNotification: function (notification) {
-        console.log("NOTIFICATION:", notification);
-      },
-      permissions: {
-        alert: true,
-        badge: true,
-        sound: true,
-      },
-      popInitialNotification: true,
-      requestPermissions: true,
-    });
-  testPush = () => {
-    PushNotification.localNotification({
-      title: "My Notification Title", // (optional)
-      message: "My Notification Message", // (required)
-    });
-  }
 }
   async _loadFontsAsync() {
     await Font.loadAsync(customFonts);
