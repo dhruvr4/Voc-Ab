@@ -138,6 +138,15 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginTop : screenHeight/35,
     paddingHorizontal: 0,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,
+      height: 15,
+    },
+
+    shadowOpacity: 0.38,
+    shadowRadius: 16.00,
+    elevation: 24,
   },
   text: {
     alignSelf: 'center',
@@ -146,6 +155,7 @@ const styles = StyleSheet.create({
     textAlign : 'center',
     fontFamily:'ReemKufi',
     paddingHorizontal:5,
+    color : 'white'
   },
   text2: {
     textAlign: "center",
@@ -164,6 +174,7 @@ const styles = StyleSheet.create({
     height : screenHeight / 6,
     borderWidth: 1,
     borderRadius : 20,
+    
   },
   numberPow : {
     alignItems : 'flex-end',

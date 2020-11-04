@@ -98,6 +98,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: normalize(5),
     width : screenWidth  - 40,
     minHeight: '20%',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,
+      height: 15,
+    },
+
+    shadowOpacity: 0.38,
+    shadowRadius: 16.00,
+    elevation: 24,
   },
   AnswerText: {
     fontSize: normalize(25),
@@ -113,6 +122,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: '10%',
     borderRadius: 30,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,
+      height: 15,
+    },
+
+    shadowOpacity: 0.38,
+    shadowRadius: 16.00,
+    elevation: 24,
   },
   FirstAnswerButton: {
     width: screenWidth - 45,
@@ -121,6 +139,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: '13%',
     borderRadius: 30,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,
+      height: 15,
+    },
+
+    shadowOpacity: 0.38,
+    shadowRadius: 16.00,
+    elevation: 24,
   },
   quest: {
     marginTop: '4%',
