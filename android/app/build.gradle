@@ -130,7 +130,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.projecta"
+        applicationId "com.vocab"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 5

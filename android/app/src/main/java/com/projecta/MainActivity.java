@@ -1,4 +1,4 @@
-package com.projecta;
+package com.vocab;
 
 import android.os.Bundle;
 
