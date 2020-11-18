@@ -67,10 +67,10 @@ export default function Challenge({ navigation, route }) {
   const [hint2, sethint2] = React.useState(hint)
 
   return (
-    <View style = {{flex : 1, backgroundColor : '#f5fcfc'}}>
+    <View style = {{flex : 1, backgroundColor : '#ffffff'}}>
       <KeyboardAvoidingView
         behavior= "position" 
-        style={{ flex: 1, backgroundColor : '#f5fcfc'}} 
+        style={{ flex: 1, backgroundColor : '#ffffff'}} 
         keyboardVerticalOffset={-180}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

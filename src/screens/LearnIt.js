@@ -49,7 +49,7 @@ export default function LearnIt({ navigation, route }) {
   const [options, setOptions] = React.useState(arr)
   const [correct, setCorrect] = React.useState(cor)
   return (
-    <View style={{ flex: 1, backgroundColor: '#f5fcfc' }}>
+    <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
       <IconBack name="home" size={normalize(40)} onPress={() => navigation.navigate('Home', { mode: result,lvl:lvl,xp:xp,pu:pu,words_done:words_done })} style={styles.home} />
       <Text style={styles.quest}>Give One Word for...</Text>
       <View style = {{flexWrap : 'wrap', alignContent: 'center'}}>
@@ -57,7 +57,7 @@ export default function LearnIt({ navigation, route }) {
           <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>
       </View>
-      <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5fcfc' }}>
+      <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffffff' }}>
         <TouchableOpacity style={styles.FirstAnswerButton} onPress={() => { answer(0) }}>
           <Text style={styles.AnswerText}>{options[0]}</Text>
         </TouchableOpacity>

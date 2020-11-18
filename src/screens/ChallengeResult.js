@@ -88,7 +88,7 @@ export default function ChallengeResult({ route, navigation }) {
   })
   const pushAction = StackActions.push('Challenge', { answer: mod, lvl: lvl, xp: xp, pu: pu, words_done: words_done });
   return (
-    <View style={{ flex: 1, backgroundColor: '#f5fcfc' }}>
+    <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
       <IconBack name="home" size={normalize(40)} onPress={() => navigation.navigate('Home', { mode: mod, lvl: lvl, xp: xp, pu: pu, words_done: words_done })} style={styles.home} />
 
       <Text style={{
