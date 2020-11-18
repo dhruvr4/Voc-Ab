@@ -165,7 +165,7 @@ export default function TimeTrial({ navigation, route }) {
 
   let time = null
   return (
-    <View style={{ flex: 1, backgroundColor: '#f5fcfc' }}>
+    <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
       <View style={{ flexDirection: 'row' }}>
         <IconBack name="home" size={normalize(40)} onPress={() => navigation.navigate('Home', { mode: mode, lvl: lvl, xp: xp, pu: powerupp, words_done: words_done })} style={styles.home} />
         <View style={styles.PowerButton}>
@@ -185,7 +185,7 @@ export default function TimeTrial({ navigation, route }) {
         </TouchableOpacity>
       </View>
 
-      <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5fcfc' }}>
+      <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffffff' }}>
         {
           to_show[0] &&
           <TouchableOpacity style={styles.FirstAnswerButton} onPress={() => { answer(0) }}>

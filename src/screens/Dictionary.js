@@ -107,7 +107,7 @@ export default function Dictionary({navigation, route}) {
         <View style={{
             flex: 1,
             flexDirection: 'column',
-            backgroundColor: '#f5fcfc',
+            backgroundColor: '#ffffff',
           }}>
 
             <View style={styles.head}>
@@ -120,7 +120,7 @@ export default function Dictionary({navigation, route}) {
             value={search.toString()} 
             lightTheme={true} 
             round={true} 
-            containerStyle={{backgroundColor:'#f5fcfc', borderTopWidth:0}}
+            containerStyle={{backgroundColor:'#ffffff', borderTopWidth:0}}
             inputContainerStyle={{backgroundColor:'#EBEBEB', height: 40, width: '97%', marginLeft:'1%',}}/>
             <View style={{flex:1}}>
                 {
