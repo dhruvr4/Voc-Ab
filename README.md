@@ -1,3 +1,3 @@
-# Voc-AB
+# VocAB
 
 The one stop vocabulary builder!
