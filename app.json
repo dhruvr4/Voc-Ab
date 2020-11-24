@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Voc-ab",
-    "slug": "Vocab_Up",
+    "name": "VocAB",
+    "slug": "VocAB",
     "platforms": [
       "ios",
       "android",
@@ -23,7 +23,7 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier":"com.NerdDevz.VocAB",
+      "bundleIdentifier":"com.NerdDevz.VocabularyBuilder",
       "supportsTablet": true
     },
     "android":{
