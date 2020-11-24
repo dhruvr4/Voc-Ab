@@ -23,12 +23,12 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier":"com.NerdDevz.VocabularyBuilder",
+      "bundleIdentifier":"com.NerdDevz.vocabulary",
       "supportsTablet": true
     },
     "android":{
-      "package":"com.NerdDevz.VocabularyBuilder",
-      "versionCode": 5 // Notice the versionCode added under android.
+      "package":"com.NerdDevz.vocabulary",
+      "versionCode": 13 // Notice the versionCode added under android.
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
