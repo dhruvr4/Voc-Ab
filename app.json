@@ -27,7 +27,7 @@
       "supportsTablet": true
     },
     "android":{
-      "package":"com.NerdDevz.VocAB",
+      "package":"com.NerdDevz.VocabularyBuilder",
       "versionCode": 5 // Notice the versionCode added under android.
     },
     "web": {
